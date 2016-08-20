@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C03BC931D68FCA50035F510 /* VoteViewController.swift */; };
+		4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */; };
+		4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B28D1D63F9BB002755B7 /* ViewController.swift */; };
+		4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B28F1D63F9BB002755B7 /* Main.storyboard */; };
+		4C75B2931D63F9BB002755B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B2921D63F9BB002755B7 /* Assets.xcassets */; };
+		4C75B2961D63F9BB002755B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B2941D63F9BB002755B7 /* LaunchScreen.storyboard */; };
+		4C75B2AE1D652F2C002755B7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75B2AB1D652F2C002755B7 /* Bolts.framework */; };
+		4C75B2AF1D652F2C002755B7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75B2AC1D652F2C002755B7 /* Parse.framework */; };
+		4C75B2B01D652F2C002755B7 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75B2AD1D652F2C002755B7 /* ParseUI.framework */; };
+		4C75B2B11D652F40002755B7 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AB1D652F2C002755B7 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C75B2B21D652F40002755B7 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AC1D652F2C002755B7 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C75B2B31D652F40002755B7 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AD1D652F2C002755B7 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C75B2B51D665324002755B7 /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */; };
+		4C75B2B71D66533A002755B7 /* CustomSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4C75B29F1D642690002755B7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4C75B2B11D652F40002755B7 /* Bolts.framework in CopyFiles */,
+				4C75B2B21D652F40002755B7 /* Parse.framework in CopyFiles */,
+				4C75B2B31D652F40002755B7 /* ParseUI.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4C03BC931D68FCA50035F510 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		4C75B2881D63F9BB002755B7 /* Pet Pageant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pet Pageant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C75B28D1D63F9BB002755B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C75B2901D63F9BB002755B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4C75B2921D63F9BB002755B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4C75B2951D63F9BB002755B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C75B2971D63F9BB002755B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C75B2AB1D652F2C002755B7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		4C75B2AC1D652F2C002755B7 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		4C75B2AD1D652F2C002755B7 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
+		4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSignupViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C75B2851D63F9BB002755B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C75B2AE1D652F2C002755B7 /* Bolts.framework in Frameworks */,
+				4C75B2AF1D652F2C002755B7 /* Parse.framework in Frameworks */,
+				4C75B2B01D652F2C002755B7 /* ParseUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C75B27F1D63F9BB002755B7 = {
+			isa = PBXGroup;
+			children = (
+				4C75B28A1D63F9BB002755B7 /* Pet Pageant */,
+				4C75B2891D63F9BB002755B7 /* Products */,
+				4C75B2A71D643088002755B7 /* Libraries */,
+			);
+			sourceTree = "<group>";
+		};
+		4C75B2891D63F9BB002755B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C75B2881D63F9BB002755B7 /* Pet Pageant.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C75B28A1D63F9BB002755B7 /* Pet Pageant */ = {
+			isa = PBXGroup;
+			children = (
+				4C75B2A91D64309E002755B7 /* App Global */,
+				4C75B2A81D643098002755B7 /* Controller */,
+				4C75B2AA1D6430A8002755B7 /* View */,
+			);
+			path = "Pet Pageant";
+			sourceTree = "<group>";
+		};
+		4C75B2A71D643088002755B7 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4C75B2AB1D652F2C002755B7 /* Bolts.framework */,
+				4C75B2AC1D652F2C002755B7 /* Parse.framework */,
+				4C75B2AD1D652F2C002755B7 /* ParseUI.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		4C75B2A81D643098002755B7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C75B2941D63F9BB002755B7 /* LaunchScreen.storyboard */,
+				4C75B28D1D63F9BB002755B7 /* ViewController.swift */,
+				4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */,
+				4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */,
+				4C03BC931D68FCA50035F510 /* VoteViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4C75B2A91D64309E002755B7 /* App Global */ = {
+			isa = PBXGroup;
+			children = (
+				4C75B2971D63F9BB002755B7 /* Info.plist */,
+				4C75B2921D63F9BB002755B7 /* Assets.xcassets */,
+				4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */,
+			);
+			name = "App Global";
+			sourceTree = "<group>";
+		};
+		4C75B2AA1D6430A8002755B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C75B28F1D63F9BB002755B7 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C75B2871D63F9BB002755B7 /* Pet Pageant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C75B29A1D63F9BB002755B7 /* Build configuration list for PBXNativeTarget "Pet Pageant" */;
+			buildPhases = (
+				4C75B2841D63F9BB002755B7 /* Sources */,
+				4C75B2851D63F9BB002755B7 /* Frameworks */,
+				4C75B2861D63F9BB002755B7 /* Resources */,
+				4C75B29F1D642690002755B7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pet Pageant";
+			productName = "Pet Pageant";
+			productReference = 4C75B2881D63F9BB002755B7 /* Pet Pageant.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C75B2801D63F9BB002755B7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Michael Sweeney";
+				TargetAttributes = {
+					4C75B2871D63F9BB002755B7 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 4C75B2831D63F9BB002755B7 /* Build configuration list for PBXProject "Pet Pageant" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C75B27F1D63F9BB002755B7;
+			productRefGroup = 4C75B2891D63F9BB002755B7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C75B2871D63F9BB002755B7 /* Pet Pageant */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C75B2861D63F9BB002755B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C75B2961D63F9BB002755B7 /* LaunchScreen.storyboard in Resources */,
+				4C75B2931D63F9BB002755B7 /* Assets.xcassets in Resources */,
+				4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C75B2841D63F9BB002755B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C75B2B51D665324002755B7 /* CustomLoginViewController.swift in Sources */,
+				4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */,
+				4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */,
+				4C75B2B71D66533A002755B7 /* CustomSignupViewController.swift in Sources */,
+				4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4C75B28F1D63F9BB002755B7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C75B2901D63F9BB002755B7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4C75B2941D63F9BB002755B7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C75B2951D63F9BB002755B7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C75B2981D63F9BB002755B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4C75B2991D63F9BB002755B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C75B29B1D63F9BB002755B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Pet Pageant/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4C75B29C1D63F9BB002755B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Pet Pageant/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C75B2831D63F9BB002755B7 /* Build configuration list for PBXProject "Pet Pageant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C75B2981D63F9BB002755B7 /* Debug */,
+				4C75B2991D63F9BB002755B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C75B29A1D63F9BB002755B7 /* Build configuration list for PBXNativeTarget "Pet Pageant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C75B29B1D63F9BB002755B7 /* Debug */,
+				4C75B29C1D63F9BB002755B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C75B2801D63F9BB002755B7 /* Project object */;
+}
