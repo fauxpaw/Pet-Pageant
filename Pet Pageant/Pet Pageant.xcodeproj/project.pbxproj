@@ -21,6 +21,8 @@
 		4C75B2B31D652F40002755B7 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AD1D652F2C002755B7 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C75B2B51D665324002755B7 /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */; };
 		4C75B2B71D66533A002755B7 /* CustomSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */; };
+		4CB8EA591D6AE2A4009B20B3 /* VoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */; };
+		4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +54,8 @@
 		4C75B2AD1D652F2C002755B7 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
 		4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSignupViewController.swift; sourceTree = "<group>"; };
+		4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteView.xib; sourceTree = "<group>"; };
+		4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 		4C75B2AA1D6430A8002755B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */,
+				4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */,
 				4C75B28F1D63F9BB002755B7 /* Main.storyboard */,
 			);
 			name = View;
@@ -196,6 +202,7 @@
 			files = (
 				4C75B2961D63F9BB002755B7 /* LaunchScreen.storyboard in Resources */,
 				4C75B2931D63F9BB002755B7 /* Assets.xcassets in Resources */,
+				4CB8EA591D6AE2A4009B20B3 /* VoteView.xib in Resources */,
 				4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +216,7 @@
 			files = (
 				4C75B2B51D665324002755B7 /* CustomLoginViewController.swift in Sources */,
 				4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */,
+				4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */,
 				4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */,
 				4C75B2B71D66533A002755B7 /* CustomSignupViewController.swift in Sources */,
 				4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */,

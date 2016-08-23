@@ -20,18 +20,15 @@ class VoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let topPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         let bottomPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         self.topVoteView.addGestureRecognizer(topPanGesture)
         self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
-        
     }
     
     func setupImageViews() {
         
         //TODO: GET IMAGE
-        print("got/set image")
         //TODO: SET IMAGE
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
     }
@@ -39,6 +36,7 @@ class VoteViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setupImageViews()
+    
     }
     
     func hideViews(top: UIView, bot: UIView){
@@ -54,6 +52,24 @@ class VoteViewController: UIViewController {
         bot.hidden = false
         
     }
+    
+    func addYesVoteIcon(target: UIView){
+        
+        let image = UIImage(named: "GreenCheck.png")
+        let yesImageView = UIImageView(image: image)
+        target.addSubview(yesImageView)
+        yesImageView.center = CGPointMake(target.bounds.midX, target.bounds.midY)
+        yesImageView.alpha = 0.0
+        yesImageView.tag = 1
+    }
+    
+    func addNoVoteIcon(target: UIView){
+        
+        //TODO: red icon logic
+        
+    }
+    
+    
     
     func animateViewsIn(top: UIView, bot: UIView) {
         
@@ -106,12 +122,16 @@ class VoteViewController: UIViewController {
         }
     }
     
+    //MARK: PAN GESTURE
     func viewWasPanned(sender: UIPanGestureRecognizer) {
         
         guard let view = sender.view else {return}
         guard let superView = sender.view?.superview else {return}
         let translation = sender.translationInView(view)
         var otherView = UIView()
+        
+        //vote icons
+        
         
         if view == topVoteView {
             otherView = bottomVoteView
@@ -123,17 +143,18 @@ class VoteViewController: UIViewController {
         
         switch sender.state {
         case .Began:
-            print("began")
+            self.addYesVoteIcon(view)
         case .Changed:
+            let iconView = view.subviews[0]
             view.center.x = superView.center.x + translation.x
-            let alphaSet = ((100 - abs(translation.x)) / 100)
-            view.alpha = alphaSet
+            let alphaSet = abs(translation.x) / 100
+            iconView.alpha = alphaSet
+            //TODO: otherview icon alpha
             otherView.alpha = alphaSet
         case .Ended:
             guard let superView = view.superview else {return}
-            
-            if view.alpha < 0.55 {
-                //TODO: call function to animate selected view out, hide other view, reset voteview
+            let iconView = view.subviews[0]
+            if iconView.alpha > 0.55 {
                 view.userInteractionEnabled = false
                 otherView.userInteractionEnabled = false
                 self.animateViewsOut(view, otherView: otherView)
@@ -143,7 +164,10 @@ class VoteViewController: UIViewController {
                 view.center = CGPointMake(superView.center.x, view.center.y)
                 view.alpha = 1.0
                 otherView.alpha = 1.0
-                //TODO: remove the checkmark etc
+                
+                for subview in view.subviews {
+                    subview.removeFromSuperview()
+                }
             }
             
         default:
