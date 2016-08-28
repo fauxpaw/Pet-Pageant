@@ -9,18 +9,21 @@
 import UIKit
 import Parse
 
+let themeColor = UIColor(red: 0.01, green: 0.41, blue: 0.22, alpha: 1.0)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        window?.tintColor = themeColor
+        
         let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
-            ParseMutableClientConfiguration.applicationId = "pp"
+            ParseMutableClientConfiguration.applicationId = "petPageant"
             ParseMutableClientConfiguration.clientKey = "myMasterKey"
-            ParseMutableClientConfiguration.server = "http://pet-pageant.herokuapp.com/parse"
+            ParseMutableClientConfiguration.server = "https://pet-pageant.herokuapp.com/parse"
         })
         
         Parse.initializeWithConfiguration(parseConfiguration)

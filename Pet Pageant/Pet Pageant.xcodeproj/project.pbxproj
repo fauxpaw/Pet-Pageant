@@ -8,19 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C03BC931D68FCA50035F510 /* VoteViewController.swift */; };
+		4C0A74E51D729289009B4F93 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; };
+		4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; };
+		4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */; };
+		4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */; };
+		4C1E3AD31D6CDC2A000B9861 /* Leaderboard-RankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E3AD21D6CDC2A000B9861 /* Leaderboard-RankView.xib */; };
+		4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; };
+		4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */; };
+		4C4FF2F81D714C4300714806 /* PetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F71D714C4300714806 /* PetImage.swift */; };
 		4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */; };
 		4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B28D1D63F9BB002755B7 /* ViewController.swift */; };
 		4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B28F1D63F9BB002755B7 /* Main.storyboard */; };
 		4C75B2931D63F9BB002755B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B2921D63F9BB002755B7 /* Assets.xcassets */; };
 		4C75B2961D63F9BB002755B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B2941D63F9BB002755B7 /* LaunchScreen.storyboard */; };
-		4C75B2AE1D652F2C002755B7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75B2AB1D652F2C002755B7 /* Bolts.framework */; };
-		4C75B2AF1D652F2C002755B7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75B2AC1D652F2C002755B7 /* Parse.framework */; };
-		4C75B2B01D652F2C002755B7 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75B2AD1D652F2C002755B7 /* ParseUI.framework */; };
-		4C75B2B11D652F40002755B7 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AB1D652F2C002755B7 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C75B2B21D652F40002755B7 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AC1D652F2C002755B7 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C75B2B31D652F40002755B7 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C75B2AD1D652F2C002755B7 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C75B2B51D665324002755B7 /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */; };
-		4C75B2B71D66533A002755B7 /* CustomSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */; };
 		4CB8EA591D6AE2A4009B20B3 /* VoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */; };
 		4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */; };
 /* End PBXBuildFile section */
@@ -32,9 +35,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4C75B2B11D652F40002755B7 /* Bolts.framework in CopyFiles */,
-				4C75B2B21D652F40002755B7 /* Parse.framework in CopyFiles */,
-				4C75B2B31D652F40002755B7 /* ParseUI.framework in CopyFiles */,
+				4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */,
+				4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */,
+				4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +45,14 @@
 
 /* Begin PBXFileReference section */
 		4C03BC931D68FCA50035F510 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		4C0A74E31D729289009B4F93 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		4C0A74E41D729289009B4F93 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		4C1E3AD21D6CDC2A000B9861 /* Leaderboard-RankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Leaderboard-RankView.xib"; sourceTree = "<group>"; };
+		4C36E7351D72936800B83B92 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		4C4FF2F71D714C4300714806 /* PetImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetImage.swift; sourceTree = "<group>"; };
 		4C75B2881D63F9BB002755B7 /* Pet Pageant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pet Pageant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C75B28D1D63F9BB002755B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,11 +60,6 @@
 		4C75B2921D63F9BB002755B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C75B2951D63F9BB002755B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C75B2971D63F9BB002755B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C75B2AB1D652F2C002755B7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		4C75B2AC1D652F2C002755B7 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		4C75B2AD1D652F2C002755B7 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
-		4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSignupViewController.swift; sourceTree = "<group>"; };
 		4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteView.xib; sourceTree = "<group>"; };
 		4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,9 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C75B2AE1D652F2C002755B7 /* Bolts.framework in Frameworks */,
-				4C75B2AF1D652F2C002755B7 /* Parse.framework in Frameworks */,
-				4C75B2B01D652F2C002755B7 /* ParseUI.framework in Frameworks */,
+				4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */,
+				4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */,
+				4C0A74E51D729289009B4F93 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +101,7 @@
 				4C75B2A91D64309E002755B7 /* App Global */,
 				4C75B2A81D643098002755B7 /* Controller */,
 				4C75B2AA1D6430A8002755B7 /* View */,
+				4C4FF2F71D714C4300714806 /* PetImage.swift */,
 			);
 			path = "Pet Pageant";
 			sourceTree = "<group>";
@@ -102,9 +109,9 @@
 		4C75B2A71D643088002755B7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				4C75B2AB1D652F2C002755B7 /* Bolts.framework */,
-				4C75B2AC1D652F2C002755B7 /* Parse.framework */,
-				4C75B2AD1D652F2C002755B7 /* ParseUI.framework */,
+				4C36E7351D72936800B83B92 /* ParseUI.framework */,
+				4C0A74E31D729289009B4F93 /* Bolts.framework */,
+				4C0A74E41D729289009B4F93 /* Parse.framework */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -114,9 +121,10 @@
 			children = (
 				4C75B2941D63F9BB002755B7 /* LaunchScreen.storyboard */,
 				4C75B28D1D63F9BB002755B7 /* ViewController.swift */,
-				4C75B2B41D665324002755B7 /* CustomLoginViewController.swift */,
-				4C75B2B61D66533A002755B7 /* CustomSignupViewController.swift */,
 				4C03BC931D68FCA50035F510 /* VoteViewController.swift */,
+				4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */,
+				4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */,
+				4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -137,6 +145,7 @@
 				4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */,
 				4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */,
 				4C75B28F1D63F9BB002755B7 /* Main.storyboard */,
+				4C1E3AD21D6CDC2A000B9861 /* Leaderboard-RankView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -202,6 +211,7 @@
 			files = (
 				4C75B2961D63F9BB002755B7 /* LaunchScreen.storyboard in Resources */,
 				4C75B2931D63F9BB002755B7 /* Assets.xcassets in Resources */,
+				4C1E3AD31D6CDC2A000B9861 /* Leaderboard-RankView.xib in Resources */,
 				4CB8EA591D6AE2A4009B20B3 /* VoteView.xib in Resources */,
 				4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */,
 			);
@@ -214,11 +224,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C75B2B51D665324002755B7 /* CustomLoginViewController.swift in Sources */,
 				4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */,
 				4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */,
 				4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */,
-				4C75B2B71D66533A002755B7 /* CustomSignupViewController.swift in Sources */,
+				4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */,
+				4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */,
+				4C4FF2F81D714C4300714806 /* PetImage.swift in Sources */,
+				4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */,
 				4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,16 +7,18 @@
 //
 
 import UIKit
-
+import Parse
 
 class VoteViewController: UIViewController {
     
     //MARK: OUTLETS
-    @IBOutlet weak var topVoteView: UIView!
-    @IBOutlet weak var bottomVoteView: UIView!
-    let panThreshold: CGFloat = 4.0
-    let viewAnimationOutTime = 0.5
-    let viewAnimationInTime = 1.0
+    
+    @IBOutlet weak var topVoteView: VoteView!
+    @IBOutlet weak var bottomVoteView: VoteView!
+    
+    private let panThreshold: CGFloat = 4.0
+    private let viewAnimationOutTime = 0.5
+    private let viewAnimationInTime = 0.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,10 @@ class VoteViewController: UIViewController {
         let bottomPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         self.topVoteView.addGestureRecognizer(topPanGesture)
         self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
+        
+//        let testObject = PFObject(className: "PuppyKins")
+//        testObject.addObject("Nova", forKey: "My Dog")
+//        testObject.saveInBackground()
     }
     
     func setupImageViews() {
@@ -31,48 +37,25 @@ class VoteViewController: UIViewController {
         //TODO: GET IMAGE
         //TODO: SET IMAGE
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
+        
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //TODO: HANDLE VIEW COLLISSION
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setupImageViews()
-    
     }
-    
-    func hideViews(top: UIView, bot: UIView){
-        
-        top.hidden = true
-        bot.hidden = true
-        
-    }
-    
-    func showViews(top: UIView, bot: UIView) {
-        
-        top.hidden = false
-        bot.hidden = false
-        
-    }
-    
-    func addYesVoteIcon(target: UIView){
-        
-        let image = UIImage(named: "GreenCheck.png")
-        let yesImageView = UIImageView(image: image)
-        target.addSubview(yesImageView)
-        yesImageView.center = CGPointMake(target.bounds.midX, target.bounds.midY)
-        yesImageView.alpha = 0.0
-        yesImageView.tag = 1
-    }
-    
-    func addNoVoteIcon(target: UIView){
-        
-        //TODO: red icon logic
-        
-    }
-    
-    
-    
+    //MARK: ANIMATIONS
     func animateViewsIn(top: UIView, bot: UIView) {
-        
+        topVoteView.removeVoteIcon()
+        bottomVoteView.removeVoteIcon()
         let startCenter = self.view.center.x
         top.center.x = self.view.frame.width * 2
         bot.center.x = self.view.frame.width * -2
@@ -128,46 +111,51 @@ class VoteViewController: UIViewController {
         guard let view = sender.view else {return}
         guard let superView = sender.view?.superview else {return}
         let translation = sender.translationInView(view)
-        var otherView = UIView()
+        var selectedView = VoteView()
+        var otherView = VoteView()
         
         //vote icons
         
-        
         if view == topVoteView {
+            selectedView = topVoteView
             otherView = bottomVoteView
         }
             
         else if view == bottomVoteView {
+            selectedView = bottomVoteView
             otherView = topVoteView
         }
         
         switch sender.state {
         case .Began:
-            self.addYesVoteIcon(view)
+            selectedView.addYesVoteIcon()
+            otherView.addNoVoteIcon()
+            otherView.userInteractionEnabled = false
         case .Changed:
-            let iconView = view.subviews[0]
-            view.center.x = superView.center.x + translation.x
+            let yesIconView = selectedView.petImageView.subviews[0]
+            let noIconView = otherView.petImageView.subviews[0]
+            selectedView.center.x = superView.center.x + translation.x
             let alphaSet = abs(translation.x) / 100
-            iconView.alpha = alphaSet
-            //TODO: otherview icon alpha
-            otherView.alpha = alphaSet
+            yesIconView.alpha = alphaSet
+            noIconView.alpha = alphaSet
         case .Ended:
             guard let superView = view.superview else {return}
-            let iconView = view.subviews[0]
-            if iconView.alpha > 0.55 {
+            let iconView = selectedView.petImageView.subviews[0]
+            if iconView.alpha > 0.75 {
                 view.userInteractionEnabled = false
                 otherView.userInteractionEnabled = false
                 self.animateViewsOut(view, otherView: otherView)
             }
                 
             else {
-                view.center = CGPointMake(superView.center.x, view.center.y)
-                view.alpha = 1.0
+                selectedView.center = CGPointMake(superView.center.x, view.center.y)
+                selectedView.alpha = 1.0
                 otherView.alpha = 1.0
                 
-                for subview in view.subviews {
-                    subview.removeFromSuperview()
-                }
+                selectedView.removeVoteIcon()
+                otherView.removeVoteIcon()
+                otherView.userInteractionEnabled = true
+                
             }
             
         default:
