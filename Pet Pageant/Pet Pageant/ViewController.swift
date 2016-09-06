@@ -12,37 +12,48 @@ import ParseUI
 
 class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-//    func pictureTest () {
-//        
-//        guard let picture = UIImage(named: "anna.png") else {print("picture not converted..."); return }
-//        let pictureData = UIImagePNGRepresentation(picture)
-//        let file = PFFile(name: "image", data: pictureData!)
-//        file?.saveInBackgroundWithBlock({ (success, error) in
-//            if success {
-//                
-//                let currentUser = PFUser.currentUser()
-//                let nova = Pet(image: file!, owner: currentUser!)
-//    
-//                nova.saveInBackgroundWithBlock({ (success, error) in
-//                    if success {
-//                        print("nova saved success!")
-//                    }
-//                    else if let error = error {
-//                        print("ERROR: \(error.localizedDescription)")
-//                    }
-//                    
-//                })
-//            }
-//            else if let error = error{
-//                print("ERROR: \(error.localizedDescription)")
-//            }
-//        })
-//    }
+    func pictureTest () {
+        
+        if imageView.image == nil {
+            print("image view has no image... assign before we can save to parse")
+        }
+        else {
+            
+            let imageTest = PFObject(className: "Anna")
+            imageTest["name"] = "Anna Kendrick"
+            imageTest["title"] = "Your Goddess"
+            imageTest["user"] = PFUser.currentUser()
+            imageTest.saveInBackgroundWithBlock({ (success, error) in
+                
+                if error == nil {
+                    
+                    let imageData = UIImagePNGRepresentation(self.imageView.image!)
+                    let parseImageFile = PFFile(name: "the_hotness.png", data: imageData!)
+                    imageTest["imageFile"] = parseImageFile
+                    imageTest.saveInBackgroundWithBlock({ (success, error) in
+                        
+                        if success {
+                            print("Image successfully saved")
+                        }
+                        else if let error = error {
+                            
+                            print("Image not saved. ERROR: \(error.localizedDescription)")
+                        }
+                        
+                    })
+                }
+                
+            })
+        }
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -53,7 +64,6 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     func login(){
         
-        PFUser.logOut()
         if (PFUser.currentUser() == nil) {
             let loginViewController: PFLogInViewController = PFLogInViewController()
             loginViewController.fields = [PFLogInFields.UsernameAndPassword, PFLogInFields.LogInButton, PFLogInFields.SignUpButton, PFLogInFields.PasswordForgotten, PFLogInFields.DismissButton, PFLogInFields.Facebook, PFLogInFields.Twitter]
@@ -73,7 +83,6 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
             
         } else {
 //            self.pictureTest()
-            print("user signed in?")
 
         }
     }
@@ -132,5 +141,39 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         
     }
     
+    
+    @IBAction func queryButtonPressed(sender: UIButton) {
+        
+      let query = PFQuery(className: "Pet")
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            
+            if error == nil {
+                let imageObjects = objects as! [Pet]
+                for (_, object) in imageObjects.enumerate() {
+                    let thumbnail = object["imageFile"] as! PFFile
+                    thumbnail.getDataInBackgroundWithBlock({ (imageData: NSData?, error) in
+                        if error == nil {
+                            if let image = UIImage(data: imageData!) {
+                                self.imageView.image = image
+                            }
+                            
+                        }
+                        else {
+                            print("error getting the data")
+                            let alertController = UIAlertController(title: "ERROR:", message: "Could not retrieve image due to error \(error?.localizedDescription)", preferredStyle: .Alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        }
+                    })
+                }
+            }
+            else {
+                print("Error: \(error?.localizedDescription)")
+                let alertController = UIAlertController(title: "Error!", message: "Could not retrieve desired data due to erorr \(error?.localizedDescription)", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+    }
 }
 

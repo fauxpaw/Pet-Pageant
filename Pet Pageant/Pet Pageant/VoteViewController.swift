@@ -20,6 +20,8 @@ class VoteViewController: UIViewController {
     private let viewAnimationOutTime = 0.5
     private let viewAnimationInTime = 0.5
     
+    internal var showdown = [Pet]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let topPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
@@ -27,25 +29,61 @@ class VoteViewController: UIViewController {
         self.topVoteView.addGestureRecognizer(topPanGesture)
         self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
         
-//        let testObject = PFObject(className: "PuppyKins")
-//        testObject.addObject("Nova", forKey: "My Dog")
-//        testObject.saveInBackground()
     }
     
     func setupImageViews() {
         
         //TODO: GET IMAGE
         //TODO: SET IMAGE
+        self.GETPets()
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
         
     }
-    
+    func GETPets () {
+        
+        self.showdown.removeAll()
+        let query = PFQuery(className: "Pet")
+        query.orderByAscending("updatedAt")
+        query.limit = 2
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if error == nil {
+                let petObjects = objects as! [Pet]
+                print("success in getting \(objects)")
+                for object in petObjects {
+                    
+                    let imageData = object["imageFile"] as! PFFile
+                    imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
+                        
+                        if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                        }
+                        if let image = UIImage(data: data!) {
+                            if self.topVoteView.petImage == nil {
+                                self.topVoteView.petImage = image
+                            }
+                            else {
+                                self.bottomVoteView.petImage = image
+                            }
+                        }
+                    })
+                    self.showdown.append(object)
+                }
+            }
+            else {
+                print("Error: \(error?.localizedDescription)")
+            }
+        }
+    }
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //TODO: HANDLE VIEW COLLISSION
+        let toucheCount = touches.count
+//        print(toucheCount)
+        
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //
+        print(touches.count)
     }
     
     override func viewWillAppear(animated: Bool) {

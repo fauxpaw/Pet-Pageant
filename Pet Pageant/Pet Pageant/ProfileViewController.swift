@@ -47,6 +47,12 @@ class ProfileViewController: UICollectionViewController{
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //reminder - the indexPath.row is 0 based index
         print("You clicked on photo number \(indexPath.row)")
+        
+        if indexPath.row == allPets.count {
+            guard let topVC = UIApplication.sharedApplication().keyWindow?.rootViewController else {return}
+           topVC.performSegueWithIdentifier("uploadPhoto", sender: self)
+            
+        }
     }
     
 }
