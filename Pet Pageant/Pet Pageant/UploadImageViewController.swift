@@ -47,7 +47,7 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
         
         print("upload button pressed")
         if imagView.image == nil {
-            let alertController = UIAlertController(title: "Failure to upload", message: "You must select an image", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Image missing", message: "Please tap the image field to select a photo before pressing the upload button.", preferredStyle: .Alert)
             let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(alertAction)
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -55,9 +55,8 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
         }
         else {
             
-           
             let pet = Pet(owner: PFUser.currentUser()!)
-            
+            print(PFUser.currentUser())
             pet.saveInBackgroundWithBlock({ (success, error) in
                 
                 if error == nil {
@@ -80,6 +79,11 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
                             self.presentViewController(alertController, animated: true, completion: nil)
                         }
                     })
+                }
+                else if let error = error {
+                    let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
             })
         }

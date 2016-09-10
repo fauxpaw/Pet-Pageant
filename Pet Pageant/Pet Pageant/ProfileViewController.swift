@@ -8,6 +8,8 @@
 let screenSize: CGRect = UIScreen.mainScreen().bounds
 
 import UIKit
+import Parse
+import ParseUI
 
 class ProfileViewController: UICollectionViewController{
 
@@ -16,11 +18,53 @@ class ProfileViewController: UICollectionViewController{
     private let photoWidth = (screenSize.width - 40) / 2
     private let sectionInsets = UIEdgeInsets(top: 50, left: 10, bottom: 50, right: 10)
     
+    
     //TODO: REPLACE WITH DATA SOURCE
-    let allPets = [1,2,3,4,5]
+    var allPets = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.GETUsersPets()
+    }
+    
+    func GETUsersPets() {
+        
+        self.allPets.removeAll()
+        guard let owner = PFUser.currentUser() else {return}
+        let query = PFQuery(className: "Pet")
+        query.whereKey("owner", equalTo: owner)
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if let error = error {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            else {
+                print("pet objects...")
+                let petObjects = objects as! [Pet]
+                print(petObjects)
+                for object in petObjects {
+                    let imageData = object["imageFile"] as! PFFile
+                    imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
+                        if let error = error {
+                            print("ERROR fetching image: \(error.localizedDescription) ")
+                        }
+                        else {
+                            print("fetching images...")
+                            if let data = data {
+                                guard let image = UIImage(data: data) else {return}
+                                self.allPets.append(image)
+                                self.collectionView?.reloadData()
+                            }
+                        }
+                    })
+                    
+                }
+            }
+        }
+        
     }
     
     //MARK: CollectionViewControllerDelegate
@@ -37,6 +81,8 @@ class ProfileViewController: UICollectionViewController{
         
         if indexPath.row < allPets.count {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+            let pic = cell.viewWithTag(2) as! UIImageView
+            pic.image = allPets[indexPath.row]
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseAddPhoto, forIndexPath: indexPath) as UICollectionViewCell

@@ -24,6 +24,9 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         
         if imageView.image == nil {
             print("image view has no image... assign before we can save to parse")
+            let alertController = UIAlertController(title: "Error:", message: "You have not selected an image. Please tap the image field to select a photo to upload.", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         else {
             

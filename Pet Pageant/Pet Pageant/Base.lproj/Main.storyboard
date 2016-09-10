@@ -192,7 +192,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="anna" translatesAutoresizingMaskIntoConstraints="NO" id="6gA-DZ-gmJ">
+                                        <imageView tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="anna" translatesAutoresizingMaskIntoConstraints="NO" id="6gA-DZ-gmJ">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
                                     </subviews>

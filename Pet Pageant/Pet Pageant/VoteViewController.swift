@@ -20,7 +20,15 @@ class VoteViewController: UIViewController {
     private let viewAnimationOutTime = 0.5
     private let viewAnimationInTime = 0.5
     
-    internal var showdown = [Pet]()
+    var showdownRecords = [Pet]()
+    var showdownImages = [UIImage]() {
+        didSet {
+            if showdownImages.count == 2 {
+                self.topVoteView.petImage = showdownImages[0]
+                self.bottomVoteView.petImage = showdownImages[1]
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +41,15 @@ class VoteViewController: UIViewController {
     
     func setupImageViews() {
         
-        //TODO: GET IMAGE
-        //TODO: SET IMAGE
         self.GETPets()
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
         
     }
+    //MARK: BACKEND COMMUNICATION
+    //get the 2 oldest(by update time) records
     func GETPets () {
         
-        self.showdown.removeAll()
+        self.showdownImages.removeAll()
         let query = PFQuery(className: "Pet")
         query.orderByAscending("updatedAt")
         query.limit = 2
@@ -58,15 +66,10 @@ class VoteViewController: UIViewController {
                             print("Error: \(error.localizedDescription)")
                         }
                         if let image = UIImage(data: data!) {
-                            if self.topVoteView.petImage == nil {
-                                self.topVoteView.petImage = image
-                            }
-                            else {
-                                self.bottomVoteView.petImage = image
-                            }
+                            self.showdown.append(image)
                         }
                     })
-                    self.showdown.append(object)
+                    
                 }
             }
             else {
@@ -74,16 +77,15 @@ class VoteViewController: UIViewController {
             }
         }
     }
-
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //TODO: HANDLE VIEW COLLISSION
-        let toucheCount = touches.count
-//        print(toucheCount)
+    
+    func updatePet() {
         
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print(touches.count)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //Handle collision for dual-view pan
+        self.topVoteView.userInteractionEnabled = false
+        self.bottomVoteView.userInteractionEnabled = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -192,6 +194,7 @@ class VoteViewController: UIViewController {
                 
                 selectedView.removeVoteIcon()
                 otherView.removeVoteIcon()
+                selectedView.userInteractionEnabled = true
                 otherView.userInteractionEnabled = true
                 
             }
