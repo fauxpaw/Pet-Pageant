@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="Pet_Pageant" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PetCell" customModule="Pet_Pageant" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="411"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d1o-5d-w19">
+                    <rect key="frame" x="0.0" y="0.0" width="325" height="310"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="b5h-eO-0p7"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="b5h-eO-0p7"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxN-7K-N1d">
+                    <rect key="frame" x="8" y="318" width="309" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="309" id="SqK-Hc-ofo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZY4-L3-ow1">
+                    <rect key="frame" x="8" y="349" width="309" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hT0-HD-Ybh">
+                    <rect key="frame" x="8" y="380" width="309" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="d1o-5d-w19" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1Vb-yH-evt"/>
+                <constraint firstAttribute="trailing" secondItem="d1o-5d-w19" secondAttribute="trailing" id="3QJ-Gt-3ue"/>
+                <constraint firstAttribute="bottom" secondItem="hT0-HD-Ybh" secondAttribute="bottom" constant="10" id="565-ba-Hn4"/>
+                <constraint firstItem="d1o-5d-w19" firstAttribute="centerX" secondItem="HxN-7K-N1d" secondAttribute="centerX" id="A4y-Fh-Bac"/>
+                <constraint firstItem="hT0-HD-Ybh" firstAttribute="top" secondItem="ZY4-L3-ow1" secondAttribute="bottom" constant="10" id="JkO-q9-FGd"/>
+                <constraint firstItem="d1o-5d-w19" firstAttribute="centerX" secondItem="ZY4-L3-ow1" secondAttribute="centerX" id="JoL-6X-e6e"/>
+                <constraint firstItem="ZY4-L3-ow1" firstAttribute="top" secondItem="HxN-7K-N1d" secondAttribute="bottom" constant="10" id="K0s-Va-lGM"/>
+                <constraint firstItem="HxN-7K-N1d" firstAttribute="top" secondItem="d1o-5d-w19" secondAttribute="bottom" constant="8" symbolic="YES" id="RL0-ov-eYC"/>
+                <constraint firstItem="ZY4-L3-ow1" firstAttribute="leading" secondItem="hT0-HD-Ybh" secondAttribute="leading" id="YiH-Wy-6rU"/>
+                <constraint firstItem="HxN-7K-N1d" firstAttribute="leading" secondItem="ZY4-L3-ow1" secondAttribute="leading" id="jzH-Vm-x5C"/>
+                <constraint firstItem="d1o-5d-w19" firstAttribute="centerX" secondItem="hT0-HD-Ybh" secondAttribute="centerX" id="lzs-bm-7BE"/>
+                <constraint firstItem="d1o-5d-w19" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="naq-Vm-9mM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="d1o-5d-w19" id="Eoe-1U-WOC"/>
+                <outlet property="reportsLabel" destination="hT0-HD-Ybh" id="yhY-zG-svO"/>
+                <outlet property="viewLabel" destination="ZY4-L3-ow1" id="7Pm-on-giL"/>
+                <outlet property="votesLabel" destination="HxN-7K-N1d" id="Jxb-es-rSz"/>
+            </connections>
+            <point key="canvasLocation" x="570.5" y="100.5"/>
+        </view>
+    </objects>
+</document>

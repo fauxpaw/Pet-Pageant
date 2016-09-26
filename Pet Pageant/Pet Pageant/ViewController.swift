@@ -20,43 +20,43 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         
     }
     
-    func pictureTest () {
-        
-        if imageView.image == nil {
-            print("image view has no image... assign before we can save to parse")
-            let alertController = UIAlertController(title: "Error:", message: "You have not selected an image. Please tap the image field to select a photo to upload.", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        else {
-            
-            let imageTest = PFObject(className: "Anna")
-            imageTest["name"] = "Anna Kendrick"
-            imageTest["title"] = "Your Goddess"
-            imageTest["user"] = PFUser.currentUser()
-            imageTest.saveInBackgroundWithBlock({ (success, error) in
-                
-                if error == nil {
-                    
-                    let imageData = UIImagePNGRepresentation(self.imageView.image!)
-                    let parseImageFile = PFFile(name: "the_hotness.png", data: imageData!)
-                    imageTest["imageFile"] = parseImageFile
-                    imageTest.saveInBackgroundWithBlock({ (success, error) in
-                        
-                        if success {
-                            print("Image successfully saved")
-                        }
-                        else if let error = error {
-                            
-                            print("Image not saved. ERROR: \(error.localizedDescription)")
-                        }
-                        
-                    })
-                }
-                
-            })
-        }
-    }
+//    func pictureTest () {
+//        
+//        if imageView.image == nil {
+//            print("image view has no image... assign before we can save to parse")
+//            let alertController = UIAlertController(title: "Error:", message: "You have not selected an image. Please tap the image field to select a photo to upload.", preferredStyle: .Alert)
+//            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//            self.presentViewController(alertController, animated: true, completion: nil)
+//        }
+//        else {
+//            
+//            let imageTest = PFObject(className: "Anna")
+//            imageTest["name"] = "Anna Kendrick"
+//            imageTest["title"] = "Your Goddess"
+//            imageTest["user"] = PFUser.currentUser()
+//            imageTest.saveInBackgroundWithBlock({ (success, error) in
+//                
+//                if error == nil {
+//                    
+//                    let imageData = UIImagePNGRepresentation(self.imageView.image!)
+//                    let parseImageFile = PFFile(name: "the_hotness.png", data: imageData!)
+//                    imageTest["imageFile"] = parseImageFile
+//                    imageTest.saveInBackgroundWithBlock({ (success, error) in
+//                        
+//                        if success {
+//                            print("Image successfully saved")
+//                        }
+//                        else if let error = error {
+//                            
+//                            print("Image not saved. ERROR: \(error.localizedDescription)")
+//                        }
+//                        
+//                    })
+//                }
+//                
+//            })
+//        }
+//    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -100,9 +100,9 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
 
-        print("failed to login. ERROR: \(error)")
         let alertController = UIAlertController(title: "Pet Pageant", message: "Login failed due to error \(error)", preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func logInViewControllerDidCancelLogIn(logInController: PFLogInViewController) {
@@ -114,7 +114,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         
         self.dismissViewControllerAnimated(true, completion: nil)
         self.login()
-        let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully signed up and are now logged in.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully signed up and are now logged in. Have fun!", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) in
             self.login()
         }))
@@ -123,8 +123,12 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     }
     
     func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
-        //TODO: ALERT
-        print("failed to signup")
+        if let error = error {
+            let alertController = UIAlertController(title: "Error", message: "Signup failed due to \(error.localizedDescription).", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
     }
     
     func signUpViewControllerDidCancelSignUp(signUpController: PFSignUpViewController) {
@@ -144,6 +148,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         
     }
     
+    //MARK: TESTS
     
     @IBAction func queryButtonPressed(sender: UIButton) {
         

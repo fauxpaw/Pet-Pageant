@@ -5,7 +5,6 @@
 //  Created by Michael Sweeney on 8/23/16.
 //  Copyright © 2016 Michael Sweeney. All rights reserved.
 //
-let screenSize: CGRect = UIScreen.mainScreen().bounds
 
 import UIKit
 import Parse
@@ -18,12 +17,12 @@ class ProfileViewController: UICollectionViewController{
     private let photoWidth = (screenSize.width - 40) / 2
     private let sectionInsets = UIEdgeInsets(top: 50, left: 10, bottom: 50, right: 10)
     
-    
     //TODO: REPLACE WITH DATA SOURCE
-    var allPets = [UIImage]()
-    
+    var allImages = [UIImage]()
+    var allPets = [Pet]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView!.registerNib(UINib(nibName: "PetCell", bundle: nil), forCellWithReuseIdentifier: "PetCell")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -34,6 +33,7 @@ class ProfileViewController: UICollectionViewController{
     func GETUsersPets() {
         
         self.allPets.removeAll()
+        self.allImages.removeAll()
         guard let owner = PFUser.currentUser() else {return}
         let query = PFQuery(className: "Pet")
         query.whereKey("owner", equalTo: owner)
@@ -42,9 +42,7 @@ class ProfileViewController: UICollectionViewController{
                 print("ERROR: \(error.localizedDescription)")
             }
             else {
-                print("pet objects...")
                 let petObjects = objects as! [Pet]
-                print(petObjects)
                 for object in petObjects {
                     let imageData = object["imageFile"] as! PFFile
                     imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
@@ -52,16 +50,17 @@ class ProfileViewController: UICollectionViewController{
                             print("ERROR fetching image: \(error.localizedDescription) ")
                         }
                         else {
-                            print("fetching images...")
                             if let data = data {
                                 guard let image = UIImage(data: data) else {return}
-                                self.allPets.append(image)
+                                self.allImages.append(image)
+                                self.allPets.append(object)
                                 self.collectionView?.reloadData()
                             }
                         }
                     })
                     
                 }
+                self.collectionView?.reloadData()
             }
         }
         
@@ -74,15 +73,19 @@ class ProfileViewController: UICollectionViewController{
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (allPets.count + 1)
+        return (allImages.count + 1)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if indexPath.row < allPets.count {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
-            let pic = cell.viewWithTag(2) as! UIImageView
-            pic.image = allPets[indexPath.row]
+        if indexPath.row < allImages.count {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PetCell", forIndexPath: indexPath) as! PetCell
+//            let pic = cell.viewWithTag(2) as! UIImageView
+//            pic.image = allImages[indexPath.row]
+            cell.imageView.image = allImages[indexPath.row]
+            cell.votesLabel.text = "Votes: \(allPets[indexPath.row].votes)"
+            cell.viewLabel.text = "Views: \(allPets[indexPath.row].viewed)"
+            cell.reportsLabel.text = "Reports: \(allPets[indexPath.row].reports)"
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseAddPhoto, forIndexPath: indexPath) as UICollectionViewCell
@@ -93,8 +96,10 @@ class ProfileViewController: UICollectionViewController{
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //reminder - the indexPath.row is 0 based index
         print("You clicked on photo number \(indexPath.row)")
-        
-        if indexPath.row == allPets.count {
+        print("This pics votes: \(allPets[indexPath.row].votes)")
+        print("This pics viewed: \(allPets[indexPath.row].viewed)")
+
+        if indexPath.row == allImages.count {
             guard let topVC = UIApplication.sharedApplication().keyWindow?.rootViewController else {return}
            topVC.performSegueWithIdentifier("uploadPhoto", sender: self)
             

@@ -20,12 +20,37 @@ class VoteViewController: UIViewController {
     private let viewAnimationOutTime = 0.5
     private let viewAnimationInTime = 0.5
     
-    var showdownRecords = [Pet]()
-    var showdownImages = [UIImage]() {
+    var voteQueue = [Pet]()
+    var topViewsRecord = [Pet]() {
         didSet {
-            if showdownImages.count == 2 {
-                self.topVoteView.petImage = showdownImages[0]
-                self.bottomVoteView.petImage = showdownImages[1]
+            for pet in topViewsRecord {
+                let imageData = pet["imageFile"] as! PFFile
+                imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
+                    
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    if let image = UIImage(data: data!) {
+                        self.topVoteView.petImage = image
+                    }
+                })
+            }
+        }
+    }
+    
+    var botViewsRecord = [Pet]() {
+        didSet {
+            for pet in botViewsRecord {
+                let imageData = pet["imageFile"] as! PFFile
+                imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
+                    
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    if let image = UIImage(data: data!) {
+                        self.bottomVoteView.petImage = image
+                    }
+                })
             }
         }
     }
@@ -38,48 +63,112 @@ class VoteViewController: UIViewController {
         self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
         
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupImageViews()
+    }
     
     func setupImageViews() {
-        
-        self.GETPets()
+        self.topVoteView.petImage = nil
+        self.bottomVoteView.petImage = nil
+        self.GETPetsForQueue()
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
-        
     }
+    
+    func chooseRecords(){
+        if self.voteQueue.isEmpty{
+            print("VOTEQUE EMPTY -> Aborting chooseRecords")
+            return
+        }
+        
+        let objectIndex1 = Int(arc4random_uniform(UInt32(self.voteQueue.count)))
+        var objectIndex2 = Int(arc4random_uniform(UInt32(self.voteQueue.count)))
+        while objectIndex1 == objectIndex2 {
+            objectIndex2 = Int(arc4random_uniform(UInt32(self.voteQueue.count)))
+        }
+        if objectIndex1 > objectIndex2 {
+            self.topViewsRecord.append(self.voteQueue.removeAtIndex(objectIndex1))
+            self.botViewsRecord.append(self.voteQueue.removeAtIndex(objectIndex2))
+        }
+        else {
+            self.topViewsRecord.append(self.voteQueue.removeAtIndex(objectIndex2))
+            self.botViewsRecord.append(self.voteQueue.removeAtIndex(objectIndex1))
+        }
+    }
+    
+    
     //MARK: BACKEND COMMUNICATION
     //get the 2 oldest(by update time) records
-    func GETPets () {
-        
-        self.showdownImages.removeAll()
+    func GETPetsForQueue () {
+        self.topViewsRecord.removeAll()
+        self.botViewsRecord.removeAll()
+        self.voteQueue.removeAll()
         let query = PFQuery(className: "Pet")
         query.orderByAscending("updatedAt")
-        query.limit = 2
+        query.limit = 100
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if error == nil {
                 let petObjects = objects as! [Pet]
-                print("success in getting \(objects)")
                 for object in petObjects {
-                    
-                    let imageData = object["imageFile"] as! PFFile
-                    imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
-                        
-                        if let error = error {
-                            print("Error: \(error.localizedDescription)")
-                        }
-                        if let image = UIImage(data: data!) {
-                            self.showdown.append(image)
-                        }
-                    })
-                    
+                    self.voteQueue.append(object)
                 }
+                self.chooseRecords()
             }
-            else {
-                print("Error: \(error?.localizedDescription)")
+            else if let error = error {
+                let alertController = UIAlertController(title: "ERROR", message: "Could not retrieve data due to \(error.localizedDescription). Please try again", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
     
-    func updatePet() {
-        
+    func updatePetRecords(selectedView: UIView, nonselectedView: UIView) {
+        if selectedView == self.topVoteView {
+            guard let record = self.topViewsRecord.first else { return}
+            record.incrementKey("votes")
+            record.incrementKey("viewed")
+            record.saveInBackgroundWithBlock({ (success, error) in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                }
+                else {
+                    print("record updated")
+                }
+            })
+            guard let record2 = self.botViewsRecord.first else { return }
+            record2.incrementKey("viewed")
+            record2.saveInBackgroundWithBlock({ (success, error) in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                }
+                else {
+                    print("record updated")
+                }
+            })
+        }
+        else {
+            guard let record = self.botViewsRecord.first else {return}
+            record.incrementKey("votes")
+            record.incrementKey("viewed")
+            record.saveInBackgroundWithBlock({ (success, error) in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                }
+                else {
+                    print("record updated")
+                }
+            })
+            guard let record2 = self.topViewsRecord.first else { return }
+            record2.incrementKey("viewed")
+            record2.saveInBackgroundWithBlock({ (success, error) in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                }
+                else {
+                    print("record updated")
+                }
+            })
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -88,10 +177,6 @@ class VoteViewController: UIViewController {
         self.bottomVoteView.userInteractionEnabled = false
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setupImageViews()
-    }
     //MARK: ANIMATIONS
     func animateViewsIn(top: UIView, bot: UIView) {
         topVoteView.removeVoteIcon()
@@ -140,7 +225,7 @@ class VoteViewController: UIViewController {
                 otherView.userInteractionEnabled = true
                 selectedView.alpha = 1.0
                 otherView.alpha = 1.0
-                self.animateViewsIn(self.topVoteView, bot: self.bottomVoteView)
+                self.setupImageViews()
             }
         }
     }
@@ -184,6 +269,7 @@ class VoteViewController: UIViewController {
             if iconView.alpha > 0.75 {
                 view.userInteractionEnabled = false
                 otherView.userInteractionEnabled = false
+                self.updatePetRecords(selectedView, nonselectedView: otherView)
                 self.animateViewsOut(view, otherView: otherView)
             }
                 
