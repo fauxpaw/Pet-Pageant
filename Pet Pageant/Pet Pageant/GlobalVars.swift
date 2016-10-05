@@ -7,6 +7,6 @@
 //
 
 let screenSize: CGRect = UIScreen.mainScreen().bounds
-let carouselCenterPoint = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
+let carouselCenterPoint = CGPoint(x: screenSize.width/2, y: screenSize.height/3)
 
 import UIKit

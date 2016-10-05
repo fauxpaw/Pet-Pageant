@@ -42,7 +42,7 @@ struct CarouselView {
         targetView.layer.addAnimation(anim, forKey: "carousel")
     }
     
-    static func rotateViewsClockwise(VC: UIViewController, views: [UIView],completion: (success: Bool) -> ()) {
+    static func rotateViewsClockwise(VC: UIViewController, inout views: [UIView],completion: (success: Bool) -> ()) {
         for view in views {
             view.userInteractionEnabled = false
         }
@@ -53,10 +53,12 @@ struct CarouselView {
             let endAngle = CGFloat(90 + (index + 1) * (360/carouselViewCount))
             CarouselView.arcClockwiseAnimation(views[index], startAngle: angle * radians, endAngle: endAngle * radians)
         }
+        let pop = views.removeLast()
+        views.insert(pop, atIndex: 0)
         completion(success: true)
     }
     
-    static func rotateViewsCounterClockwise(VC: UIViewController, views: [UIView] ,completion: (success: Bool) -> ()) {
+    static func rotateViewsCounterClockwise(VC: UIViewController, inout views: [UIView] ,completion: (success: Bool) -> ()) {
         for view in views {
             view.userInteractionEnabled = false
         }
@@ -66,7 +68,18 @@ struct CarouselView {
             let endAngle = CGFloat(90 - (index + 1) * (360/carouselViewCount))
             CarouselView.arcCounter_ClockwiseAnimation(views[index], startAngle: angle * radians, endAngle: endAngle * radians)
         }
+        let pop = views.removeLast()
+        views.insert(pop, atIndex: 0)
         completion(success: true)
+    }
+    
+    static func viewHeirarcyManager(views: [UIView]) {
+        let count = views.count
+        
+    }
+    
+    static func viewResizer() {
+        
     }
     
     static func toggleUserInteractionAfterAnimation(VC: UIViewController ,views: [UIView]){

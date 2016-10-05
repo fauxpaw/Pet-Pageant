@@ -7,16 +7,41 @@
 //
 
 import UIKit
+import Parse
 
 class LeaderboardViewController: UIViewController {
     
     var viewCenterPositions = [CGPoint]()
     var views = [UIView]()
-    
+    var pets = [Pet]() {
+        didSet{
+            var count = 0
+            for pet in pets {
+                let imageData = pet["imageFile"] as! PFFile
+                imageData.getDataInBackgroundWithBlock({ (data: NSData?, error) in
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    if (data != nil) {
+                        let image = UIImage(data: data!)
+                        print("first view? -> \(self.views[count])")
+                        let rankview = self.views[count] as! RankView
+                        rankview.imageView.image = image
+                        
+                    }
+                    print("count: \(count)")
+                    count += 1
+                })
+                
+            }
+        }
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwipes()
         self.setupViews()
+        self.fetchTopPets()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,19 +69,37 @@ class LeaderboardViewController: UIViewController {
             self.viewCenterPositions.append(position)
             self.views.append(view)
             self.view.addSubview(view)
-            print("Center Positions: \(self.viewCenterPositions)")
+        }
+    }
+    
+    func fetchTopPets(){
+        let query = PFQuery(className: "Pet")
+        query.orderByDescending("votes")
+        query.limit = 5
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if let error = error {
+                let alertController = UIAlertController(title: "Error", message: "Could not retrieve data due to \(error.localizedDescription). Please try again later.", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+            else {
+                let petObjects = objects as! [Pet]
+//                petObjects.sort({$0.votes > $1.votes})
+                self.pets = petObjects
+                print(self.pets)
+            }
         }
     }
     
     func swipeGesture(gesture: UISwipeGestureRecognizer){
         
         if gesture.direction == UISwipeGestureRecognizerDirection.Left{
-            CarouselView.rotateViewsClockwise(self, views: self.views, completion: { (success) in
+            CarouselView.rotateViewsClockwise(self, views: &self.views, completion: { (success) in
                 CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
             })
         }
         else if gesture.direction == UISwipeGestureRecognizerDirection.Right {
-            CarouselView.rotateViewsCounterClockwise(self, views: views, completion: { (success) in
+            CarouselView.rotateViewsCounterClockwise(self, views: &views, completion: { (success) in
                 CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
             })
         }

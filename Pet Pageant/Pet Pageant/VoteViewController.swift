@@ -289,7 +289,4 @@ class VoteViewController: UIViewController {
             return
         }
     }
-    
-    //MARK: ACTIONS
-    
 }
