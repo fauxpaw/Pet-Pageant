@@ -58,7 +58,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
 //        }
 //    }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.login()
     }
@@ -67,9 +67,9 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     func login(){
         
-        if (PFUser.currentUser() == nil) {
+        if (PFUser.current() == nil) {
             let loginViewController: PFLogInViewController = PFLogInViewController()
-            loginViewController.fields = [PFLogInFields.UsernameAndPassword, PFLogInFields.LogInButton, PFLogInFields.SignUpButton, PFLogInFields.PasswordForgotten, PFLogInFields.DismissButton, PFLogInFields.Facebook, PFLogInFields.Twitter]
+            loginViewController.fields = [PFLogInFields.usernameAndPassword, PFLogInFields.logInButton, PFLogInFields.signUpButton, PFLogInFields.passwordForgotten, PFLogInFields.dismissButton, PFLogInFields.facebook, PFLogInFields.twitter]
             
             //TODO: SKIN - SPLASH SCREEN
             let loginLogoTitle = UILabel()
@@ -82,7 +82,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
             let signupLogoTitle = UILabel()
             signupLogoTitle.text = "Pet Pageant <placeholder>"
             loginViewController.signUpController?.signUpView?.logo = signupLogoTitle
-            self.presentViewController(loginViewController, animated: true, completion: nil)
+            self.present(loginViewController, animated: true, completion: nil)
             
         } else {
 //            self.pictureTest()
@@ -93,73 +93,73 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     //MARK: PARSE LOGIN DELEGATE
 
-    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+    func log(_ logInController: PFLogInViewController, didLogIn user: PFUser) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
+    @nonobjc func log(_ logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
 
-        let alertController = UIAlertController(title: "Pet Pageant", message: "Login failed due to error \(error)", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: "Pet Pageant", message: "Login failed due to error \(error)", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    func logInViewControllerDidCancelLogIn(logInController: PFLogInViewController) {
+    func logInViewControllerDidCancelLog(in logInController: PFLogInViewController) {
     }
     
     //MARK: Parse Signup
     
-    func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+    func signUpViewController(_ signUpController: PFSignUpViewController, didSignUp user: PFUser) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         self.login()
-        let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully signed up and are now logged in. Have fun!", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) in
+        let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully signed up and are now logged in. Have fun!", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
             self.login()
         }))
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
-    func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
+    @nonobjc func signUpViewController(_ signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
         if let error = error {
-            let alertController = UIAlertController(title: "Error", message: "Signup failed due to \(error.localizedDescription).", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "Error", message: "Signup failed due to \(error.localizedDescription).", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }
         
     }
     
-    func signUpViewControllerDidCancelSignUp(signUpController: PFSignUpViewController) {
+    func signUpViewControllerDidCancelSignUp(_ signUpController: PFSignUpViewController) {
     }
     
     //MARK: ACTIONS
     
-    @IBAction func logoutButtonPressed(sender: AnyObject) {
+    @IBAction func logoutButtonPressed(_ sender: AnyObject) {
         PFUser.logOut()
        
-        let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully logged out.", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) in
+        let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully logged out.", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
             self.login()
         }))
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
     //MARK: TESTS
     
-    @IBAction func queryButtonPressed(sender: UIButton) {
+    @IBAction func queryButtonPressed(_ sender: UIButton) {
         
       let query = PFQuery(className: "Pet")
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
+        query.findObjectsInBackground { (objects, error) in
             
             if error == nil {
                 let imageObjects = objects as! [Pet]
-                for (_, object) in imageObjects.enumerate() {
+                for (_, object) in imageObjects.enumerated() {
                     let thumbnail = object["imageFile"] as! PFFile
-                    thumbnail.getDataInBackgroundWithBlock({ (imageData: NSData?, error) in
+                    thumbnail.getDataInBackground(block: { (imageData: Data?, error) in
                         if error == nil {
                             if let image = UIImage(data: imageData!) {
                                 self.imageView.image = image
@@ -168,18 +168,18 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
                         }
                         else {
                             print("error getting the data")
-                            let alertController = UIAlertController(title: "ERROR:", message: "Could not retrieve image due to error \(error?.localizedDescription)", preferredStyle: .Alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                            self.presentViewController(alertController, animated: true, completion: nil)
+                            let alertController = UIAlertController(title: "ERROR:", message: "Could not retrieve image due to error \(error?.localizedDescription)", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
                         }
                     })
                 }
             }
             else {
                 print("Error: \(error?.localizedDescription)")
-                let alertController = UIAlertController(title: "Error!", message: "Could not retrieve desired data due to erorr \(error?.localizedDescription)", preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                self.presentViewController(alertController, animated: true, completion: nil)
+                let alertController = UIAlertController(title: "Error!", message: "Could not retrieve desired data due to erorr \(error?.localizedDescription)", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

@@ -23,7 +23,6 @@ class Pet: PFObject, PFSubclassing {
     
     init(owner: PFUser) {
         super.init()
-        
         self.owner = owner
         self.votes = 0
         self.viewed = 0

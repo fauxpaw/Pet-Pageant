@@ -18,9 +18,9 @@ class RankView: UIView {
     @IBOutlet weak var votePercentageLabel: UILabel!
     
     func loadXib() -> UIView {
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "RankView", bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
     
@@ -39,7 +39,7 @@ class RankView: UIView {
     func setup() {
         view = self.loadXib()
         view.frame = self.bounds
-        view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         addSubview(view)
     }
     

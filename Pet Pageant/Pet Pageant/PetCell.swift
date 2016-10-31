@@ -14,6 +14,4 @@ class PetCell: UICollectionViewCell {
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var viewLabel: UILabel!
     @IBOutlet weak var reportsLabel: UILabel!
-    
-    
 }

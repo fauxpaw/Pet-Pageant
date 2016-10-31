@@ -17,80 +17,76 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-
     }
     
     func setup(){
-        imagView.userInteractionEnabled = true
+        imagView.isUserInteractionEnabled = true
         let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UploadImageViewController.imageTapped(_:)))
         imagView.addGestureRecognizer(tapRecognizer)
-        
     }
     
     //MARK: ACTIONS
     
-    func imageTapped(sender: UITapGestureRecognizer) {
+    func imageTapped(_ sender: UITapGestureRecognizer) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func backButtonSelected(sender: UIBarButtonItem) {
+    @IBAction func backButtonSelected(_ sender: UIBarButtonItem) {
         
         print("back button pressed")
-       self.dismissViewControllerAnimated(true, completion: nil)
-        
+       self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func uploadButtonSelected(sender: UIBarButtonItem) {
+    @IBAction func uploadButtonSelected(_ sender: UIBarButtonItem) {
         
         print("upload button pressed")
         if imagView.image == nil {
-            let alertController = UIAlertController(title: "Image missing", message: "Please tap the image field to select a photo before pressing the upload button.", preferredStyle: .Alert)
-            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            let alertController = UIAlertController(title: "Image missing", message: "Please tap the image field to select a photo before pressing the upload button.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
         else {
             
-            let pet = Pet(owner: PFUser.currentUser()!)
-            print(PFUser.currentUser())
-            pet.saveInBackgroundWithBlock({ (success, error) in
+            let pet = Pet(owner: PFUser.current()!)
+            pet.saveInBackground(block: { (success, error) in
                 
                 if error == nil {
                     
                     let imageData = UIImagePNGRepresentation(self.imagView.image!)
                     let parseImageFile = PFFile(name: "pet_image.png", data: imageData!)
                     pet["imageFile"] = parseImageFile
-                    pet.saveInBackgroundWithBlock({ (success, error) in
+                    pet.saveInBackground(block: { (success, error) in
                         
                         if success {
                             print("Image successfully saved")
-                            self.dismissViewControllerAnimated(true, completion: nil)
+                            self.dismiss(animated: true, completion: nil)
                             
                         }
                         else if let error = error {
                             
                             print("Image not saved. ERROR: \(error.localizedDescription)")
-                            let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .Alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                            self.presentViewController(alertController, animated: true, completion: nil)
+                            let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
                         }
                     })
                 }
                 else if let error = error {
-                    let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
                 }
             })
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         imagView.image = image
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
