@@ -12,13 +12,18 @@
 		4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; };
 		4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */; };
 		4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */; };
-		4C1E3AD31D6CDC2A000B9861 /* Leaderboard-RankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E3AD21D6CDC2A000B9861 /* Leaderboard-RankView.xib */; };
 		4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; };
 		4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */; };
 		4C4FF2F81D714C4300714806 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F71D714C4300714806 /* Pet.swift */; };
+		4C5AC27C1DBC4DF500A57776 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5AC27B1DBC4DF500A57776 /* RootViewController.swift */; };
+		4C62BC671DB9A56E00EB356D /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C62BC661DB9A56E00EB356D /* ErrorHandler.swift */; };
+		4C72E5E01D8B6FC30009AB05 /* PetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E5DF1D8B6FC30009AB05 /* PetCell.swift */; };
+		4C72E5E21D8B86AC0009AB05 /* PetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C72E5E11D8B86AC0009AB05 /* PetCell.xib */; };
+		4C72E5E41D8C35570009AB05 /* RankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C72E5E31D8C35570009AB05 /* RankView.xib */; };
+		4C72E5E61D8C36F80009AB05 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E5E51D8C36F80009AB05 /* RankView.swift */; };
 		4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */; };
 		4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75B28D1D63F9BB002755B7 /* ViewController.swift */; };
 		4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C75B28F1D63F9BB002755B7 /* Main.storyboard */; };
@@ -27,6 +32,8 @@
 		4CB8EA591D6AE2A4009B20B3 /* VoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */; };
 		4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */; };
 		4CBAEB781D73C4940003B591 /* UploadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBAEB771D73C4940003B591 /* UploadImageViewController.swift */; };
+		4CEDDA6C1D903B13004E56AD /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEDDA6B1D903B13004E56AD /* CarouselView.swift */; };
+		4CEDDA6E1D903ECC004E56AD /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEDDA6D1D903ECC004E56AD /* GlobalVars.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,10 +57,15 @@
 		4C0A74E41D729289009B4F93 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
-		4C1E3AD21D6CDC2A000B9861 /* Leaderboard-RankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Leaderboard-RankView.xib"; sourceTree = "<group>"; };
 		4C36E7351D72936800B83B92 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		4C4FF2F71D714C4300714806 /* Pet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		4C5AC27B1DBC4DF500A57776 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		4C62BC661DB9A56E00EB356D /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		4C72E5DF1D8B6FC30009AB05 /* PetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCell.swift; sourceTree = "<group>"; };
+		4C72E5E11D8B86AC0009AB05 /* PetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetCell.xib; sourceTree = "<group>"; };
+		4C72E5E31D8C35570009AB05 /* RankView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankView.xib; sourceTree = "<group>"; };
+		4C72E5E51D8C36F80009AB05 /* RankView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
 		4C75B2881D63F9BB002755B7 /* Pet Pageant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pet Pageant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C75B28D1D63F9BB002755B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +76,8 @@
 		4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteView.xib; sourceTree = "<group>"; };
 		4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 		4CBAEB771D73C4940003B591 /* UploadImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageViewController.swift; sourceTree = "<group>"; };
+		4CEDDA6B1D903B13004E56AD /* CarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		4CEDDA6D1D903ECC004E56AD /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +141,7 @@
 				4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */,
 				4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */,
 				4CBAEB771D73C4940003B591 /* UploadImageViewController.swift */,
+				4C5AC27B1DBC4DF500A57776 /* RootViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -137,6 +152,7 @@
 				4C75B2971D63F9BB002755B7 /* Info.plist */,
 				4C75B2921D63F9BB002755B7 /* Assets.xcassets */,
 				4C75B28B1D63F9BB002755B7 /* AppDelegate.swift */,
+				4CEDDA6D1D903ECC004E56AD /* GlobalVars.swift */,
 			);
 			name = "App Global";
 			sourceTree = "<group>";
@@ -146,9 +162,9 @@
 			children = (
 				4C75B2941D63F9BB002755B7 /* LaunchScreen.storyboard */,
 				4CB8EA581D6AE2A4009B20B3 /* VoteView.xib */,
-				4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */,
 				4C75B28F1D63F9BB002755B7 /* Main.storyboard */,
-				4C1E3AD21D6CDC2A000B9861 /* Leaderboard-RankView.xib */,
+				4C72E5E11D8B86AC0009AB05 /* PetCell.xib */,
+				4C72E5E31D8C35570009AB05 /* RankView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -156,7 +172,12 @@
 		4CBAEB791D73D3B20003B591 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4C62BC661DB9A56E00EB356D /* ErrorHandler.swift */,
+				4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */,
 				4C4FF2F71D714C4300714806 /* Pet.swift */,
+				4C72E5DF1D8B6FC30009AB05 /* PetCell.swift */,
+				4C72E5E51D8C36F80009AB05 /* RankView.swift */,
+				4CEDDA6B1D903B13004E56AD /* CarouselView.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -194,6 +215,8 @@
 				TargetAttributes = {
 					4C75B2871D63F9BB002755B7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = NXQBD8W8TS;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -220,9 +243,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C72E5E41D8C35570009AB05 /* RankView.xib in Resources */,
 				4C75B2961D63F9BB002755B7 /* LaunchScreen.storyboard in Resources */,
 				4C75B2931D63F9BB002755B7 /* Assets.xcassets in Resources */,
-				4C1E3AD31D6CDC2A000B9861 /* Leaderboard-RankView.xib in Resources */,
+				4C72E5E21D8B86AC0009AB05 /* PetCell.xib in Resources */,
 				4CB8EA591D6AE2A4009B20B3 /* VoteView.xib in Resources */,
 				4C75B2911D63F9BB002755B7 /* Main.storyboard in Resources */,
 			);
@@ -236,13 +260,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */,
+				4C62BC671DB9A56E00EB356D /* ErrorHandler.swift in Sources */,
+				4C72E5E01D8B6FC30009AB05 /* PetCell.swift in Sources */,
 				4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */,
+				4CEDDA6E1D903ECC004E56AD /* GlobalVars.swift in Sources */,
+				4C5AC27C1DBC4DF500A57776 /* RootViewController.swift in Sources */,
 				4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */,
 				4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */,
+				4C72E5E61D8C36F80009AB05 /* RankView.swift in Sources */,
 				4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */,
 				4CBAEB781D73C4940003B591 /* UploadImageViewController.swift in Sources */,
 				4C4FF2F81D714C4300714806 /* Pet.swift in Sources */,
 				4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */,
+				4CEDDA6C1D903B13004E56AD /* CarouselView.swift in Sources */,
 				4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +388,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NXQBD8W8TS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -366,6 +397,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -373,6 +405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NXQBD8W8TS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -381,6 +414,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

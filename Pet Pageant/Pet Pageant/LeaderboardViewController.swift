@@ -7,20 +7,100 @@
 //
 
 import UIKit
+import Parse
 
 class LeaderboardViewController: UIViewController {
-
+    
+    var viewCenterPositions = [CGPoint]()
+    var views = [UIView]()
+    var pets = [Pet]() {
+        didSet{
+            var count = 0
+            for pet in pets {
+                let imageData = pet["imageFile"] as! PFFile
+                imageData.getDataInBackground(block: { (data: Data?, error) in
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    if (data != nil) {
+                        let image = UIImage(data: data!)
+                        print("first view? -> \(self.views[count])")
+                        let rankview = self.views[count] as! RankView
+                        rankview.imageView.image = image
+                        
+                    }
+                    print("count: \(count)")
+                    count += 1
+                })
+            }
+        }
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setupSwipes()
+        self.setupViews()
+        self.fetchTopPets()
     }
-
-    override func viewWillAppear(animated: Bool) {
+    
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    func setup() {
-        
+    func setupSwipes(){
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeLeft)
+        self.view.addGestureRecognizer(swipeRight)
     }
-
+    
+    func setupViews() {
+        self.views.removeAll()
+        for index in 0..<carouselViewCount {
+            let angle = CGFloat(90 + index * (360/carouselViewCount))
+            let x = carouselCenterPoint.x + CGFloat(screenSize.width/2) * cos(angle * CGFloat(M_PI/180))
+            let y = carouselCenterPoint.y + CGFloat(screenSize.width/2) * sin(angle * CGFloat(M_PI/180))
+            let position = CGPoint(x: x, y: y)
+            let view = RankView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+            view.center = position
+            self.viewCenterPositions.append(position)
+            self.views.append(view)
+            self.view.addSubview(view)
+        }
+    }
+    
+    func fetchTopPets(){
+        let query = PFQuery(className: "Pet")
+        query.order(byDescending: "votes")
+        query.limit = 5
+        query.findObjectsInBackground { (objects, error) in
+            if let error = error {
+                let alertController = UIAlertController(title: "Error", message: "Could not retrieve data due to \(error.localizedDescription). Please try again later.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else {
+                let petObjects = objects as! [Pet]
+//                petObjects.sort({$0.votes > $1.votes})
+                self.pets = petObjects
+                print(self.pets)
+            }
+        }
+    }
+    
+    func swipeGesture(_ gesture: UISwipeGestureRecognizer){
+        
+        if gesture.direction == UISwipeGestureRecognizerDirection.left{
+            CarouselView.rotateViewsClockwise(self, views: &self.views, completion: { (success) in
+                CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
+            })
+        }
+        else if gesture.direction == UISwipeGestureRecognizerDirection.right {
+            CarouselView.rotateViewsCounterClockwise(self, views: &views, completion: { (success) in
+                CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
+            })
+        }
+    }
 }

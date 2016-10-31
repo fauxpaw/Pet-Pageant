@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11535.1" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11523"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VoteView" customModule="Pet_Pageant" customModuleProvider="target">
             <connections>
                 <outlet property="leftBackgroundImage" destination="Yb5-Rt-ZQ3" id="K9V-wE-jGR"/>
                 <outlet property="petImageView" destination="SBZ-5t-6P5" id="2cw-P5-BDi"/>
+                <outlet property="reportButton" destination="XpP-A8-KG3" id="PhQ-uG-Cse"/>
                 <outlet property="rightBackgroundImage" destination="GQE-xE-xAr" id="66i-7s-Q9X"/>
+                <outlet property="spinner" destination="fLI-ki-qB6" id="eKj-jZ-M7X"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hxU-Pm-kae"/>
             </connections>
         </placeholder>
@@ -21,7 +27,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yb5-Rt-ZQ3">
                     <rect key="frame" x="0.0" y="0.0" width="341" height="365"/>
-                    <color key="backgroundColor" red="0.2884248599861271" green="0.9334587378141399" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.2884248599861271" green="0.9334587378141399" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="341" id="ql0-xq-3Wi"/>
                     </constraints>
@@ -33,11 +39,11 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GQE-xE-xAr">
                     <rect key="frame" x="369" y="0.0" width="341" height="365"/>
-                    <color key="backgroundColor" red="0.28203205260388409" green="0.93852575427999907" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.28203205260388409" green="0.93852575427999907" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SBZ-5t-6P5">
                     <rect key="frame" x="193" y="20" width="325" height="325"/>
-                    <color key="backgroundColor" red="1" green="0.031779464291824655" blue="0.85040173478638015" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.32445870020000001" green="0.90862803849999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="325" id="5e0-fJ-81d"/>
                         <constraint firstAttribute="width" constant="325" id="OOA-Bk-o98"/>
@@ -50,17 +56,43 @@
                         </mask>
                     </variation>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpP-A8-KG3">
+                    <rect key="frame" x="518" y="167" width="192" height="30"/>
+                    <color key="backgroundColor" red="1" green="0.96957159164711049" blue="0.022582633762825211" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Report"/>
+                    <connections>
+                        <action selector="rightButtonSelected:" destination="-1" eventType="touchUpInside" id="7C7-RQ-4CJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN4-8T-VVj">
+                    <rect key="frame" x="0.0" y="167" width="193" height="30"/>
+                    <color key="backgroundColor" red="1" green="0.96957159159999995" blue="0.022582633760000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Menu"/>
+                    <connections>
+                        <action selector="leftButtonSelected:" destination="-1" eventType="touchUpInside" id="gfh-L6-QtE"/>
+                    </connections>
+                </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fLI-ki-qB6">
+                    <rect key="frame" x="337" y="164" width="37" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Yb5-Rt-ZQ3" secondAttribute="bottom" id="6hE-PP-Icy"/>
+                <constraint firstItem="SBZ-5t-6P5" firstAttribute="leading" secondItem="XN4-8T-VVj" secondAttribute="trailing" id="8Yr-vO-uN7"/>
                 <constraint firstItem="Yb5-Rt-ZQ3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9Zd-sH-jEc"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BDD-B2-axf"/>
                 <constraint firstAttribute="bottom" secondItem="SBZ-5t-6P5" secondAttribute="bottom" constant="20" id="LhM-53-EKs"/>
                 <constraint firstItem="Yb5-Rt-ZQ3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Mgd-Te-fpV"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PNg-J6-KV8"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Z5Z-hP-Nba"/>
+                <constraint firstItem="XN4-8T-VVj" firstAttribute="centerY" secondItem="Yb5-Rt-ZQ3" secondAttribute="centerY" id="buY-QS-waB"/>
+                <constraint firstItem="XN4-8T-VVj" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="leading" id="cQl-Fm-HiO"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="29" id="dmr-ID-ahR"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="ejZ-dW-kA4"/>
+                <constraint firstItem="XpP-A8-KG3" firstAttribute="leading" secondItem="SBZ-5t-6P5" secondAttribute="trailing" id="lid-29-eMO"/>
+                <constraint firstItem="XpP-A8-KG3" firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="mpG-75-Ru9"/>
+                <constraint firstItem="XpP-A8-KG3" firstAttribute="centerY" secondItem="GQE-xE-xAr" secondAttribute="centerY" id="osR-cB-ePd"/>
                 <constraint firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="sLt-IJ-y3C"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="28" id="tOA-Py-2i5"/>
                 <constraint firstItem="Yb5-Rt-ZQ3" firstAttribute="width" secondItem="GQE-xE-xAr" secondAttribute="width" id="tRS-lt-r09"/>
@@ -72,7 +104,7 @@
                     <exclude reference="dmr-ID-ahR"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="357.5" y="288"/>
+            <point key="canvasLocation" x="357" y="287.5"/>
         </view>
     </objects>
 </document>

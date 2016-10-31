@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+//TODO: Find suitable themecolor
 let themeColor = UIColor(red: 0.01, green: 0.41, blue: 0.22, alpha: 1.0)
 
 @UIApplicationMain
@@ -16,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         window?.tintColor = themeColor
         
@@ -26,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ParseMutableClientConfiguration.server = "https://pet-pageant.herokuapp.com/parse"
         })
         
-        Parse.initializeWithConfiguration(parseConfiguration)
+        Parse.initialize(with: parseConfiguration)
         return true
     }
     
