@@ -8,7 +8,6 @@
 
 import UIKit
 
-let animationTime = 6.0
 let carouselViewCount = 5
 
 struct CarouselView {
@@ -46,6 +45,7 @@ struct CarouselView {
         for view in views {
             view.isUserInteractionEnabled = false
         }
+        
         VC.view.isUserInteractionEnabled = false
         for index in 0..<views.count {
             let radians = CGFloat(M_PI/180)
@@ -72,6 +72,8 @@ struct CarouselView {
         views.insert(pop, at: 0)
         completion(true)
     }
+
+    
     
     
     //TODO:
@@ -92,4 +94,5 @@ struct CarouselView {
             VC.view.isUserInteractionEnabled = true
         }
     }
+    
 }
