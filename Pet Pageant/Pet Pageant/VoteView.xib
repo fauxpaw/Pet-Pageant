@@ -72,9 +72,8 @@
                         <action selector="leftButtonSelected:" destination="-1" eventType="touchUpInside" id="gfh-L6-QtE"/>
                     </connections>
                 </button>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fLI-ki-qB6">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fLI-ki-qB6">
                     <rect key="frame" x="337" y="164" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
             </subviews>
             <constraints>
@@ -89,6 +88,7 @@
                 <constraint firstItem="XN4-8T-VVj" firstAttribute="centerY" secondItem="Yb5-Rt-ZQ3" secondAttribute="centerY" id="buY-QS-waB"/>
                 <constraint firstItem="XN4-8T-VVj" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="leading" id="cQl-Fm-HiO"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="29" id="dmr-ID-ahR"/>
+                <constraint firstItem="fLI-ki-qB6" firstAttribute="centerY" secondItem="SBZ-5t-6P5" secondAttribute="centerY" id="dsj-iA-IUt"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="ejZ-dW-kA4"/>
                 <constraint firstItem="XpP-A8-KG3" firstAttribute="leading" secondItem="SBZ-5t-6P5" secondAttribute="trailing" id="lid-29-eMO"/>
                 <constraint firstItem="XpP-A8-KG3" firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="mpG-75-Ru9"/>
@@ -96,6 +96,7 @@
                 <constraint firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="sLt-IJ-y3C"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="28" id="tOA-Py-2i5"/>
                 <constraint firstItem="Yb5-Rt-ZQ3" firstAttribute="width" secondItem="GQE-xE-xAr" secondAttribute="width" id="tRS-lt-r09"/>
+                <constraint firstItem="fLI-ki-qB6" firstAttribute="centerX" secondItem="SBZ-5t-6P5" secondAttribute="centerX" id="vRe-5K-Ipu"/>
                 <constraint firstAttribute="bottom" secondItem="GQE-xE-xAr" secondAttribute="bottom" id="zdO-cm-31k"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

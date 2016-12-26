@@ -102,8 +102,6 @@ import UIKit
         let activityController = UIActivityViewController(activityItems: [title, image], applicationActivities: [])
         activityController.excludedActivityTypes = [UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType.mail, UIActivityType.message]
         topVC.present(activityController, animated: true, completion: nil)
-
-        
     }
     
     func reportPicture() {
@@ -123,6 +121,7 @@ import UIKit
         //API call
         let record = self.petRecord
         record?.incrementKey("reports")
+        self.disableReport()
         record?.saveInBackground(block: { (success, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -161,6 +160,6 @@ import UIKit
     
     @IBAction func rightButtonSelected(_ sender: UIButton) {
         self.reportPicture()
-        self.disableReport()
+        
     }
 }

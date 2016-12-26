@@ -16,6 +16,7 @@ class LeaderboardViewController: UIViewController {
     var pets = [Pet]() {
         didSet{
             var count = 0
+            
             for pet in pets {
                 let imageData = pet["imageFile"] as! PFFile
                 imageData.getDataInBackground(block: { (data: Data?, error) in
@@ -24,18 +25,26 @@ class LeaderboardViewController: UIViewController {
                     }
                     if (data != nil) {
                         let image = UIImage(data: data!)
-                        print("first view? -> \(self.views[count])")
-                        let rankview = self.views[count] as! RankView
+                        //print("first view? -> \(self.views[count])")
+                        let rankview = self.views[count]
                         rankview.imageView.image = image
+                        rankview.votesLabel.text = "Votes: \(pet.votes)"
+                        rankview.rankLabel.text = "Rank: \(self.pets.index(of: pet))"
+                        //rankview.votePercentageLabel.text = "\(pet.viewed)"
+                        rankview.votePercentageLabel.text = "Votes per total views: \((100 * pet.votes/pet.viewed))%"
                         
                     }
                     
                     count += 1
+                    if count == 5 {
+                        print("Attempting sort")
+                        self.sortViewsByRank()
+                    }
                 })
             }
         }
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwipes()
@@ -72,6 +81,12 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
+    func sortViewsByRank() {
+        //TODO: TODO - SORT FUNCTION
+        //Check each views votes to the adjacent view and switch positions if B < A
+        views.sort(by: { $0.votesLabel.text?.compare($1.votesLabel.text!) == ComparisonResult.orderedAscending })
+    }
+    
     func fetchTopPets(){
         let query = PFQuery(className: "Pet")
         query.order(byDescending: "votes")
@@ -84,28 +99,15 @@ class LeaderboardViewController: UIViewController {
             }
             else {
                 let petObjects = objects as! [Pet]
-//                petObjects.sort({$0.votes > $1.votes})
                 self.pets = petObjects
-                
             }
         }
     }
     
     func swipeGesture(_ gesture: UISwipeGestureRecognizer){
         
-        /* if gesture.direction == UISwipeGestureRecognizerDirection.left{
-            CarouselView.rotateViewsClockwise(self, views: &self.views, completion: { (success) in
-                CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
-            })
-        }
-        else if gesture.direction == UISwipeGestureRecognizerDirection.right {
-            CarouselView.rotateViewsCounterClockwise(self, views: &views, completion: { (success) in
-                CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
-            })
-        } */
-        
         if gesture.direction == UISwipeGestureRecognizerDirection.left {
-            print("swiping left")
+            
             for view in views {
                 view.animate(clockwise: true)
             }

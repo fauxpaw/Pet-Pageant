@@ -72,18 +72,6 @@ struct CarouselView {
         views.insert(pop, at: 0)
         completion(true)
     }
-
-    
-    
-    
-    //TODO:
-    static func viewHeirarcyManager(_ views: [UIView]) {
-        
-    }
-    //TODO:
-    static func viewResizer() {
-        
-    }
     
     static func toggleUserInteractionAfterAnimation(_ VC: UIViewController ,views: [UIView]){
         let delayTime = DispatchTime.now() + Double(Int64(animationTime * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)

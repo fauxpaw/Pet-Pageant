@@ -7,12 +7,12 @@
 //
 
 import UIKit
-
+import Foundation
 class RankView: UIView {
     
     var view: UIView!
     var currentPosition: CGPoint?
-    var nextPosition: CGPoint?
+    var defaultSize: CGRect?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var rankLabel: UILabel!
@@ -28,38 +28,31 @@ class RankView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        self.setup()
     }
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        UINib(nibName: "RankView", bundle: nil).instantiateWithOwner(self, options: nil)
         self.setup()
     }
     
     func setup() {
         view = self.loadXib()
         view.frame = self.bounds
+        self.defaultSize = view.frame
         view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         addSubview(view)
     }
     
-    func updateCurrentPosition() {
-        if let current = self.currentPosition {
-            self.center = current
-
-        } else {
-            print("no value found for self.currentPosition")
-        }
-        //print("\(self.currentPosition)")
-        //print("current is \(self.currentPosition) ----> Setting current to \(self.center)")
+    func tellMeViewStats(angle: CGFloat) {
+        self.rankLabel.text = "My height is: \(self.frame.height)"
+        self.votesLabel.text = "My angle is: \(round(angle))"
+        self.votePercentageLabel.text = "My position is: \(self.currentPosition)"
     }
-    
     
     func coordsToAngle (pos: CGPoint) -> CGFloat {
         let angle = atan2(pos.y - carouselCenterPoint.y, pos.x - carouselCenterPoint.x)
-        //print(angle)
         return angle
     }
     
@@ -82,8 +75,9 @@ class RankView: UIView {
         }
     }
     
+    //MARK: ANIMATIONS
     func animate(clockwise: Bool) {
-        self.updateCurrentPosition()
+       // self.updateCurrentPosition()
         guard let pos = self.currentPosition else { return }
         let startAngle = self.coordsToAngle(pos: pos)
         let endAngle = self.calculateNextPosition(currentAngle: startAngle, clockwise: clockwise)
@@ -96,12 +90,57 @@ class RankView: UIView {
         anim.fillMode = kCAFillModeForwards
         anim.isRemovedOnCompletion = false
         self.layer.add(anim, forKey: "carousel")
+        self.evaluateViewForResize(angle: endAngle)
+        
         let check =  self.angleToCoords(angle: endAngle)
-        print("Current position is: \(self.currentPosition)")
-        print("Position for next is: \(check)")
         self.currentPosition = check
+      //  self.tellMeViewStats(angle: endAngle)
     }
     
+    func scaleViewDown() {
+        UIView.animate(withDuration: animationTime, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        })
+    }
     
+    func scaleViewDefault() {
+        UIView.animate(withDuration: animationTime, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.transform = CGAffineTransform.identity
+        })
+    }
+    
+    func scaleViewUp() {
+        UIView.animate(withDuration: animationTime, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        })
+    }
+    
+    func viewToFront() {
+        self.superview?.bringSubview(toFront: self)
+    }
+    
+    func evaluateViewForResize(angle: CGFloat){
+       // print("angle passed is: \(angle)")
+        
+        switch round(angle) {
+        case -3:
+            self.scaleViewDefault()
+        case -2:
+            self.scaleViewDown()
+        case -1:
+            self.scaleViewDown()
+        case 0:
+            self.scaleViewDefault()
+        case 2:
+            self.scaleViewUp()
+            self.viewToFront()
+        case 3:
+            self.scaleViewDefault()
+        case 4:
+            self.scaleViewDown()
+        default:
+            self.scaleViewDefault()
+        }
+    }
     
 }
