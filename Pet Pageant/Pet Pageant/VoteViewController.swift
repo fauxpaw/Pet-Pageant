@@ -33,6 +33,8 @@ class VoteViewController: UIViewController {
                     }
                     if let image = UIImage(data: data!) {
                         self.topVoteView.petImage = image
+                        self.topVoteView.spinner.hidesWhenStopped = true
+                        self.topVoteView.spinner.stopAnimating()
                     }
                 })
             }
@@ -51,6 +53,8 @@ class VoteViewController: UIViewController {
                     }
                     if let image = UIImage(data: data!) {
                         self.bottomVoteView.petImage = image
+                        self.bottomVoteView.spinner.hidesWhenStopped = true
+                        self.bottomVoteView.spinner.stopAnimating()
                     }
                 })
             }
@@ -73,9 +77,12 @@ class VoteViewController: UIViewController {
     func setupImageViews() {
         self.topVoteView.petImage = nil
         self.bottomVoteView.petImage = nil
+        self.topVoteView.layer.cornerRadius = 4
+        self.bottomVoteView.layer.cornerRadius = 4
         self.topVoteView.enableReport()
         self.bottomVoteView.enableReport()
         self.topVoteView.spinner.startAnimating()
+        self.bottomVoteView.spinner.startAnimating()
         self.GETPetsForQueue()
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
     }

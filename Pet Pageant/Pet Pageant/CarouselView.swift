@@ -8,7 +8,6 @@
 
 import UIKit
 
-let animationTime = 6.0
 let carouselViewCount = 5
 
 struct CarouselView {
@@ -46,6 +45,7 @@ struct CarouselView {
         for view in views {
             view.isUserInteractionEnabled = false
         }
+        
         VC.view.isUserInteractionEnabled = false
         for index in 0..<views.count {
             let radians = CGFloat(M_PI/180)
@@ -73,16 +73,6 @@ struct CarouselView {
         completion(true)
     }
     
-    
-    //TODO:
-    static func viewHeirarcyManager(_ views: [UIView]) {
-        
-    }
-    //TODO:
-    static func viewResizer() {
-        
-    }
-    
     static func toggleUserInteractionAfterAnimation(_ VC: UIViewController ,views: [UIView]){
         let delayTime = DispatchTime.now() + Double(Int64(animationTime * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
@@ -92,4 +82,5 @@ struct CarouselView {
             VC.view.isUserInteractionEnabled = true
         }
     }
+    
 }

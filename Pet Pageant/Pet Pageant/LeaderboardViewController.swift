@@ -12,10 +12,11 @@ import Parse
 class LeaderboardViewController: UIViewController {
     
     var viewCenterPositions = [CGPoint]()
-    var views = [UIView]()
+    var views = [RankView]()
     var pets = [Pet]() {
         didSet{
             var count = 0
+            
             for pet in pets {
                 let imageData = pet["imageFile"] as! PFFile
                 imageData.getDataInBackground(block: { (data: Data?, error) in
@@ -24,18 +25,26 @@ class LeaderboardViewController: UIViewController {
                     }
                     if (data != nil) {
                         let image = UIImage(data: data!)
-                        print("first view? -> \(self.views[count])")
-                        let rankview = self.views[count] as! RankView
+                        //print("first view? -> \(self.views[count])")
+                        let rankview = self.views[count]
                         rankview.imageView.image = image
+                        rankview.votesLabel.text = "Votes: \(pet.votes)"
+                        rankview.rankLabel.text = "Rank: \(self.pets.index(of: pet))"
+                        //rankview.votePercentageLabel.text = "\(pet.viewed)"
+                        rankview.votePercentageLabel.text = "Votes per total views: \((100 * pet.votes/pet.viewed))%"
                         
                     }
-                    print("count: \(count)")
+                    
                     count += 1
+                    if count == 5 {
+                        print("Attempting sort")
+                        self.sortViewsByRank()
+                    }
                 })
             }
         }
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwipes()
@@ -65,10 +74,17 @@ class LeaderboardViewController: UIViewController {
             let position = CGPoint(x: x, y: y)
             let view = RankView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
             view.center = position
+            view.currentPosition = position
             self.viewCenterPositions.append(position)
             self.views.append(view)
             self.view.addSubview(view)
         }
+    }
+    
+    func sortViewsByRank() {
+        //TODO: TODO - SORT FUNCTION
+        //Check each views votes to the adjacent view and switch positions if B < A
+        views.sort(by: { $0.votesLabel.text?.compare($1.votesLabel.text!) == ComparisonResult.orderedAscending })
     }
     
     func fetchTopPets(){
@@ -83,24 +99,23 @@ class LeaderboardViewController: UIViewController {
             }
             else {
                 let petObjects = objects as! [Pet]
-//                petObjects.sort({$0.votes > $1.votes})
                 self.pets = petObjects
-                print(self.pets)
             }
         }
     }
     
     func swipeGesture(_ gesture: UISwipeGestureRecognizer){
         
-        if gesture.direction == UISwipeGestureRecognizerDirection.left{
-            CarouselView.rotateViewsClockwise(self, views: &self.views, completion: { (success) in
-                CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
-            })
+        if gesture.direction == UISwipeGestureRecognizerDirection.left {
+            
+            for view in views {
+                view.animate(clockwise: true)
+            }
         }
         else if gesture.direction == UISwipeGestureRecognizerDirection.right {
-            CarouselView.rotateViewsCounterClockwise(self, views: &views, completion: { (success) in
-                CarouselView.toggleUserInteractionAfterAnimation(self, views: self.views)
-            })
+            for view in views {
+                view.animate(clockwise: false)
+            }
         }
     }
 }
