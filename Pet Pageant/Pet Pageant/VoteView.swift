@@ -29,16 +29,22 @@ import UIKit
         }
     }
     
+    //MARK: INITIALIZERS
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
+        self.commenceAesthetics()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         UINib(nibName: "VoteView", bundle: nil).instantiate(withOwner: self, options: nil)
         self.setup()
+        self.commenceAesthetics()
     }
+    
+    //MARK: CLASS METHODS
     
     func setup() {
         view = self.loadViewFromNib()
@@ -46,6 +52,13 @@ import UIKit
         view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         addSubview(view)
         
+    }
+    
+    func commenceAesthetics() {
+        self.rightBackgroundImage.layer.cornerRadius = 15
+        self.leftBackgroundImage.layer.cornerRadius = 15
+        self.petImageView.layer.cornerRadius = 15
+        self.reportButton.layer.cornerRadius = 10
     }
     
     func loadViewFromNib() -> UIView {
@@ -56,7 +69,7 @@ import UIKit
         return view
         
     }
-    //MARK: ICONS
+    
     func addYesVoteIcon(){
         
         let image = UIImage(named: "GreenCheck.png")
@@ -85,17 +98,7 @@ import UIKit
     }
     
     func menuButtonSelected() {
-        /* let actionController = UIAlertController(title: "Menu", message: nil, preferredStyle: .actionSheet)
-        actionController.addAction(UIAlertAction(title: "Details", style: .default , handler: nil))
-        actionController.addAction(UIAlertAction(title: "Share on Facebook", style: .default, handler: nil))
-       /* let deleteAction = UIAlertAction(title: "Delete", style: .destructive) {
-            (action) in
-            self.deleteRecord()
-        }
-        actionController.addAction(deleteAction) */
-        actionController.addAction(UIAlertAction(title: "Share on Twitter", style: .default, handler: nil))
-        actionController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    */
+
         guard let topVC = UIApplication.shared.keyWindow?.rootViewController else {return}
         let title = "Share with friends"
         let image = UIImage(named: "anna.png")
@@ -153,6 +156,8 @@ import UIKit
             }
         })
     } */
+    
+    //MARK: ACTIONS
     
     @IBAction func leftButtonSelected(_ sender: UIButton) {
         self.menuButtonSelected()

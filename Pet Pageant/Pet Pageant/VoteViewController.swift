@@ -53,6 +53,7 @@ class VoteViewController: UIViewController {
                     }
                     if let image = UIImage(data: data!) {
                         self.bottomVoteView.petImage = image
+                        
                         self.bottomVoteView.spinner.hidesWhenStopped = true
                         self.bottomVoteView.spinner.stopAnimating()
                     }
@@ -61,12 +62,11 @@ class VoteViewController: UIViewController {
         }
     }
     
+    //MARK: VIEWCONTROLLER METHODS
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let topPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
-        let bottomPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
-        self.topVoteView.addGestureRecognizer(topPanGesture)
-        self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
+        self.setupPanGestures()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -74,11 +74,11 @@ class VoteViewController: UIViewController {
         self.setupImageViews()
     }
     
+    //MARK: CLASS METHODS
+    
     func setupImageViews() {
         self.topVoteView.petImage = nil
         self.bottomVoteView.petImage = nil
-        self.topVoteView.layer.cornerRadius = 4
-        self.bottomVoteView.layer.cornerRadius = 4
         self.topVoteView.enableReport()
         self.bottomVoteView.enableReport()
         self.topVoteView.spinner.startAnimating()
@@ -108,7 +108,7 @@ class VoteViewController: UIViewController {
         }
     }
     
-    //MARK: BACKEND COMMUNICATION
+    //MARK: BACKEND CALLS
     //get the 2 oldest(update time) records
     func GETPetsForQueue () {
         self.topViewsRecord.removeAll()
@@ -246,6 +246,14 @@ class VoteViewController: UIViewController {
     }
     
     //MARK: PAN GESTURE
+    
+    func setupPanGestures(){
+        let topPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
+        let bottomPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
+        self.topVoteView.addGestureRecognizer(topPanGesture)
+        self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
+    }
+    
     func viewWasPanned(_ sender: UIPanGestureRecognizer) {
         guard let view = sender.view else {return}
         guard let superView = sender.view?.superview else {return}

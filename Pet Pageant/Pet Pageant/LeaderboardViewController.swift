@@ -11,10 +11,10 @@ import Parse
 
 class LeaderboardViewController: UIViewController {
     
-    var viewCenterPositions = [CGPoint]()
     var views = [RankView]()
     var pets = [Pet]() {
         didSet{
+            
             var count = 0
             
             for pet in pets {
@@ -29,15 +29,22 @@ class LeaderboardViewController: UIViewController {
                         let rankview = self.views[count]
                         rankview.imageView.image = image
                         rankview.votesLabel.text = "Votes: \(pet.votes)"
-                        rankview.rankLabel.text = "Rank: \(self.pets.index(of: pet))"
-                        //rankview.votePercentageLabel.text = "\(pet.viewed)"
-                        rankview.votePercentageLabel.text = "Votes per total views: \((100 * pet.votes/pet.viewed))%"
+                        if let number =  self.pets.index(of: pet) {
+                            rankview.rankLabel.text = "Rank: \(number + 1)"
+                        }
+                        
+                        rankview.imageView.layer.cornerRadius = 15
+                        if pet.viewed != 0 {
+                            rankview.votePercentageLabel.text = "Votes per total views: \((100 * pet.votes/pet.viewed))%"
+                        } else {
+                            rankview.votePercentageLabel.text = "Photo has not yet been viewed"
+                        }
+                        
                         
                     }
                     
                     count += 1
                     if count == 5 {
-                        print("Attempting sort")
                         self.sortViewsByRank()
                     }
                 })
@@ -45,46 +52,98 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
+    //MARK: VIEWCONTROLLER METHODS
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwipes()
-        self.setupViews()
+        self.instantiateViews()
         self.fetchTopPets()
+        self.setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
     
-    func setupSwipes(){
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeLeft)
-        self.view.addGestureRecognizer(swipeRight)
+    //MARK: CLASS METHODS
+    
+    func instantiateViews() {
+        self.views.removeAll()
+        for index in 0..<gCarouselViewCount {
+            let angle = CGFloat(90 + index * (360/gCarouselViewCount))
+            let x = gCarouselCenterPoint.x + CGFloat(gScreenSize.width/2) * cos(angle * CGFloat(M_PI/180))
+            let y = gCarouselCenterPoint.y + CGFloat(gScreenSize.width/2) * sin(angle * CGFloat(M_PI/180))
+            let position = CGPoint(x: x, y: y)
+            let view = RankView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width/2, height: gScreenSize.width/2))
+            view.center = position
+            view.currentPosition = position
+            view.layer.cornerRadius = 15
+            view.imageView.layer.cornerRadius = 15
+            self.views.append(view)
+            self.view.addSubview(view)
+            //view.evaluateViewForResize(angle: angle)
+        }
     }
     
     func setupViews() {
-        self.views.removeAll()
-        for index in 0..<carouselViewCount {
-            let angle = CGFloat(90 + index * (360/carouselViewCount))
-            let x = carouselCenterPoint.x + CGFloat(screenSize.width/2) * cos(angle * CGFloat(M_PI/180))
-            let y = carouselCenterPoint.y + CGFloat(screenSize.width/2) * sin(angle * CGFloat(M_PI/180))
-            let position = CGPoint(x: x, y: y)
-            let view = RankView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-            view.center = position
-            view.currentPosition = position
-            self.viewCenterPositions.append(position)
-            self.views.append(view)
-            self.view.addSubview(view)
+        let views = self.view.subviews
+        for view in views {
+            if view is RankView {
+                let rankview = view as! RankView
+                let angle = rankview.coordsToAngle(pos: rankview.center)
+                rankview.evaluateViewForResize(angle: angle)
+            }
         }
     }
     
     func sortViewsByRank() {
-        //TODO: TODO - SORT FUNCTION
-        //Check each views votes to the adjacent view and switch positions if B < A
-        views.sort(by: { $0.votesLabel.text?.compare($1.votesLabel.text!) == ComparisonResult.orderedAscending })
+        
+        var count = 0
+        var first = Int()
+        var nextView = RankView()
+        
+        for (index, element) in views.enumerated() {
+        
+            if let rank1 = element.rankLabel.text {
+                let ind = rank1.index(rank1.startIndex, offsetBy: 6)
+                let cutString1 = rank1.substring(from: ind)
+                if let numString1 = Int(cutString1) {
+                    first = numString1
+                    print(first)
+
+                }
+            }
+            
+            if index > 0 {
+                nextView = views[index-1]
+                if let rank2 = views[index-1].rankLabel.text {
+                    //print("Next views rank: \(rank2)")
+                    let ind = rank2.index(rank2.startIndex, offsetBy:6)
+                    let cutString2 = rank2.substring(from: ind)
+                    if let numString2 = Int(cutString2){
+                        
+                        if first < numString2 {
+                            print("swappage")
+                            self.swapViewPositions(first: element, second: nextView)
+                            let temp = self.views.remove(at: index)
+                            self.views.insert(temp, at: index-1)
+                            self.sortViewsByRank()
+                        }
+                    }
+                }
+            }
+            count += 1
+        }
+    }
+    
+    func swapViewPositions(first: RankView, second: RankView){
+        let tempPos : CGPoint = first.center
+        first.center = second.center
+        second.center = tempPos
+        first.updateCenterPosition()
+        second.updateCenterPosition()
     }
     
     func fetchTopPets(){
@@ -104,10 +163,20 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
+    //MARK: GESTURES
+    
+    func setupSwipes(){
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeLeft)
+        self.view.addGestureRecognizer(swipeRight)
+    }
+    
     func swipeGesture(_ gesture: UISwipeGestureRecognizer){
         
         if gesture.direction == UISwipeGestureRecognizerDirection.left {
-            
             for view in views {
                 view.animate(clockwise: true)
             }

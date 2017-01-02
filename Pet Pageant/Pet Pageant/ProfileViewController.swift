@@ -12,9 +12,11 @@ import ParseUI
 
 class ProfileViewController: UICollectionViewController{
 
+    @IBOutlet var colView: UICollectionView!
     fileprivate let reuseIdentifier = "PetPhotoCell"
     fileprivate let reuseAddPhoto = "AddPhotoCell"
-    fileprivate let photoWidth = (screenSize.width - 40) / 2
+    fileprivate let reuseMaxPhoto = "AtCapacity"
+    fileprivate let photoWidth = (gScreenSize.width - 40) / 2
     fileprivate let sectionInsets = UIEdgeInsets(top: 50, left: 10, bottom: 50, right: 10)
     
     //TODO: REPLACE WITH DATA SOURCE
@@ -23,12 +25,21 @@ class ProfileViewController: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(UINib(nibName: "PetCell", bundle: nil), forCellWithReuseIdentifier: "PetCell")
+       // self.colView.isHidden = true
+        
     }
+    
+    //MARK: VIEWCONTROLLER METHODS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.GETUsersPets()
+        /*let overlay = UIView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width, height: gScreenSize.height))
+        overlay.backgroundColor = UIColor.white
+        self.view.addSubview(overlay)*/
     }
+    
+    //MARK: BACKEND CALLS
     
     func GETUsersPets() {
         
@@ -43,6 +54,7 @@ class ProfileViewController: UICollectionViewController{
             }
             else {
                 let petObjects = objects as! [Pet]
+                self.colView.isHidden = false
                 for object in petObjects {
                     let imageData = object["imageFile"] as! PFFile
                     imageData.getDataInBackground(block: { (data: Data?, error) in
@@ -55,18 +67,18 @@ class ProfileViewController: UICollectionViewController{
                                 self.allImages.append(image)
                                 self.allPets.append(object)
                                 self.collectionView?.reloadData()
+                                print("Allimages: \(self.allImages.count)")
+                                print("AllPets: \(self.allPets.count)")
                             }
                         }
                     })
-                    
                 }
-                self.collectionView?.reloadData()
             }
         }
         
     }
     
-    //MARK: CollectionViewControllerDelegate
+    //MARK: COLLECTION VIEWCONTROLLER DELEGATE
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -86,9 +98,16 @@ class ProfileViewController: UICollectionViewController{
             cell.votesLabel.text = "Votes: \(allPets[(indexPath as NSIndexPath).row].votes)"
             cell.viewLabel.text = "Views: \(allPets[(indexPath as NSIndexPath).row].viewed)"
             cell.reportsLabel.text = "Reports: \(allPets[(indexPath as NSIndexPath).row].reports)"
+            cell.imageView.layer.cornerRadius = 10
+            cell.layer.cornerRadius = 10
+            return cell
+        } else if (indexPath as NSIndexPath).row == allImages.count && allImages.count >= gPhotoUploadLimit {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseMaxPhoto, for: indexPath) as UICollectionViewCell
+            cell.layer.cornerRadius = 10
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseAddPhoto, for: indexPath) as UICollectionViewCell
+            cell.layer.cornerRadius = 10
             return cell
         }
     }
@@ -96,8 +115,7 @@ class ProfileViewController: UICollectionViewController{
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //reminder - the indexPath.row is 0 based index
         
-
-        if (indexPath as NSIndexPath).row == allImages.count {
+        if (indexPath as NSIndexPath).row == allImages.count && allImages.count < gPhotoUploadLimit {
             guard let topVC = UIApplication.shared.keyWindow?.rootViewController else { return }
            topVC.performSegue(withIdentifier: "uploadPhoto", sender: self)
         }
@@ -121,7 +139,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-       return CGSize(width: photoWidth, height: photoWidth + 60)
+       return CGSize(width: photoWidth, height: photoWidth + 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

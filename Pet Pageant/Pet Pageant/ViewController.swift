@@ -4,7 +4,7 @@
 //
 //  Created by Michael Sweeney on 8/16/16.
 //  Copyright © 2016 Michael Sweeney. All rights reserved.
-//
+
 
 import UIKit
 import Parse
@@ -15,10 +15,11 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var logoutButton: UIButton!
     
+    //MARK: VIEWCONTROLLER METHODS
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,7 +31,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         logoutButton.layer.cornerRadius = 4
     }
     
-    //MARK: LOGIN SETUP
+    //MARK: CLASS METHODS
     
     func login(){
         
