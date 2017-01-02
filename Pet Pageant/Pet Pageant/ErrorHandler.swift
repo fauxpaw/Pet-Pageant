@@ -9,6 +9,7 @@
 import UIKit
 
 class ErrorHandler {
+    
     class func presentNotification(title: String ,message: String) -> Void {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

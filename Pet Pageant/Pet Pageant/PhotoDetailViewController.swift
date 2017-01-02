@@ -19,10 +19,14 @@ class PhotoDetailViewController: UIViewController {
     var pet: Pet?
     var image: UIImage?
     
+    //MARK: VIEWCONTROLLER METHODS
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
     }
+    
+    //MARK: CLASS METHODS
     
     func setup() {
         
@@ -37,6 +41,8 @@ class PhotoDetailViewController: UIViewController {
         
         imageView.image = image
     }
+    
+    //MARK: ACTIONS
     
     @IBAction func deleteButtonSelected(_ sender: Any) {
         

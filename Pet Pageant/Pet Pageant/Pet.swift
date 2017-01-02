@@ -11,6 +11,8 @@ import Parse
 
 class Pet: PFObject, PFSubclassing {
     
+    //MARK: PROPERTIES
+    
     @NSManaged var owner: PFUser
     @NSManaged var votes: Int
     @NSManaged var viewed: Int
@@ -20,6 +22,8 @@ class Pet: PFObject, PFSubclassing {
     static func parseClassName() -> String {
         return "Pet"
     }
+    
+    //MARK: INITIALIZERS
     
     init(owner: PFUser) {
         super.init()

@@ -12,20 +12,38 @@ import Parse
 class UploadImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //MARK: OUTLETS
+    
     @IBOutlet weak var imagView: UIImageView!
     
+    //MARK: VIEWCONTROLLER METHODS
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
     }
     
+    //MARK: CLASS METHODS
+    
     func setup(){
         imagView.isUserInteractionEnabled = true
+        self.setupTapGesture()
+    }
+    
+    //MARK: IMAGE PICKERCONTROLLER DELEGATE
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        imagView.image = image
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    //MARK: GESTURES
+    
+    func setupTapGesture() {
         let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UploadImageViewController.imageTapped(_:)))
         imagView.addGestureRecognizer(tapRecognizer)
     }
-    
-    //MARK: ACTIONS
     
     func imageTapped(_ sender: UITapGestureRecognizer) {
         let imagePicker = UIImagePickerController()
@@ -33,6 +51,8 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
         imagePicker.sourceType = .photoLibrary
         self.present(imagePicker, animated: true, completion: nil)
     }
+    
+    //MARK: ACTIONS
     
     @IBAction func backButtonSelected(_ sender: UIBarButtonItem) {
         
@@ -83,10 +103,5 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
                 }
             })
         }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        imagView.image = image
-        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -10,8 +10,11 @@ import UIKit
 
 class PetCell: UICollectionViewCell {
     
+    //MARK: PROPERTIES
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var viewLabel: UILabel!
     @IBOutlet weak var reportsLabel: UILabel!
+    
 }
