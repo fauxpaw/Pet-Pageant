@@ -14,9 +14,11 @@ let gNumberOfRankViews: Int = 5
 let gAnimationTime = 1.0
 let gPhotoUploadLimit = 5
 let gThemeColor = #colorLiteral(red: 0.1253122985, green: 0.6035761833, blue: 0.8839741349, alpha: 1)
-//let gThemeColorCG = UIColor.blue
 let gBackGroundColor = #colorLiteral(red: 1, green: 0.969643414, blue: 0.6297263503, alpha: 1)
 let gTextColor = UIColor.white
+let gCornerRadius: CGFloat = 15
+let gCornerRadiusButton: CGFloat = 10
+let gBorderWidthDefault: CGFloat = 2
 
 
 

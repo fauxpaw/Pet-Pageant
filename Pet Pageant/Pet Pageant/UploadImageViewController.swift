@@ -24,9 +24,22 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
     
     //MARK: CLASS METHODS
     
-    func setup(){
-        imagView.isUserInteractionEnabled = true
+    private func setup(){
+        self.modifyView()
+        self.modifyImageView()
         self.setupTapGesture()
+    }
+    
+    private func modifyImageView () {
+        imagView.isUserInteractionEnabled = true
+        imagView.backgroundColor = gBackGroundColor
+        imagView.layer.cornerRadius = gCornerRadius
+        imagView.layer.borderWidth = gBorderWidthDefault
+        imagView.layer.borderColor = gThemeColor.cgColor
+    }
+    
+    private func modifyView () {
+        self.view.backgroundColor = gBackGroundColor
     }
     
     //MARK: IMAGE PICKERCONTROLLER DELEGATE

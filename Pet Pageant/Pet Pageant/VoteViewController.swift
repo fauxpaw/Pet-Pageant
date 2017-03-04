@@ -76,7 +76,7 @@ class VoteViewController: UIViewController {
     
     //MARK: CLASS METHODS
     
-    func setupImageViews() {
+    private func setupImageViews() {
         self.topVoteView.petImage = nil
         self.bottomVoteView.petImage = nil
         self.topVoteView.enableReport()
@@ -87,7 +87,7 @@ class VoteViewController: UIViewController {
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
     }
     
-    func chooseRecords(){
+    private func chooseRecords(){
         if self.voteQueue.isEmpty{
             print("VOTEQUE EMPTY -> Aborting chooseRecords")
             return
@@ -110,7 +110,7 @@ class VoteViewController: UIViewController {
     
     //MARK: BACKEND CALLS
     //get the 2 oldest(update time) records
-    func GETPetsForQueue () {
+    private func GETPetsForQueue () {
         self.topViewsRecord.removeAll()
         self.botViewsRecord.removeAll()
         self.voteQueue.removeAll()
@@ -133,7 +133,7 @@ class VoteViewController: UIViewController {
         }
     }
     
-    func updatePetRecords(_ selectedView: UIView, nonselectedView: UIView) {
+    private func updatePetRecords(_ selectedView: UIView, nonselectedView: UIView) {
         if selectedView == self.topVoteView {
             guard let record = self.topViewsRecord.first else { return}
             record.incrementKey("votes")
@@ -193,7 +193,7 @@ class VoteViewController: UIViewController {
     }
     
     //MARK: ANIMATIONS
-    func animateViewsIn(_ top: UIView, bot: UIView) {
+   private func animateViewsIn(_ top: UIView, bot: UIView) {
         topVoteView.removeVoteIcon()
         bottomVoteView.removeVoteIcon()
         let startCenter = self.view.center.x
@@ -208,7 +208,7 @@ class VoteViewController: UIViewController {
             }, completion: nil)
     }
     
-    func animateViewsOut(_ selectedView: UIView, otherView: UIView){
+    private func animateViewsOut(_ selectedView: UIView, otherView: UIView){
         
         if selectedView.center.x > self.view.center.x {
             
@@ -247,14 +247,14 @@ class VoteViewController: UIViewController {
     
     //MARK: PAN GESTURE
     
-    func setupPanGestures(){
+     private func setupPanGestures(){
         let topPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         let bottomPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         self.topVoteView.addGestureRecognizer(topPanGesture)
         self.bottomVoteView.addGestureRecognizer(bottomPanGesture)
     }
     
-    func viewWasPanned(_ sender: UIPanGestureRecognizer) {
+     public func viewWasPanned(_ sender: UIPanGestureRecognizer) {
         guard let view = sender.view else {return}
         guard let superView = sender.view?.superview else {return}
         let translation = sender.translation(in: view)

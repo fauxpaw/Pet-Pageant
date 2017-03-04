@@ -27,24 +27,21 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         self.login()
     }
     
-    func setup() {
-        self.logoutButton.layer.cornerRadius = 4
+    private func setup() {
+        self.logoutButton.layer.cornerRadius = gCornerRadiusButton
         self.logoutButton.backgroundColor = gThemeColor
         self.logoutButton.setTitleColor(gTextColor, for: .normal)
         view.backgroundColor = gBackGroundColor
-        
     }
     
     //MARK: CLASS METHODS
     
-    func login(){
+    private func login(){
         
         if (PFUser.current() == nil) {
             let loginViewController: LoginViewController = LoginViewController()
             loginViewController.fields = [PFLogInFields.usernameAndPassword, PFLogInFields.logInButton, PFLogInFields.signUpButton, PFLogInFields.passwordForgotten, PFLogInFields.dismissButton]
           
-           
-            
             loginViewController.delegate = self
             loginViewController.signUpController?.delegate = self
             

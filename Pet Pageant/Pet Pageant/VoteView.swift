@@ -59,11 +59,11 @@ import UIKit
     }
     
     func commenceAesthetics() {
-        self.rightBackgroundImage.layer.cornerRadius = 15
-        self.leftBackgroundImage.layer.cornerRadius = 15
-        self.petImageView.layer.cornerRadius = 15
-        self.reportButton.layer.cornerRadius = 10
-        self.menuButton.layer.cornerRadius = 10
+        self.rightBackgroundImage.layer.cornerRadius = gCornerRadius
+        self.leftBackgroundImage.layer.cornerRadius = gCornerRadius
+        self.petImageView.layer.cornerRadius = gCornerRadius
+        self.reportButton.layer.cornerRadius = gCornerRadiusButton
+        self.menuButton.layer.cornerRadius = gCornerRadiusButton
         self.menuButton.layer.borderWidth = 3
         self.menuButton.layer.borderColor = gThemeColor.cgColor
         self.petImageView.layer.borderWidth = 3
