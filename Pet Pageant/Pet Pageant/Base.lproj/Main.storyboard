@@ -23,8 +23,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="titleLogo1" translatesAutoresizingMaskIntoConstraints="NO" id="hSr-BI-pIl">
+                                <rect key="frame" x="0.0" y="20" width="375" height="552"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6A-qk-A1U">
-                                <rect key="frame" x="154" y="318.5" width="67" height="30"/>
+                                <rect key="frame" x="154" y="580" width="67" height="30"/>
                                 <color key="backgroundColor" red="0.95052523434639347" green="1" blue="0.03600893968189911" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="67" id="HKG-wD-TPy"/>
@@ -35,9 +39,9 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="F6A-qk-A1U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Sbi-Oi-IGf"/>
+                            <constraint firstItem="F6A-qk-A1U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="261.5" id="Sbi-Oi-IGf"/>
                             <constraint firstItem="F6A-qk-A1U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tgi-E5-0GY"/>
                         </constraints>
                     </view>
@@ -49,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1301" y="1114"/>
+            <point key="canvasLocation" x="1300" y="1113.1934032983509"/>
         </scene>
         <!--Upload Image View Controller-->
         <scene sceneID="lcw-hF-kty">
@@ -127,7 +131,7 @@
                                 <rect key="frame" x="16" y="20" width="343" height="269"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Ttc-Q7-onn" secondAttribute="trailing" id="3XI-N9-jC5"/>
                             <constraint firstItem="0eD-8H-iK9" firstAttribute="top" secondItem="CPh-3e-DAM" secondAttribute="bottom" constant="20" id="4L1-7F-pM9"/>
@@ -162,7 +166,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="NsO-La-uDo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.47379471179999999" green="0.5933649782" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o0T-us-g6f">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -172,7 +176,6 @@
                         <view key="backgroundView" contentMode="scaleToFill" id="R6P-yk-I4D">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AtCapacity" id="sN1-G6-MlL">
@@ -182,7 +185,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RedX" translatesAutoresizingMaskIntoConstraints="NO" id="aiQ-NG-Snj">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPetPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="aiQ-NG-Snj">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
                                     </subviews>
@@ -222,12 +225,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GreenCheck" translatesAutoresizingMaskIntoConstraints="NO" id="PBT-77-cbP">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPetPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="PBT-77-cbP">
                                             <rect key="frame" x="10" y="10" width="180" height="180"/>
                                         </imageView>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" red="0.10663704362427173" green="1" blue="0.92806165101801907" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PBT-77-cbP" secondAttribute="bottom" constant="10" id="7Rz-OM-q5F"/>
                                     <constraint firstAttribute="trailing" secondItem="PBT-77-cbP" secondAttribute="trailing" constant="10" id="Cvh-fB-h77"/>
@@ -263,7 +265,7 @@
                     <view key="view" contentMode="scaleToFill" id="E92-gl-JGp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Leaders" id="X8Q-EM-g6U"/>
                 </viewController>
@@ -394,7 +396,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="GreenCheck" width="55" height="55"/>
-        <image name="RedX" width="128" height="128"/>
+        <image name="titleLogo1" width="1124" height="1200"/>
+        <image name="uploadPetPhoto" width="1200" height="1600"/>
     </resources>
 </document>

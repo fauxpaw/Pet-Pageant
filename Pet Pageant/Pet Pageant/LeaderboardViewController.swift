@@ -59,7 +59,7 @@ class LeaderboardViewController: UIViewController {
         self.setupSwipes()
         self.instantiateViews()
         self.fetchTopPets()
-        self.setupViews()
+        //self.setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,13 +88,8 @@ class LeaderboardViewController: UIViewController {
     }
     
     func setupViews() {
-        let views = self.view.subviews
         for view in views {
-            if view is RankView {
-                let rankview = view as! RankView
-                let angle = rankview.coordsToAngle(pos: rankview.center)
-                rankview.evaluateViewForResize(angle: angle)
-            }
+            view.animate(clockwise: true)
         }
     }
     
