@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VoteView" customModule="Pet_Pageant" customModuleProvider="target">
             <connections>
                 <outlet property="leftBackgroundImage" destination="Yb5-Rt-ZQ3" id="K9V-wE-jGR"/>
+                <outlet property="menuButton" destination="XN4-8T-VVj" id="NLC-DE-6ZR"/>
                 <outlet property="petImageView" destination="SBZ-5t-6P5" id="2cw-P5-BDi"/>
                 <outlet property="reportButton" destination="XpP-A8-KG3" id="PhQ-uG-Cse"/>
                 <outlet property="rightBackgroundImage" destination="GQE-xE-xAr" id="66i-7s-Q9X"/>
@@ -27,7 +28,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yb5-Rt-ZQ3">
                     <rect key="frame" x="0.0" y="0.0" width="341" height="365"/>
-                    <color key="backgroundColor" red="0.2884248599861271" green="0.9334587378141399" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="341" id="ql0-xq-3Wi"/>
                     </constraints>
@@ -39,11 +40,11 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GQE-xE-xAr">
                     <rect key="frame" x="369" y="0.0" width="341" height="365"/>
-                    <color key="backgroundColor" red="0.28203205260388409" green="0.93852575427999907" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SBZ-5t-6P5">
                     <rect key="frame" x="193" y="20" width="325" height="325"/>
-                    <color key="backgroundColor" red="0.32445870020000001" green="0.90862803849999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="325" id="5e0-fJ-81d"/>
                         <constraint firstAttribute="width" constant="325" id="OOA-Bk-o98"/>
@@ -58,11 +59,14 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN4-8T-VVj">
                     <rect key="frame" x="0.0" y="105" width="193" height="154"/>
-                    <color key="backgroundColor" red="1" green="0.96957159159999995" blue="0.022582633760000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="XN4-8T-VVj" secondAttribute="height" multiplier="24:17" constant="-25" id="kmM-hQ-Y0P"/>
                     </constraints>
-                    <state key="normal" title="Menu"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Menu">
+                        <color key="titleColor" red="0.1176470588" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="leftButtonSelected:" destination="-1" eventType="touchUpInside" id="gfh-L6-QtE"/>
                     </connections>
@@ -70,13 +74,15 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fLI-ki-qB6">
                     <rect key="frame" x="337" y="164" width="37" height="37"/>
                 </activityIndicatorView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpP-A8-KG3">
-                    <rect key="frame" x="518" y="105" width="192" height="154"/>
-                    <color key="backgroundColor" red="1" green="0.96957159164711049" blue="0.022582633762825211" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpP-A8-KG3">
+                    <rect key="frame" x="520" y="154" width="55" height="57"/>
+                    <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="XpP-A8-KG3" secondAttribute="height" multiplier="24:17" constant="-25" id="OTC-jZ-k9G"/>
                     </constraints>
-                    <state key="normal" title="Report"/>
+                    <state key="normal" title="Report">
+                        <color key="titleColor" red="0.1176470588" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="rightButtonSelected:" destination="-1" eventType="touchUpInside" id="7C7-RQ-4CJ"/>
                     </connections>
@@ -96,8 +102,7 @@
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="29" id="dmr-ID-ahR"/>
                 <constraint firstItem="fLI-ki-qB6" firstAttribute="centerY" secondItem="SBZ-5t-6P5" secondAttribute="centerY" id="dsj-iA-IUt"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="ejZ-dW-kA4"/>
-                <constraint firstItem="XpP-A8-KG3" firstAttribute="leading" secondItem="SBZ-5t-6P5" secondAttribute="trailing" id="lid-29-eMO"/>
-                <constraint firstItem="XpP-A8-KG3" firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="mpG-75-Ru9"/>
+                <constraint firstItem="XpP-A8-KG3" firstAttribute="leading" secondItem="SBZ-5t-6P5" secondAttribute="trailing" constant="2" id="lid-29-eMO"/>
                 <constraint firstItem="XpP-A8-KG3" firstAttribute="centerY" secondItem="GQE-xE-xAr" secondAttribute="centerY" id="osR-cB-ePd"/>
                 <constraint firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="sLt-IJ-y3C"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="28" id="tOA-Py-2i5"/>

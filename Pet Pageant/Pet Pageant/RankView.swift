@@ -57,6 +57,10 @@ class RankView: UIView {
         self.layer.cornerRadius = 15
         //self.labelBackground.backgroundColor = UIColor.yellow
         //self.backgroundColor = UIColor.red
+        self.layer.borderWidth = 2
+        self.layer.borderColor = gThemeColor.cgColor
+        self.labelBackground.layer.borderWidth = 2
+        self.labelBackground.layer.borderColor = gThemeColor.cgColor
     }
     
     func coordsToAngle (pos: CGPoint) -> CGFloat {

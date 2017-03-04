@@ -19,7 +19,8 @@ class ProfileViewController: UICollectionViewController{
     fileprivate let photoWidth = (gScreenSize.width - 40) / 2
     fileprivate let sectionInsets = UIEdgeInsets(top: 50, left: 10, bottom: 50, right: 10)
     
-    //TODO: REPLACE WITH DATA SOURCE
+    
+    var retrieved = false
     var allImages = [UIImage]()
     var allPets = [Pet]()
     override func viewDidLoad() {
@@ -33,10 +34,15 @@ class ProfileViewController: UICollectionViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.GETUsersPets()
+        
         /*let overlay = UIView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width, height: gScreenSize.height))
-        overlay.backgroundColor = UIColor.white
+        overlay.backgroundColor = UIColor.black
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.center = overlay.center
+        overlay.addSubview(spinner)
         self.view.addSubview(overlay)*/
+        self.GETUsersPets()
     }
     
     //MARK: BACKEND CALLS
@@ -69,13 +75,14 @@ class ProfileViewController: UICollectionViewController{
                                 self.collectionView?.reloadData()
                                 print("Allimages: \(self.allImages.count)")
                                 print("AllPets: \(self.allPets.count)")
+                                //self.view.sendSubview(toBack: self.view.subviews.last!)
+                                
                             }
                         }
                     })
                 }
             }
         }
-        
     }
     
     //MARK: COLLECTION VIEWCONTROLLER DELEGATE
@@ -100,6 +107,8 @@ class ProfileViewController: UICollectionViewController{
             cell.reportsLabel.text = "Reports: \(allPets[(indexPath as NSIndexPath).row].reports)"
             cell.imageView.layer.cornerRadius = 10
             cell.layer.cornerRadius = 10
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = gThemeColor.cgColor
             return cell
         } else if (indexPath as NSIndexPath).row == allImages.count && allImages.count >= gPhotoUploadLimit {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseMaxPhoto, for: indexPath) as UICollectionViewCell

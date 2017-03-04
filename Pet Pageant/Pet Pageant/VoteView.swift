@@ -20,6 +20,10 @@ import UIKit
     @IBOutlet weak var leftBackgroundImage: UIImageView!
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    @IBOutlet weak var menuButton: UIButton!
+    
+    
     @IBInspectable var petImage: UIImage? {
         get{
             return petImageView.image
@@ -59,6 +63,12 @@ import UIKit
         self.leftBackgroundImage.layer.cornerRadius = 15
         self.petImageView.layer.cornerRadius = 15
         self.reportButton.layer.cornerRadius = 10
+        self.menuButton.layer.cornerRadius = 10
+        self.menuButton.layer.borderWidth = 3
+        self.menuButton.layer.borderColor = gThemeColor.cgColor
+        self.petImageView.layer.borderWidth = 3
+        self.petImageView.layer.borderColor = gBackGroundColor.cgColor
+        
     }
     
     func loadViewFromNib() -> UIView {

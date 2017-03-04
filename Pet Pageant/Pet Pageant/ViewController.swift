@@ -28,7 +28,11 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     }
     
     func setup() {
-        logoutButton.layer.cornerRadius = 4
+        self.logoutButton.layer.cornerRadius = 4
+        self.logoutButton.backgroundColor = gThemeColor
+        self.logoutButton.setTitleColor(gTextColor, for: .normal)
+        view.backgroundColor = gBackGroundColor
+        
     }
     
     //MARK: CLASS METHODS
@@ -36,20 +40,14 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     func login(){
         
         if (PFUser.current() == nil) {
-            let loginViewController: PFLogInViewController = PFLogInViewController()
-            loginViewController.fields = [PFLogInFields.usernameAndPassword, PFLogInFields.logInButton, PFLogInFields.signUpButton, PFLogInFields.passwordForgotten, PFLogInFields.dismissButton, PFLogInFields.facebook, PFLogInFields.twitter]
+            let loginViewController: LoginViewController = LoginViewController()
+            loginViewController.fields = [PFLogInFields.usernameAndPassword, PFLogInFields.logInButton, PFLogInFields.signUpButton, PFLogInFields.passwordForgotten, PFLogInFields.dismissButton]
+          
+           
             
-            //TODO: SKIN - SPLASH SCREEN
-            let loginLogoTitle = UILabel()
-            loginLogoTitle.text = "Pet Pageant <placeholder>"
-            loginViewController.logInView?.logo = loginLogoTitle
             loginViewController.delegate = self
             loginViewController.signUpController?.delegate = self
             
-            //TODO: SKIN - SPLASH SCREEN
-            let signupLogoTitle = UILabel()
-            signupLogoTitle.text = "Pet Pageant <placeholder>"
-            loginViewController.signUpController?.signUpView?.logo = signupLogoTitle
             self.present(loginViewController, animated: true, completion: nil)
             
         } else {
