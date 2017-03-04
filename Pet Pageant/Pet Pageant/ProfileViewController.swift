@@ -47,7 +47,7 @@ class ProfileViewController: UICollectionViewController{
     
     //MARK: BACKEND CALLS
     
-    func GETUsersPets() {
+    private func GETUsersPets() {
         
         self.allPets.removeAll()
         self.allImages.removeAll()
@@ -105,18 +105,18 @@ class ProfileViewController: UICollectionViewController{
             cell.votesLabel.text = "Votes: \(allPets[(indexPath as NSIndexPath).row].votes)"
             cell.viewLabel.text = "Views: \(allPets[(indexPath as NSIndexPath).row].viewed)"
             cell.reportsLabel.text = "Reports: \(allPets[(indexPath as NSIndexPath).row].reports)"
-            cell.imageView.layer.cornerRadius = 10
-            cell.layer.cornerRadius = 10
+            cell.imageView.layer.cornerRadius = gCornerRadius
+            cell.layer.cornerRadius = gCornerRadius
             cell.layer.borderWidth = 2
             cell.layer.borderColor = gThemeColor.cgColor
             return cell
         } else if (indexPath as NSIndexPath).row == allImages.count && allImages.count >= gPhotoUploadLimit {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseMaxPhoto, for: indexPath) as UICollectionViewCell
-            cell.layer.cornerRadius = 10
+            cell.layer.cornerRadius = gCornerRadius
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseAddPhoto, for: indexPath) as UICollectionViewCell
-            cell.layer.cornerRadius = 10
+            cell.layer.cornerRadius = gCornerRadius
             return cell
         }
     }

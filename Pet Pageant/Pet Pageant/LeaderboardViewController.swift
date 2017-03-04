@@ -33,9 +33,9 @@ class LeaderboardViewController: UIViewController {
                             rankview.rankLabel.text = "Rank: \(number + 1)"
                         }
                         
-                        rankview.imageView.layer.cornerRadius = 15
+                        rankview.imageView.layer.cornerRadius = gCornerRadius
                         if pet.viewed != 0 {
-                            rankview.votePercentageLabel.text = "Votes per total views: \((100 * pet.votes/pet.viewed))%"
+                            rankview.votePercentageLabel.text = "Votes of total views: \((100 * pet.votes/pet.viewed))%"
                         } else {
                             rankview.votePercentageLabel.text = "Photo has not yet been viewed"
                         }
@@ -59,7 +59,6 @@ class LeaderboardViewController: UIViewController {
         self.setupSwipes()
         self.instantiateViews()
         self.fetchTopPets()
-        //self.setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,20 +75,12 @@ class LeaderboardViewController: UIViewController {
             let x = gCarouselCenterPoint.x + CGFloat(gScreenSize.width/2) * cos(angle * CGFloat(M_PI/180))
             let y = gCarouselCenterPoint.y + CGFloat(gScreenSize.width/2) * sin(angle * CGFloat(M_PI/180))
             let position = CGPoint(x: x, y: y)
-            let view = RankView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width/2, height: gScreenSize.width/2))
+            let view = RankView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width/2, height: gScreenSize.width/2 + 75))
             view.center = position
             view.currentPosition = position
-            view.layer.cornerRadius = 15
-            view.imageView.layer.cornerRadius = 15
             self.views.append(view)
             self.view.addSubview(view)
             //view.evaluateViewForResize(angle: angle)
-        }
-    }
-    
-    func setupViews() {
-        for view in views {
-            view.animate(clockwise: true)
         }
     }
     

@@ -49,8 +49,8 @@ class LoginViewController: PFLogInViewController {
         for button in buttons {
             button.setBackgroundImage(nil, for: .normal)
             button.backgroundColor = gTextColor
-            button.layer.cornerRadius = 10
-            button.layer.borderWidth = 2
+            button.layer.cornerRadius = gCornerRadiusButton
+            button.layer.borderWidth = gBorderWidthDefault
             button.layer.borderColor = gThemeColor.cgColor
         }
         self.logInView?.passwordForgottenButton?.setTitleColor(gThemeColor, for: .normal)

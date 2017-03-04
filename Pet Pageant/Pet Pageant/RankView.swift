@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+
 class RankView: UIView {
     
     //MARK: PROPERTIES
@@ -16,10 +17,10 @@ class RankView: UIView {
     var currentPosition: CGPoint?
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var labelBackground: UIImageView!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var votePercentageLabel: UILabel!
+    @IBOutlet weak var labelBackgroundView: UIView!
     
     func loadXib() -> UIView {
         let bundle = Bundle(for: type(of: self))
@@ -53,14 +54,22 @@ class RankView: UIView {
     }
     
     func commenceAesthetics() {
-        self.imageView.layer.cornerRadius = 15
-        self.layer.cornerRadius = 15
-        //self.labelBackground.backgroundColor = UIColor.yellow
-        //self.backgroundColor = UIColor.red
-        self.layer.borderWidth = 2
-        self.layer.borderColor = gThemeColor.cgColor
-        self.labelBackground.layer.borderWidth = 2
-        self.labelBackground.layer.borderColor = gThemeColor.cgColor
+//        self.view.layer.borderColor = gThemeColor.cgColor
+//        self.view.layer.borderWidth = 5
+        self.imageView.layer.cornerRadius = gCornerRadius
+        self.imageView.layer.borderColor = gThemeColor.cgColor
+        self.imageView.layer.borderWidth = 4
+        self.imageView.backgroundColor = gThemeColor
+        self.labelBackgroundView.layer.borderWidth = gBorderWidthDefault
+        self.labelBackgroundView.layer.borderColor = gThemeColor.cgColor
+        self.labelBackgroundView.layer.cornerRadius = gCornerRadius
+        self.view.layer.cornerRadius = gCornerRadius
+        self.view.layer.borderColor = gThemeColor.cgColor
+        self.labelBackgroundView.backgroundColor = gBackGroundColor
+        self.votesLabel.textColor = gThemeColor
+        self.votePercentageLabel.textColor = gThemeColor
+        self.rankLabel.textColor = gThemeColor
+        
     }
     
     func coordsToAngle (pos: CGPoint) -> CGFloat {
@@ -146,7 +155,6 @@ class RankView: UIView {
         
         let check =  self.angleToCoords(angle: endAngle)
         self.currentPosition = check
-      //  self.tellMeViewStats(angle: endAngle)
     }
     
     func scaleViewDown() {
