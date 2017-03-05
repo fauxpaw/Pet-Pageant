@@ -22,12 +22,13 @@ class RootViewController: UITabBarController, StatusBarBackgroundProtocol {
         super.viewDidLoad()
         modifyStatusBarBackground(view: self.view)
         self.tabBar.barTintColor = gThemeColor
-//        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *) {
 //            self.tabBar.unselectedItemTintColor = gTextColor
-//        } else {
-//            // Fallback on earlier versions
-//        }
-        
+            self.tabBar.unselectedItemTintColor = UIColor.darkGray
+
+        } else {
+            // Fallback on earlier versions
+        }
         self.tabBar.tintColor = gTextColor
 
     }
