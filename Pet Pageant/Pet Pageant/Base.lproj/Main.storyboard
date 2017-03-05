@@ -326,23 +326,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDW-z1-6yy">
-                                <rect key="frame" x="-4" y="20" width="383" height="44"/>
-                                <items>
-                                    <navigationItem title="Details" id="ZTB-BG-4QG">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="5b1-tj-Zf8">
-                                            <connections>
-                                                <action selector="backButtonSelected:" destination="rC6-va-iKy" id="udK-i8-g7F"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Delete" id="2D9-eP-7Qp">
-                                            <connections>
-                                                <action selector="deleteButtonSelected:" destination="rC6-va-iKy" id="qCl-Lt-XIP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner: Fauxpaw" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clx-LF-Fdd">
                                 <rect key="frame" x="16" y="437" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -374,17 +357,39 @@
                                     <constraint firstAttribute="width" secondItem="JyX-eL-v0s" secondAttribute="height" multiplier="1:1" id="Avb-Ag-Aq7"/>
                                 </constraints>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDW-z1-6yy">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Details" id="ZTB-BG-4QG">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="5b1-tj-Zf8">
+                                            <connections>
+                                                <action selector="backButtonSelected:" destination="rC6-va-iKy" id="udK-i8-g7F"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Delete" id="2D9-eP-7Qp">
+                                            <connections>
+                                                <action selector="deleteButtonSelected:" destination="rC6-va-iKy" id="qCl-Lt-XIP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="clx-LF-Fdd" firstAttribute="centerX" secondItem="e2u-CU-PU4" secondAttribute="centerX" id="2A8-jN-cgO"/>
                             <constraint firstItem="MSs-gG-cJc" firstAttribute="height" secondItem="e2u-CU-PU4" secondAttribute="height" constant="-579" id="BeE-jR-twJ"/>
                             <constraint firstItem="U2n-3I-e65" firstAttribute="centerX" secondItem="e2u-CU-PU4" secondAttribute="centerX" id="EVf-r8-8Ed"/>
-                            <constraint firstItem="JyX-eL-v0s" firstAttribute="top" secondItem="JDW-z1-6yy" secondAttribute="bottom" constant="20" id="FT5-Nb-Mvp"/>
+                            <constraint firstItem="JyX-eL-v0s" firstAttribute="top" secondItem="JDW-z1-6yy" secondAttribute="bottom" constant="-583" id="FT5-Nb-Mvp"/>
                             <constraint firstItem="MSs-gG-cJc" firstAttribute="top" secondItem="cSC-JD-U2G" secondAttribute="bottom" constant="10" id="PGQ-X5-8pa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JDW-z1-6yy" secondAttribute="trailing" constant="-20" id="T78-nl-gYC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JDW-z1-6yy" secondAttribute="trailing" constant="-16" id="T78-nl-gYC"/>
                             <constraint firstItem="MSs-gG-cJc" firstAttribute="centerX" secondItem="e2u-CU-PU4" secondAttribute="centerX" id="Tte-D6-5w3"/>
-                            <constraint firstItem="JDW-z1-6yy" firstAttribute="leading" secondItem="e2u-CU-PU4" secondAttribute="leadingMargin" constant="-20" id="YAT-Qj-u5G"/>
+                            <constraint firstItem="JDW-z1-6yy" firstAttribute="leading" secondItem="e2u-CU-PU4" secondAttribute="leadingMargin" constant="-16" id="YAT-Qj-u5G"/>
                             <constraint firstItem="clx-LF-Fdd" firstAttribute="leading" secondItem="e2u-CU-PU4" secondAttribute="leadingMargin" id="dx2-X2-geC"/>
                             <constraint firstItem="U2n-3I-e65" firstAttribute="top" secondItem="MSs-gG-cJc" secondAttribute="bottom" constant="10" id="iyg-FC-54t"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JyX-eL-v0s" secondAttribute="trailing" id="leE-kT-ZJT"/>
@@ -392,7 +397,7 @@
                             <constraint firstItem="JyX-eL-v0s" firstAttribute="leading" secondItem="e2u-CU-PU4" secondAttribute="leadingMargin" id="uC4-w0-mxK"/>
                             <constraint firstItem="cSC-JD-U2G" firstAttribute="centerX" secondItem="e2u-CU-PU4" secondAttribute="centerX" id="v23-cl-ZKA"/>
                             <constraint firstItem="clx-LF-Fdd" firstAttribute="top" secondItem="JyX-eL-v0s" secondAttribute="bottom" constant="10" id="xM4-4V-gSN"/>
-                            <constraint firstItem="JDW-z1-6yy" firstAttribute="top" secondItem="Uyw-Xn-agi" secondAttribute="bottom" id="xUh-9Z-qrg"/>
+                            <constraint firstItem="JDW-z1-6yy" firstAttribute="top" secondItem="Uyw-Xn-agi" secondAttribute="bottom" constant="603" id="xUh-9Z-qrg"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -410,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ode-za-uWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="542" y="1875"/>
+            <point key="canvasLocation" x="541.60000000000002" y="1874.2128935532235"/>
         </scene>
     </scenes>
     <resources>

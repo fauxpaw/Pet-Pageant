@@ -19,6 +19,7 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     var pet: Pet?
     var image: UIImage?
     
+    
     //MARK: VIEWCONTROLLER METHODS
 
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
         super.setup()
         self.changeImage()
         self.updateLabels()
+        self.modifyLabels()
         self.modifyNavbar()
     }
     
