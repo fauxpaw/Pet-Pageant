@@ -59,16 +59,20 @@ import UIKit
     }
     
     func commenceAesthetics() {
-        self.rightBackgroundImage.layer.cornerRadius = gCornerRadius
-        self.leftBackgroundImage.layer.cornerRadius = gCornerRadius
-        self.petImageView.layer.cornerRadius = gCornerRadius
-        self.reportButton.layer.cornerRadius = gCornerRadiusButton
-        self.menuButton.layer.cornerRadius = gCornerRadiusButton
-        self.menuButton.layer.borderWidth = 3
-        self.menuButton.layer.borderColor = gThemeColor.cgColor
-        self.petImageView.layer.borderWidth = 3
-        self.petImageView.layer.borderColor = gBackGroundColor.cgColor
         
+        let corners = [self.rightBackgroundImage, self.leftBackgroundImage, self.petImageView]
+        
+        for view in corners {
+            view?.layer.cornerRadius = gCornerRadius
+            view?.layer.borderWidth = 3
+            view?.layer.borderColor = gBackGroundColor.cgColor
+        }
+        let buttons = [self.menuButton, self.reportButton]
+        for button in buttons {
+            button?.layer.borderWidth = 3
+            button?.layer.borderColor = gThemeColor.cgColor
+            button?.layer.cornerRadius = gCornerRadiusButton
+        }
     }
     
     func loadViewFromNib() -> UIView {

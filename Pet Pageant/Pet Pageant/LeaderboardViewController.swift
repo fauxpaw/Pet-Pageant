@@ -11,6 +11,9 @@ import Parse
 
 class LeaderboardViewController: UIViewController {
     
+    @IBOutlet weak var rightArrowButton: ArrowButton!
+    @IBOutlet weak var leftArrowButton: ArrowButton!
+    
     var views = [RankView]()
     var pets = [Pet]() {
         didSet{
@@ -46,6 +49,8 @@ class LeaderboardViewController: UIViewController {
                     count += 1
                     if count == 5 {
                         self.sortViewsByRank()
+                        self.view.isUserInteractionEnabled = true
+                        self.leftArrowPressed(self)
                     }
                 })
             }
@@ -56,9 +61,12 @@ class LeaderboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.flipRightButton()
         self.setupSwipes()
+        self.view.isUserInteractionEnabled = false
         self.instantiateViews()
         self.fetchTopPets()
+        self.buttonsToForeground()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +76,18 @@ class LeaderboardViewController: UIViewController {
     
     //MARK: CLASS METHODS
     
-    func instantiateViews() {
+    fileprivate func buttonsToForeground() {
+        let buttons = [leftArrowButton, rightArrowButton]
+        for button in buttons {
+            self.view.bringSubview(toFront: button!)
+        }
+    }
+    
+    fileprivate func flipRightButton () {
+        rightArrowButton.transform = CGAffineTransform(scaleX: -1, y: 1)
+    }
+    
+    fileprivate func instantiateViews() {
         self.views.removeAll()
         for index in 0..<gCarouselViewCount {
             let angle = CGFloat(90 + index * (360/gCarouselViewCount))
@@ -84,7 +103,7 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
-    func sortViewsByRank() {
+    fileprivate func sortViewsByRank() {
         
         var count = 0
         var first = Int()
@@ -124,7 +143,7 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
-    func swapViewPositions(first: RankView, second: RankView){
+    fileprivate func swapViewPositions(first: RankView, second: RankView){
         let tempPos : CGPoint = first.center
         first.center = second.center
         second.center = tempPos
@@ -132,7 +151,7 @@ class LeaderboardViewController: UIViewController {
         second.updateCenterPosition()
     }
     
-    func fetchTopPets(){
+    fileprivate func fetchTopPets(){
         let query = PFQuery(className: "Pet")
         query.order(byDescending: "votes")
         query.limit = 5
@@ -149,9 +168,11 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
+    
+    
     //MARK: GESTURES
     
-    func setupSwipes(){
+    fileprivate func setupSwipes(){
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(LeaderboardViewController.swipeGesture(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -172,5 +193,25 @@ class LeaderboardViewController: UIViewController {
                 view.animate(clockwise: false)
             }
         }
+        self.buttonsToForeground()
     }
+    
+    //MARK - ACTIONS
+    
+    @IBAction func leftArrowPressed(_ sender: Any) {
+        
+        let swipe = UISwipeGestureRecognizer()
+        swipe.direction = .left
+        swipeGesture(swipe)
+        self.buttonsToForeground()
+    }
+    
+    @IBAction func rightArrowPressed(_ sender: Any) {
+
+        let swipe = UISwipeGestureRecognizer()
+        swipe.direction = .right
+        swipeGesture(swipe)
+        self.buttonsToForeground()
+    }
+    
 }

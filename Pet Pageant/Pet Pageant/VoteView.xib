@@ -75,11 +75,12 @@
                     <rect key="frame" x="337" y="164" width="37" height="37"/>
                 </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpP-A8-KG3">
-                    <rect key="frame" x="520" y="154" width="55" height="57"/>
+                    <rect key="frame" x="518" y="106" width="192" height="153"/>
                     <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="XpP-A8-KG3" secondAttribute="height" multiplier="24:17" constant="-25" id="OTC-jZ-k9G"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="Report">
                         <color key="titleColor" red="0.1176470588" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -93,6 +94,7 @@
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="leading" secondItem="XN4-8T-VVj" secondAttribute="trailing" id="8Yr-vO-uN7"/>
                 <constraint firstItem="Yb5-Rt-ZQ3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9Zd-sH-jEc"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BDD-B2-axf"/>
+                <constraint firstAttribute="trailing" secondItem="XpP-A8-KG3" secondAttribute="trailing" id="Eii-0o-k4y"/>
                 <constraint firstAttribute="bottom" secondItem="SBZ-5t-6P5" secondAttribute="bottom" constant="20" id="LhM-53-EKs"/>
                 <constraint firstItem="Yb5-Rt-ZQ3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Mgd-Te-fpV"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PNg-J6-KV8"/>
@@ -102,7 +104,7 @@
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="29" id="dmr-ID-ahR"/>
                 <constraint firstItem="fLI-ki-qB6" firstAttribute="centerY" secondItem="SBZ-5t-6P5" secondAttribute="centerY" id="dsj-iA-IUt"/>
                 <constraint firstItem="SBZ-5t-6P5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="ejZ-dW-kA4"/>
-                <constraint firstItem="XpP-A8-KG3" firstAttribute="leading" secondItem="SBZ-5t-6P5" secondAttribute="trailing" constant="2" id="lid-29-eMO"/>
+                <constraint firstItem="XpP-A8-KG3" firstAttribute="leading" secondItem="SBZ-5t-6P5" secondAttribute="trailing" id="lid-29-eMO"/>
                 <constraint firstItem="XpP-A8-KG3" firstAttribute="centerY" secondItem="GQE-xE-xAr" secondAttribute="centerY" id="osR-cB-ePd"/>
                 <constraint firstAttribute="trailing" secondItem="GQE-xE-xAr" secondAttribute="trailing" id="sLt-IJ-y3C"/>
                 <constraint firstItem="GQE-xE-xAr" firstAttribute="leading" secondItem="Yb5-Rt-ZQ3" secondAttribute="trailing" constant="28" id="tOA-Py-2i5"/>

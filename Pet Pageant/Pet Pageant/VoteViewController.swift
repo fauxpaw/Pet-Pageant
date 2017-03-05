@@ -20,8 +20,8 @@ class VoteViewController: UIViewController {
     fileprivate let viewAnimationOutTime = 0.5
     fileprivate let viewAnimationInTime = 0.5
     
-    var voteQueue = [Pet]()
-    var topViewsRecord = [Pet]() {
+    fileprivate var voteQueue = [Pet]()
+    fileprivate var topViewsRecord = [Pet]() {
         didSet {
             topVoteView.petRecord = topViewsRecord.first
             for pet in topViewsRecord {
@@ -41,7 +41,7 @@ class VoteViewController: UIViewController {
         }
     }
     
-    var botViewsRecord = [Pet]() {
+    fileprivate var botViewsRecord = [Pet]() {
         didSet {
             bottomVoteView.petRecord = botViewsRecord.first
             for pet in botViewsRecord {
@@ -76,7 +76,7 @@ class VoteViewController: UIViewController {
     
     //MARK: CLASS METHODS
     
-    private func setupImageViews() {
+    fileprivate func setupImageViews() {
         self.topVoteView.petImage = nil
         self.bottomVoteView.petImage = nil
         self.topVoteView.enableReport()
@@ -87,7 +87,7 @@ class VoteViewController: UIViewController {
         self.animateViewsIn(topVoteView, bot: bottomVoteView)
     }
     
-    private func chooseRecords(){
+    fileprivate func chooseRecords(){
         if self.voteQueue.isEmpty{
             print("VOTEQUE EMPTY -> Aborting chooseRecords")
             return
@@ -108,9 +108,11 @@ class VoteViewController: UIViewController {
         }
     }
     
-    //MARK: BACKEND CALLS
-    //get the 2 oldest(update time) records
-    private func GETPetsForQueue () {
+    /* MARK: BACKEND CALLS
+           -- get the 2 oldest(by update time) records --
+    */
+    
+    fileprivate func GETPetsForQueue () {
         self.topViewsRecord.removeAll()
         self.botViewsRecord.removeAll()
         self.voteQueue.removeAll()
@@ -133,7 +135,7 @@ class VoteViewController: UIViewController {
         }
     }
     
-    private func updatePetRecords(_ selectedView: UIView, nonselectedView: UIView) {
+    fileprivate func updatePetRecords(_ selectedView: UIView, nonselectedView: UIView) {
         if selectedView == self.topVoteView {
             guard let record = self.topViewsRecord.first else { return}
             record.incrementKey("votes")
@@ -193,7 +195,8 @@ class VoteViewController: UIViewController {
     }
     
     //MARK: ANIMATIONS
-   private func animateViewsIn(_ top: UIView, bot: UIView) {
+    
+    fileprivate func animateViewsIn(_ top: UIView, bot: UIView) {
         topVoteView.removeVoteIcon()
         bottomVoteView.removeVoteIcon()
         let startCenter = self.view.center.x
@@ -208,7 +211,7 @@ class VoteViewController: UIViewController {
             }, completion: nil)
     }
     
-    private func animateViewsOut(_ selectedView: UIView, otherView: UIView){
+    fileprivate func animateViewsOut(_ selectedView: UIView, otherView: UIView){
         
         if selectedView.center.x > self.view.center.x {
             
@@ -247,7 +250,7 @@ class VoteViewController: UIViewController {
     
     //MARK: PAN GESTURE
     
-     private func setupPanGestures(){
+     fileprivate func setupPanGestures(){
         let topPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         let bottomPanGesture = UIPanGestureRecognizer(target: self, action: #selector(self.viewWasPanned(_:)))
         self.topVoteView.addGestureRecognizer(topPanGesture)
@@ -316,7 +319,6 @@ class VoteViewController: UIViewController {
                 otherView.removeVoteIcon()
                 selectedView.isUserInteractionEnabled = true
                 otherView.isUserInteractionEnabled = true
-                
             }
             
         default:

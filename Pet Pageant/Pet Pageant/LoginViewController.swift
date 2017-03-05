@@ -9,7 +9,7 @@
 import Foundation
 import ParseUI
 
-class LoginViewController: PFLogInViewController {
+class LoginViewController: PFLogInViewController, ModifyButtonProtocol, StatusBarBackgroundProtocol {
     
     
     override func viewDidLoad() {
@@ -26,6 +26,9 @@ class LoginViewController: PFLogInViewController {
         self.initBackgroundView()
         self.modifyButtons()
         self.removeLogos()
+        self.modifySignupController()
+        modifyStatusBarBackground(view: self.logInView!)
+        modifyStatusBarBackground(view: (self.signUpController?.signUpView)!)
     }
     
     private func initBackgroundView (){
@@ -38,20 +41,20 @@ class LoginViewController: PFLogInViewController {
         self.logInView?.backgroundColor = gBackGroundColor
     }
     
-    private func modifyButtons () {
+    internal func modifyButtons () {
         
         var buttons = [UIButton]()
         buttons.append((self.logInView?.signUpButton)!)
         buttons.append((self.logInView?.logInButton)!)
-        buttons.append((self.logInView?.passwordForgottenButton)!)
         buttons.append((self.signUpController?.signUpView?.signUpButton)!)
         
         for button in buttons {
             button.setBackgroundImage(nil, for: .normal)
-            button.backgroundColor = gTextColor
+            button.backgroundColor = gThemeColor
             button.layer.cornerRadius = gCornerRadiusButton
             button.layer.borderWidth = gBorderWidthDefault
             button.layer.borderColor = gThemeColor.cgColor
+            button.tintColor = gTextColor
         }
         self.logInView?.passwordForgottenButton?.setTitleColor(gThemeColor, for: .normal)
         
@@ -67,7 +70,14 @@ class LoginViewController: PFLogInViewController {
     }
     
     private func modifySignupController (){
-        
+        self.signUpController?.signUpView?.backgroundColor = gThemeColor
+        let loginSplash = UIImage(named: "titleLogo1")
+        let imageViewBackground = UIImageView(frame: CGRect(x:0,y:0,width:gScreenSize.width,height:gScreenSize.height))
+        imageViewBackground.image = loginSplash
+        imageViewBackground.contentMode = .scaleAspectFit
+        self.signUpController?.signUpView?.addSubview(imageViewBackground)
+        self.signUpController?.signUpView?.sendSubview(toBack: imageViewBackground)
+        self.signUpController?.signUpView?.backgroundColor = gBackGroundColor
     }
     
 }

@@ -9,14 +9,15 @@
 import UIKit
 import Parse
 
-class UploadImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UploadImageViewController: CustomBaseViewContollerViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //MARK: OUTLETS
     
     @IBOutlet weak var imagView: UIImageView!
+    fileprivate var defaultImage = UIImage(named: "selectPhoto.png")
     
     //MARK: VIEWCONTROLLER METHODS
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -24,23 +25,21 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
     
     //MARK: CLASS METHODS
     
-    private func setup(){
-        self.modifyView()
-        self.modifyImageView()
+    internal override func setup(){
+        super.setup()
+        self.modifyImage()
         self.setupTapGesture()
+        self.modifyNavBar()
     }
     
-    private func modifyImageView () {
-        imagView.isUserInteractionEnabled = true
-        imagView.backgroundColor = gBackGroundColor
-        imagView.layer.cornerRadius = gCornerRadius
-        imagView.layer.borderWidth = gBorderWidthDefault
-        imagView.layer.borderColor = gThemeColor.cgColor
+    fileprivate func modifyNavBar () {
+        self.navigationController?.navigationBar.tintColor = gThemeColor
     }
     
-    private func modifyView () {
-        self.view.backgroundColor = gBackGroundColor
+    internal override func modifyImage() {
+        self.imagView.image = defaultImage
     }
+    
     
     //MARK: IMAGE PICKERCONTROLLER DELEGATE
     
@@ -48,8 +47,6 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
         imagView.image = image
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
     
     //MARK: GESTURES
     
@@ -59,6 +56,11 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imageTapped(_ sender: UITapGestureRecognizer) {
+        if imagView.image != self.defaultImage {
+            imagView.image = self.defaultImage
+            return
+        }
+        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
@@ -76,8 +78,8 @@ class UploadImageViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func uploadButtonSelected(_ sender: UIBarButtonItem) {
         
         print("upload button pressed")
-        if imagView.image == nil {
-            let alertController = UIAlertController(title: "Image missing", message: "Please tap the image field to select a photo before pressing the upload button.", preferredStyle: .alert)
+        if imagView.image == nil || imagView.image == defaultImage {
+            let alertController = UIAlertController(title: "Image Missing", message: "Please tap the image field to select a photo before pressing the upload button.", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)
             self.present(alertController, animated: true, completion: nil)

@@ -16,6 +16,8 @@
 		4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C46344B1E6AF6C000E38B56 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46344A1E6AF6C000E38B56 /* ArrowButton.swift */; };
+		4C46344F1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46344E1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift */; };
 		4C4F7DD01E69793F0064BB61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4F7DCF1E69793F0064BB61 /* LoginViewController.swift */; };
 		4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */; };
 		4C4FF2F81D714C4300714806 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F71D714C4300714806 /* Pet.swift */; };
@@ -34,6 +36,11 @@
 		4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */; };
 		4CBAEB781D73C4940003B591 /* UploadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBAEB771D73C4940003B591 /* UploadImageViewController.swift */; };
 		4CEDDA6E1D903ECC004E56AD /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEDDA6D1D903ECC004E56AD /* GlobalVars.swift */; };
+		4CF524C11E6AA6CA0038505B /* ModifyViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF524C01E6AA6CA0038505B /* ModifyViewProtocol.swift */; };
+		4CF524C31E6AA7550038505B /* ModifyImageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF524C21E6AA7550038505B /* ModifyImageProtocol.swift */; };
+		4CF524C51E6AA7BE0038505B /* SetupViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF524C41E6AA7BE0038505B /* SetupViewControllerProtocol.swift */; };
+		4CF524C71E6AA8110038505B /* CustomBaseViewContollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF524C61E6AA8110038505B /* CustomBaseViewContollerViewController.swift */; };
+		4CF524C91E6AB68B0038505B /* ModifyButonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF524C81E6AB68B0038505B /* ModifyButonProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +65,8 @@
 		4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		4C36E7351D72936800B83B92 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		4C46344A1E6AF6C000E38B56 /* ArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
+		4C46344E1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarBackgroundProtocol.swift; sourceTree = "<group>"; };
 		4C4F7DCF1E69793F0064BB61 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		4C4FF2F71D714C4300714806 /* Pet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
@@ -78,6 +87,11 @@
 		4CB8EA5A1D6AE6DF009B20B3 /* VoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 		4CBAEB771D73C4940003B591 /* UploadImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageViewController.swift; sourceTree = "<group>"; };
 		4CEDDA6D1D903ECC004E56AD /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
+		4CF524C01E6AA6CA0038505B /* ModifyViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyViewProtocol.swift; sourceTree = "<group>"; };
+		4CF524C21E6AA7550038505B /* ModifyImageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyImageProtocol.swift; sourceTree = "<group>"; };
+		4CF524C41E6AA7BE0038505B /* SetupViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewControllerProtocol.swift; sourceTree = "<group>"; };
+		4CF524C61E6AA8110038505B /* CustomBaseViewContollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBaseViewContollerViewController.swift; sourceTree = "<group>"; };
+		4CF524C81E6AB68B0038505B /* ModifyButonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyButonProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				4C75B28A1D63F9BB002755B7 /* Pet Pageant */,
+				4CF524CA1E6ADB3B0038505B /* Extensions */,
 				4C75B2891D63F9BB002755B7 /* Products */,
 				4C75B2A71D643088002755B7 /* Libraries */,
 			);
@@ -118,6 +133,7 @@
 				4C75B2A81D643098002755B7 /* Controller */,
 				4C75B2AA1D6430A8002755B7 /* View */,
 				4CBAEB791D73D3B20003B591 /* Model */,
+				4CF524CE1E6ADEF70038505B /* Protocols */,
 			);
 			path = "Pet Pageant";
 			sourceTree = "<group>";
@@ -143,6 +159,7 @@
 				4CBAEB771D73C4940003B591 /* UploadImageViewController.swift */,
 				4C5AC27B1DBC4DF500A57776 /* RootViewController.swift */,
 				4C4F7DCF1E69793F0064BB61 /* LoginViewController.swift */,
+				4CF524C61E6AA8110038505B /* CustomBaseViewContollerViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -178,8 +195,29 @@
 				4C4FF2F71D714C4300714806 /* Pet.swift */,
 				4C72E5DF1D8B6FC30009AB05 /* PetCell.swift */,
 				4C72E5E51D8C36F80009AB05 /* RankView.swift */,
+				4C46344A1E6AF6C000E38B56 /* ArrowButton.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		4CF524CA1E6ADB3B0038505B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			path = "Pet Pageant";
+			sourceTree = "<group>";
+		};
+		4CF524CE1E6ADEF70038505B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4CF524C01E6AA6CA0038505B /* ModifyViewProtocol.swift */,
+				4CF524C21E6AA7550038505B /* ModifyImageProtocol.swift */,
+				4CF524C41E6AA7BE0038505B /* SetupViewControllerProtocol.swift */,
+				4CF524C81E6AB68B0038505B /* ModifyButonProtocol.swift */,
+				4C46344E1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,20 +298,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C75B28E1D63F9BB002755B7 /* ViewController.swift in Sources */,
+				4CF524C31E6AA7550038505B /* ModifyImageProtocol.swift in Sources */,
 				4C62BC671DB9A56E00EB356D /* ErrorHandler.swift in Sources */,
 				4C72E5E01D8B6FC30009AB05 /* PetCell.swift in Sources */,
 				4C4F7DD01E69793F0064BB61 /* LoginViewController.swift in Sources */,
 				4CB8EA5B1D6AE6DF009B20B3 /* VoteView.swift in Sources */,
+				4CF524C91E6AB68B0038505B /* ModifyButonProtocol.swift in Sources */,
 				4CEDDA6E1D903ECC004E56AD /* GlobalVars.swift in Sources */,
 				4C5AC27C1DBC4DF500A57776 /* RootViewController.swift in Sources */,
 				4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */,
+				4CF524C11E6AA6CA0038505B /* ModifyViewProtocol.swift in Sources */,
+				4C46344F1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift in Sources */,
 				4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */,
 				4C72E5E61D8C36F80009AB05 /* RankView.swift in Sources */,
 				4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */,
 				4CBAEB781D73C4940003B591 /* UploadImageViewController.swift in Sources */,
 				4C4FF2F81D714C4300714806 /* Pet.swift in Sources */,
+				4C46344B1E6AF6C000E38B56 /* ArrowButton.swift in Sources */,
 				4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */,
+				4CF524C51E6AA7BE0038505B /* SetupViewControllerProtocol.swift in Sources */,
 				4C75B28C1D63F9BB002755B7 /* AppDelegate.swift in Sources */,
+				4CF524C71E6AA8110038505B /* CustomBaseViewContollerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

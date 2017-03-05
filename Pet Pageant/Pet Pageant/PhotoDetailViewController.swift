@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController {
+class PhotoDetailViewController: CustomBaseViewContollerViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var ownerLabel: UILabel!
@@ -28,17 +28,11 @@ class PhotoDetailViewController: UIViewController {
     
     //MARK: CLASS METHODS
     
-    private func setup() {
-        self.modifyView()
-        self.modifyImageView()
+    internal override func setup() {
+        super.setup()
+        self.changeImage()
         self.updateLabels()
-        self.modifyToolbar()
-//        imageView.image = image
-        
-    }
-    
-    private func modifyView() {
-        self.view.backgroundColor = gBackGroundColor
+        self.modifyNavbar()
     }
     
     private func updateLabels () {
@@ -49,16 +43,10 @@ class PhotoDetailViewController: UIViewController {
         } else {
             print("pet not found")
         }
-        self.modifyLabels()
     }
     
-    private func modifyImageView () {
+    private func changeImage () {
         imageView.image = image
-        self.view.layer.cornerRadius = gCornerRadius
-        self.imageView.layer.cornerRadius = gCornerRadius
-        self.imageView.layer.borderWidth = gBorderWidthDefault
-        self.imageView.layer.borderColor = gThemeColor.cgColor
-        
     }
     
     private func modifyLabels () {
@@ -68,8 +56,10 @@ class PhotoDetailViewController: UIViewController {
         }
     }
     
-    private func modifyToolbar(){
-        
+    private func modifyNavbar(){
+       //self.tab.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = gThemeColor
+
     }
     
     //MARK: ACTIONS

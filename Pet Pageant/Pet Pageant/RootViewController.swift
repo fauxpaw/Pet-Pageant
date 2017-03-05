@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootViewController: UITabBarController {
+class RootViewController: UITabBarController, StatusBarBackgroundProtocol {
 
     var pet: Pet?
     var votes: Int?
@@ -20,11 +20,16 @@ class RootViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        modifyStatusBarBackground(view: self.view)
+        self.tabBar.barTintColor = gThemeColor
+//        if #available(iOS 10.0, *) {
+//            self.tabBar.unselectedItemTintColor = gTextColor
+//        } else {
+//            // Fallback on earlier versions
+//        }
+        
+        self.tabBar.tintColor = gTextColor
 
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
