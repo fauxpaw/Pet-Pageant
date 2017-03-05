@@ -53,31 +53,27 @@ class RankView: UIView {
         addSubview(view)
     }
     
-    func commenceAesthetics() {
-//        self.view.layer.borderColor = gThemeColor.cgColor
-//        self.view.layer.borderWidth = 5
-        self.imageView.layer.cornerRadius = gCornerRadius
-        self.imageView.layer.borderColor = gThemeColor.cgColor
-        self.imageView.layer.borderWidth = 4
-        self.imageView.backgroundColor = gThemeColor
-        self.labelBackgroundView.layer.borderWidth = gBorderWidthDefault
-        self.labelBackgroundView.layer.borderColor = gThemeColor.cgColor
-        self.labelBackgroundView.layer.cornerRadius = gCornerRadius
-        self.view.layer.cornerRadius = gCornerRadius
-        self.view.layer.borderColor = gThemeColor.cgColor
+    fileprivate func commenceAesthetics() {
+        let corners = [self.imageView, self.view, self.labelBackgroundView]
+        for view in corners {
+            view?.layer.cornerRadius = gCornerRadiusButton
+            view?.layer.borderWidth = gBorderWidthDefault
+            view?.layer.borderColor = gThemeColor.cgColor
+        }
+        self.view.backgroundColor = gThemeColor
         self.labelBackgroundView.backgroundColor = gBackGroundColor
-        self.votesLabel.textColor = gThemeColor
-        self.votePercentageLabel.textColor = gThemeColor
-        self.rankLabel.textColor = gThemeColor
-        
+        let labels = [self.rankLabel, self.votesLabel, self.votePercentageLabel]
+        for label in labels {
+            label?.textColor = gThemeColor
+        }
     }
     
-    func coordsToAngle (pos: CGPoint) -> CGFloat {
+    fileprivate func coordsToAngle (pos: CGPoint) -> CGFloat {
         let angle = atan2(pos.y - gCarouselCenterPoint.y, pos.x - gCarouselCenterPoint.x)
         return angle
     }
     
-    func angleToCoords (angle: CGFloat) -> CGPoint {
+    fileprivate func angleToCoords (angle: CGFloat) -> CGPoint {
         
         //(x,y) = cx + rcos0, cy +sin0
        
@@ -85,7 +81,7 @@ class RankView: UIView {
         
     }
     
-    func calculateNextPosition (currentAngle: CGFloat, clockwise: Bool) -> CGFloat {
+    fileprivate func calculateNextPosition (currentAngle: CGFloat, clockwise: Bool) -> CGFloat {
         let distance = 2 * M_PI / Double(gNumberOfRankViews)
         
         if clockwise == true {
@@ -96,7 +92,7 @@ class RankView: UIView {
         }
     }
     
-    func updateCenterPosition() {
+    public func updateCenterPosition() {
         self.currentPosition = self.center
     }
     
@@ -108,7 +104,7 @@ class RankView: UIView {
         self.superview?.sendSubview(toBack: self)
     }
     
-    func evaluateViewForResize(angle: CGFloat){
+    fileprivate func evaluateViewForResize(angle: CGFloat){
         print("angle passed is: \(angle)")
         
         switch round(angle) {
@@ -138,7 +134,6 @@ class RankView: UIView {
     //MARK: ANIMATIONS
     
     func animate(clockwise: Bool) {
-       // self.updateCurrentPosition()
         guard let pos = self.currentPosition else { return }
         let startAngle = self.coordsToAngle(pos: pos)
         let endAngle = self.calculateNextPosition(currentAngle: startAngle, clockwise: clockwise)
@@ -152,24 +147,24 @@ class RankView: UIView {
         anim.isRemovedOnCompletion = false
         self.layer.add(anim, forKey: "carousel")
         self.evaluateViewForResize(angle: endAngle)
-        
-        let check =  self.angleToCoords(angle: endAngle)
-        self.currentPosition = check
+
+        let newPos =  self.angleToCoords(angle: endAngle)
+        self.currentPosition = newPos
     }
     
-    func scaleViewDown() {
+    fileprivate func scaleViewDown() {
         UIView.animate(withDuration: gAnimationTime, delay: 0.0, options: .curveEaseInOut, animations: {
             self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         })
     }
     
-    func scaleViewDefault() {
+    fileprivate func scaleViewDefault() {
         UIView.animate(withDuration: gAnimationTime, delay: 0.0, options: .curveEaseInOut, animations: {
             self.transform = CGAffineTransform.identity
         })
     }
     
-    func scaleViewUp() {
+    fileprivate func scaleViewUp() {
         UIView.animate(withDuration: gAnimationTime, delay: 0.0, options: .curveEaseInOut, animations: {
             self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         })

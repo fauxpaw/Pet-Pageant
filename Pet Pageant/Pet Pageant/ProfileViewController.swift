@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class ProfileViewController: UICollectionViewController{
+class ProfileViewController: UICollectionViewController {
 
     @IBOutlet var colView: UICollectionView!
     fileprivate let reuseIdentifier = "PetPhotoCell"
@@ -23,31 +23,48 @@ class ProfileViewController: UICollectionViewController{
     var retrieved = false
     var allImages = [UIImage]()
     var allPets = [Pet]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(UINib(nibName: "PetCell", bundle: nil), forCellWithReuseIdentifier: "PetCell")
-       // self.colView.isHidden = true
-        
     }
     
     //MARK: VIEWCONTROLLER METHODS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.colView.reloadData()
+        self.addOverlay()
+        self.GETUsersPets()
+    }
+    
+    fileprivate func addOverlay() {
         
-        /*let overlay = UIView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width, height: gScreenSize.height))
-        overlay.backgroundColor = UIColor.black
+        if let exists = self.view.viewWithTag(1) {
+            self.view.bringSubview(toFront: exists)
+            return
+        }
+        
+        let overlay = UIView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width, height: gScreenSize.height))
+        overlay.backgroundColor = gBackGroundColor
+        overlay.tag = 1
         let spinner = UIActivityIndicatorView()
+        spinner.color = gThemeColor
         spinner.startAnimating()
         spinner.center = overlay.center
         overlay.addSubview(spinner)
-        self.view.addSubview(overlay)*/
-        self.GETUsersPets()
+        self.view.addSubview(overlay)
+        self.view.bringSubview(toFront: overlay)
+    }
+    
+    fileprivate func removeOverlay() {
+        guard let view = self.view.viewWithTag(1) else { return }
+        self.view.sendSubview(toBack: view)
     }
     
     //MARK: BACKEND CALLS
     
-    private func GETUsersPets() {
+    fileprivate func GETUsersPets() {
         
         self.allPets.removeAll()
         self.allImages.removeAll()
@@ -75,8 +92,8 @@ class ProfileViewController: UICollectionViewController{
                                 self.collectionView?.reloadData()
                                 print("Allimages: \(self.allImages.count)")
                                 print("AllPets: \(self.allPets.count)")
-                                //self.view.sendSubview(toBack: self.view.subviews.last!)
                                 
+                                self.removeOverlay()
                             }
                         }
                     })
@@ -99,8 +116,7 @@ class ProfileViewController: UICollectionViewController{
         
         if (indexPath as NSIndexPath).row < allImages.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetCell", for: indexPath) as! PetCell
-//            let pic = cell.viewWithTag(2) as! UIImageView
-//            pic.image = allImages[indexPath.row]
+
             cell.imageView.image = allImages[(indexPath as NSIndexPath).row]
             cell.votesLabel.text = "Votes: \(allPets[(indexPath as NSIndexPath).row].votes)"
             cell.viewLabel.text = "Views: \(allPets[(indexPath as NSIndexPath).row].viewed)"
@@ -140,6 +156,12 @@ class ProfileViewController: UICollectionViewController{
             topVC.photo = allImages[(indexPath as NSIndexPath).row]
 
             topVC.performSegue(withIdentifier: "photoDetails", sender: self)
+        } else if (indexPath as NSIndexPath).row == allImages.count && allImages.count == gPhotoUploadLimit {
+            
+            let alertVC = UIAlertController(title: "Pet Pageant", message: "You are at the upload limit. You may delete a photo from your collection by tapping on it and selecting 'delete.'", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertVC, animated: true, completion: nil)
+            
         }
     }
 }

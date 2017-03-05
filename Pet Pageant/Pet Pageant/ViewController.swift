@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
+class ViewController: CustomBaseViewContollerViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate  {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var logoutButton: UIButton!
@@ -27,16 +27,17 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         self.login()
     }
     
-    private func setup() {
-        self.logoutButton.layer.cornerRadius = gCornerRadiusButton
-        self.logoutButton.backgroundColor = gThemeColor
-        self.logoutButton.setTitleColor(gTextColor, for: .normal)
-        view.backgroundColor = gBackGroundColor
+    internal override func modifyImage() {
+        return
+    }
+    
+    internal override func setup() {
+        super.setup()
     }
     
     //MARK: CLASS METHODS
     
-    private func login(){
+    fileprivate func login(){
         
         if (PFUser.current() == nil) {
             let loginViewController: LoginViewController = LoginViewController()
@@ -55,7 +56,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     //MARK: PARSE LOGIN DELEGATE
 
-    func log(_ logInController: PFLogInViewController, didLogIn user: PFUser) {
+    public func log(_ logInController: PFLogInViewController, didLogIn user: PFUser) {
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -67,12 +68,12 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func logInViewControllerDidCancelLog(in logInController: PFLogInViewController) {
+    public func logInViewControllerDidCancelLog(in logInController: PFLogInViewController) {
     }
     
     //MARK: PARSE SIGN-UP
     
-    func signUpViewController(_ signUpController: PFSignUpViewController, didSignUp user: PFUser) {
+    public func signUpViewController(_ signUpController: PFSignUpViewController, didSignUp user: PFUser) {
         
         self.dismiss(animated: true, completion: nil)
         self.login()
@@ -93,21 +94,21 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         
     }
     
-    func signUpViewControllerDidCancelSignUp(_ signUpController: PFSignUpViewController) {
+    public func signUpViewControllerDidCancelSignUp(_ signUpController: PFSignUpViewController) {
+        
     }
     
     //MARK: ACTIONS
     
     @IBAction func logoutButtonPressed(_ sender: AnyObject) {
         PFUser.logOut()
-       
+        
         let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully logged out.", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
             self.login()
         }))
         
         self.present(alertController, animated: true, completion: nil)
-        
     }
 }
 

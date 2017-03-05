@@ -66,13 +66,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="374-0W-hD4">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="selectPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="374-0W-hD4">
                                 <rect key="frame" x="16" y="40" width="343" height="553"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.05040766128562324" blue="0.091245207102577996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A18-zS-bxA">
-                                <rect key="frame" x="16" y="593" width="343" height="74"/>
+                                <rect key="frame" x="0.0" y="593" width="375" height="74"/>
                                 <items>
                                     <navigationItem prompt="" id="5Qd-GY-nNJ">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="d39-Ok-wJu">
@@ -92,8 +91,8 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Itq-1e-4lB" firstAttribute="top" secondItem="A18-zS-bxA" secondAttribute="bottom" id="e00-pv-csx"/>
-                            <constraint firstItem="A18-zS-bxA" firstAttribute="leading" secondItem="TLS-FP-bko" secondAttribute="leadingMargin" id="gOt-XB-fWt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="A18-zS-bxA" secondAttribute="trailing" id="qXy-YT-gkn"/>
+                            <constraint firstItem="A18-zS-bxA" firstAttribute="leading" secondItem="TLS-FP-bko" secondAttribute="leadingMargin" constant="-16" id="gOt-XB-fWt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A18-zS-bxA" secondAttribute="trailing" constant="-16" id="qXy-YT-gkn"/>
                         </constraints>
                     </view>
                     <connections>
@@ -102,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tf7-hY-Ox4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1281" y="1876"/>
+            <point key="canvasLocation" x="1280.8" y="1875.1124437781111"/>
         </scene>
         <!--Vote-->
         <scene sceneID="KBW-hC-5QW">
@@ -165,19 +164,20 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <view key="backgroundView" contentMode="scaleToFill" id="R6P-yk-I4D">
+                        <view key="backgroundView" contentMode="scaleToFill" id="OvS-en-Hdf">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AtCapacity" id="sN1-G6-MlL">
-                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPetPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="aiQ-NG-Snj">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="atCapacity" translatesAutoresizingMaskIntoConstraints="NO" id="aiQ-NG-Snj">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
                                     </subviews>
@@ -191,7 +191,7 @@
                                 <size key="customSize" width="200" height="200"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PetPhotoCell" id="oym-H4-NY5">
-                                <rect key="frame" x="88" y="210" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="210" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -211,7 +211,7 @@
                                 <size key="customSize" width="200" height="200"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddPhotoCell" id="enx-6Q-rHr">
-                                <rect key="frame" x="88" y="420" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="420" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -257,9 +257,35 @@
                     <view key="view" contentMode="scaleToFill" id="E92-gl-JGp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYK-l3-4pr" customClass="ArrowButton" customModule="Pet_Pageant" customModuleProvider="target">
+                                <rect key="frame" x="16" y="318.5" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.47379471179999999" green="0.5933649782" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="leftArrowPressed:" destination="LIb-aF-AnO" eventType="touchUpInside" id="Yva-fg-ab8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoM-P3-Qvv" userLabel="Right Arrow Button" customClass="ArrowButton" customModule="Pet_Pageant" customModuleProvider="target">
+                                <rect key="frame" x="329" y="318.5" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.47379471179999999" green="0.5933649782" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="rightArrowPressed:" destination="LIb-aF-AnO" eventType="touchUpInside" id="Y3n-HU-1uk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="eoM-P3-Qvv" secondAttribute="trailing" id="TWL-fK-HoK"/>
+                            <constraint firstItem="RYK-l3-4pr" firstAttribute="leading" secondItem="E92-gl-JGp" secondAttribute="leadingMargin" id="cki-2V-ZeL"/>
+                            <constraint firstItem="eoM-P3-Qvv" firstAttribute="centerY" secondItem="E92-gl-JGp" secondAttribute="centerY" id="e3S-im-YOu"/>
+                            <constraint firstItem="RYK-l3-4pr" firstAttribute="centerY" secondItem="E92-gl-JGp" secondAttribute="centerY" id="meX-Ie-qc3"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Leaders" id="X8Q-EM-g6U"/>
+                    <connections>
+                        <outlet property="leftArrowButton" destination="RYK-l3-4pr" id="l06-KS-6nw"/>
+                        <outlet property="rightArrowButton" destination="eoM-P3-Qvv" id="wNH-FE-6O7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vhi-SE-43c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -388,6 +414,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="atCapacity" width="1200" height="1600"/>
+        <image name="selectPhoto" width="1079" height="1599"/>
         <image name="titleLogo1" width="1124" height="1200"/>
         <image name="uploadPetPhoto" width="1200" height="1600"/>
     </resources>
