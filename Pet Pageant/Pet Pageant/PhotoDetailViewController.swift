@@ -16,6 +16,10 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     @IBOutlet weak var shownLabel: UILabel!
     @IBOutlet weak var reportsLabel: UILabel!
     
+    @IBOutlet weak var navBar: UINavigationBar!
+    
+
+    
     var pet: Pet?
     var image: UIImage?
     
@@ -35,6 +39,7 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
         self.updateLabels()
         self.modifyLabels()
         self.modifyNavbar()
+        self.enableActions()
     }
     
     private func updateLabels () {
@@ -64,16 +69,28 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
 
     }
     
+    //The two methods below are temporary bandaids to ensure that the user cannot spam buttons or change photos while uploading is taking place. This will cause the app to crash and the upload will not complete correctly.
+    
+    fileprivate func disableActions () {
+        self.navBar.isUserInteractionEnabled = false
+    }
+    
+    fileprivate func enableActions () {
+        self.navBar.isUserInteractionEnabled = true
+    }
+    
+    
     //MARK: ACTIONS
     
     @IBAction func deleteButtonSelected(_ sender: Any) {
         
         let alertVC = UIAlertController(title: "Pet Pageant", message: "Are you sure you want to delete this record and all its coresponding data?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
-           
-            print("firing delete code")
+            self.disableActions()
+            //API call to delete record
             guard let record = self.pet  else { return }
             record.deleteInBackground { (success, error) in
+
                 if let error = error {
                     let alertController = UIAlertController(title: "Error", message: "Could not delete item due to \(error.localizedDescription)", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -87,8 +104,6 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
         }))
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
-        
-       
         
     }
     

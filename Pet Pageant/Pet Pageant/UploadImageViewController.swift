@@ -13,8 +13,12 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
 
     //MARK: OUTLETS
     
+    
+    @IBOutlet weak var navBar: UINavigationBar!
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var imagView: UIImageView!
-    fileprivate var defaultImage = UIImage(named: "selectPhoto.png")
+    fileprivate let defaultImage = UIImage(named: "selectPhoto.png")
     
     //MARK: VIEWCONTROLLER METHODS
     
@@ -27,21 +31,56 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
     
     internal override func setup(){
         super.setup()
-        self.modifyImage()
-        self.setupTapGesture()
         self.modifyNavBar()
+        self.modifyImage()
+        self.modifyUploadSpinner()
+        self.setupTapGesture()
     }
     
     fileprivate func modifyNavBar () {
-        self.navigationController?.navigationBar.tintColor = gThemeColor
+        self.navigationController?.navigationBar.tintColor = gTextColor
+        
+        if (navigationController != nil) {
+            print("we has a item")
+        }
+        
     }
     
     internal override func modifyImage() {
         self.imagView.image = defaultImage
     }
     
+    fileprivate func modifyUploadSpinner () {
+        spinner.center = self.imagView.center
+        spinner.color = gThemeColor
+        spinner.hidesWhenStopped = true
+        spinner.stopAnimating()
+    }
+    
+    fileprivate func showUploadSpinner () {
+        spinner.startAnimating()
+        
+    }
+    
+    fileprivate func hideUploadSpinner () {
+        spinner.stopAnimating()
+    }
+    
+    //The two methods below are temporary bandaids to ensure that the user cannot spam buttons or change photos while uploading is taking place. This will cause the app to crash and the upload will not complete correctly.
+    
+    fileprivate func disableActions () {
+        self.imagView.isUserInteractionEnabled = false
+        self.navBar.isUserInteractionEnabled = false
+    }
+    
+    fileprivate func enableActions () {
+        self.imagView.isUserInteractionEnabled = true
+        self.navBar.isUserInteractionEnabled = true
+    }
     
     //MARK: IMAGE PICKERCONTROLLER DELEGATE
+    
+    //As of iOS 10.x this will prompt a faulty error message of "Creating an image format with an unknown type is an error" - This is ignorable
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         imagView.image = image
@@ -76,8 +115,8 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
     }
     
     @IBAction func uploadButtonSelected(_ sender: UIBarButtonItem) {
-        
         print("upload button pressed")
+        
         if imagView.image == nil || imagView.image == defaultImage {
             let alertController = UIAlertController(title: "Image Missing", message: "Please tap the image field to select a photo before pressing the upload button.", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -86,37 +125,44 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
             return
         }
         else {
-            
+            self.disableActions()
+            self.showUploadSpinner()
             let pet = Pet(owner: PFUser.current()!)
-            pet.saveInBackground(block: { (success, error) in
-                
-                if error == nil {
+            if let img: UIImage = imagView.image {
+                pet.saveInBackground(block: { (success, error) in
                     
-                    let imageData = UIImagePNGRepresentation(self.imagView.image!)
-                    let parseImageFile = PFFile(name: "pet_image.png", data: imageData!)
-                    pet["imageFile"] = parseImageFile
-                    pet.saveInBackground(block: { (success, error) in
+                    if error == nil {
                         
-                        if success {
-                            print("Image successfully saved")
-                            self.dismiss(animated: true, completion: nil)
+                        let imageData = UIImagePNGRepresentation(img)
+                        let parseImageFile = PFFile(name: "pet_image.png", data: imageData!)
+                        pet["imageFile"] = parseImageFile
+                        pet.saveInBackground(block: { (success, error) in
                             
-                        }
-                        else if let error = error {
-                            
-                            print("Image not saved. ERROR: \(error.localizedDescription)")
-                            let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-                    })
-                }
-                else if let error = error {
-                    let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
+                            if success {
+                                self.hideUploadSpinner()
+                                print("Image successfully saved")
+                                self.enableActions()
+                                self.dismiss(animated: true, completion: nil)
+                                
+                            }
+                            else if let error = error {
+                                self.hideUploadSpinner()
+                                print("Image not saved. ERROR: \(error.localizedDescription)")
+                                self.enableActions()
+                                let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                        })
+                    }
+                    else if let error = error {
+                        self.enableActions()
+                        let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                })
+            }
         }
     }
 }
