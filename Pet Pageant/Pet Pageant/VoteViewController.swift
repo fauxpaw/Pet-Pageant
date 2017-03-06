@@ -184,8 +184,8 @@ class VoteViewController: UIViewController {
         }
     }
     
+    //To handle collision for dual-view pan
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //Handle collision for dual-view pan
         self.topVoteView.isUserInteractionEnabled = false
         self.bottomVoteView.isUserInteractionEnabled = false
     }
@@ -195,7 +195,6 @@ class VoteViewController: UIViewController {
     }
     
     //MARK: ANIMATIONS
-    
     fileprivate func animateViewsIn(_ top: UIView, bot: UIView) {
         topVoteView.removeVoteIcon()
         bottomVoteView.removeVoteIcon()
