@@ -15,12 +15,12 @@ import UIKit
     var view: UIView!
     var nibName: String = "VoteView"
     var petRecord: Pet?
+    
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var rightBackgroundImage: UIImageView!
     @IBOutlet weak var leftBackgroundImage: UIImageView!
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
     @IBOutlet weak var menuButton: UIButton!
     
     
@@ -50,7 +50,7 @@ import UIKit
     
     //MARK: CLASS METHODS
     
-    func setup() {
+    fileprivate func setup() {
         view = self.loadViewFromNib()
         view.frame = self.bounds
         view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
@@ -58,7 +58,7 @@ import UIKit
         
     }
     
-    func commenceAesthetics() {
+    fileprivate func commenceAesthetics() {
         
         let corners = [self.rightBackgroundImage, self.leftBackgroundImage, self.petImageView]
         
@@ -75,7 +75,7 @@ import UIKit
         }
     }
     
-    func loadViewFromNib() -> UIView {
+    fileprivate func loadViewFromNib() -> UIView {
         
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
@@ -114,11 +114,18 @@ import UIKit
     func menuButtonSelected() {
 
         guard let topVC = UIApplication.shared.keyWindow?.rootViewController else {return}
-        let title = "Share with friends"
-        let image = UIImage(named: "anna.png")
-        let activityController = UIActivityViewController(activityItems: [title, image], applicationActivities: [])
-        activityController.excludedActivityTypes = [UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType.mail, UIActivityType.message]
-        topVC.present(activityController, animated: true, completion: nil)
+        let alertVC = UIAlertController(title: "Menu", message: "To cast a vote for this pet, press <Choose> or cancel this menu and swipe the photo left or right. To pass on this round of voting, press <Pass>. To return to the previous screen, press <Cancel>.", preferredStyle: .actionSheet)
+        alertVC.addAction(UIAlertAction(title: "Choose", style: .default, handler: { (action) in
+            let parentVC = self.superview?.superview?.superview
+            print("parent vc is: \(parentVC)")
+            print("responder? \(parentVC?.isFirstResponder)")
+            
+        }))
+        alertVC.addAction(UIAlertAction(title: "Pass", style: .default, handler: { (action) in
+            print("passing voting round")
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        topVC.present(alertVC, animated: true, completion: nil)
     }
     
     func reportPicture() {

@@ -35,11 +35,17 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     
     internal override func setup() {
         super.setup()
-        self.changeImage()
+        self.modifyImage()
         self.updateLabels()
         self.modifyLabels()
         self.modifyNavbar()
         self.enableActions()
+    }
+    
+    internal override func modifyImage() {
+        super.modifyImage()
+        self.imageView.image = image
+
     }
     
     private func updateLabels () {
@@ -47,13 +53,10 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
             votesLabel.text = "Number of votes: \(pet.votes)"
             shownLabel.text = "Number of times viewed: \(pet.viewed)"
             reportsLabel.text = "Number of reports: \(pet.reports)"
+            self.ownerLabel.text = ""
         } else {
             print("pet not found")
         }
-    }
-    
-    private func changeImage () {
-        imageView.image = image
     }
     
     private func modifyLabels () {

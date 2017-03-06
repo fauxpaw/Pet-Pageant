@@ -366,7 +366,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JyX-eL-v0s">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JyX-eL-v0s">
                                 <rect key="frame" x="16" y="84" width="343" height="343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JyX-eL-v0s" secondAttribute="height" multiplier="1:1" id="Avb-Ag-Aq7"/>
