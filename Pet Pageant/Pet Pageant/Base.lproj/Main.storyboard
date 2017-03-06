@@ -66,20 +66,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="selectPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="374-0W-hD4">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="374-0W-hD4">
                                 <rect key="frame" x="16" y="40" width="343" height="553"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A18-zS-bxA">
-                                <rect key="frame" x="0.0" y="593" width="375" height="74"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem prompt="" id="5Qd-GY-nNJ">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="d39-Ok-wJu">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backButtonSelected:" destination="Wpp-FC-lFU" id="VVy-0K-1NK"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Upload" id="uzK-ho-vxi">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="uploadButtonSelected:" destination="Wpp-FC-lFU" id="4FP-BH-sjX"/>
                                             </connections>
@@ -87,16 +92,27 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sCC-MC-5hy">
+                                <rect key="frame" x="169" y="298" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Itq-1e-4lB" firstAttribute="top" secondItem="A18-zS-bxA" secondAttribute="bottom" id="e00-pv-csx"/>
-                            <constraint firstItem="A18-zS-bxA" firstAttribute="leading" secondItem="TLS-FP-bko" secondAttribute="leadingMargin" constant="-16" id="gOt-XB-fWt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="A18-zS-bxA" secondAttribute="trailing" constant="-16" id="qXy-YT-gkn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A18-zS-bxA" secondAttribute="trailing" constant="-16" id="2xM-W2-9Gg"/>
+                            <constraint firstItem="Itq-1e-4lB" firstAttribute="top" secondItem="374-0W-hD4" secondAttribute="bottom" constant="74" id="D3N-6A-rlf"/>
+                            <constraint firstItem="A18-zS-bxA" firstAttribute="leading" secondItem="TLS-FP-bko" secondAttribute="leadingMargin" constant="-16" id="DiE-Wn-dws"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="374-0W-hD4" secondAttribute="trailing" id="E55-pf-hYp"/>
+                            <constraint firstItem="Itq-1e-4lB" firstAttribute="top" secondItem="A18-zS-bxA" secondAttribute="bottom" id="G7f-bS-Npf"/>
+                            <constraint firstItem="374-0W-hD4" firstAttribute="top" secondItem="ZTB-tF-VSu" secondAttribute="bottom" constant="20" id="Gvq-P0-VdP"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="374-0W-hD4" secondAttribute="leading" id="ID5-ty-sGa"/>
+                            <constraint firstItem="A18-zS-bxA" firstAttribute="top" secondItem="374-0W-hD4" secondAttribute="bottom" constant="24" id="cAd-T2-pmS"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imagView" destination="374-0W-hD4" id="lFU-nc-ZmF"/>
+                        <outlet property="navBar" destination="A18-zS-bxA" id="wfE-rM-j6D"/>
+                        <outlet property="spinner" destination="sCC-MC-5hy" id="YbN-5B-uRE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tf7-hY-Ox4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -352,7 +368,6 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JyX-eL-v0s">
                                 <rect key="frame" x="16" y="84" width="343" height="343"/>
-                                <color key="backgroundColor" red="0.16484223292910705" green="1" blue="0.94521267344066207" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JyX-eL-v0s" secondAttribute="height" multiplier="1:1" id="Avb-Ag-Aq7"/>
                                 </constraints>
@@ -407,6 +422,7 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="JyX-eL-v0s" id="bNi-Pl-ek7"/>
+                        <outlet property="navBar" destination="JDW-z1-6yy" id="WOR-hn-EqY"/>
                         <outlet property="ownerLabel" destination="clx-LF-Fdd" id="QX1-Bh-xxC"/>
                         <outlet property="reportsLabel" destination="U2n-3I-e65" id="uWq-CT-wRo"/>
                         <outlet property="shownLabel" destination="MSs-gG-cJc" id="00B-U5-EiS"/>

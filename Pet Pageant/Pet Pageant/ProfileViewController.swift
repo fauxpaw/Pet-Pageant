@@ -93,13 +93,14 @@ class ProfileViewController: UICollectionViewController {
                                 print("Allimages: \(self.allImages.count)")
                                 print("AllPets: \(self.allPets.count)")
                                 
-                                self.removeOverlay()
                             }
                         }
                     })
                 }
             }
+             self.removeOverlay()
         }
+       
     }
     
     //MARK: COLLECTION VIEWCONTROLLER DELEGATE
@@ -161,7 +162,6 @@ class ProfileViewController: UICollectionViewController {
             let alertVC = UIAlertController(title: "Pet Pageant", message: "You are at the upload limit. You may delete a photo from your collection by tapping on it and selecting 'delete.'", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
-            
         }
     }
 }

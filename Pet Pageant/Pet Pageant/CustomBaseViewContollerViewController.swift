@@ -10,7 +10,6 @@ import UIKit
 
 class CustomBaseViewContollerViewController: UIViewController, SetupViewControllerProtocol, ModifyViewProtocol, ModifyButtonProtocol, ModifyImageProtocol, StatusBarBackgroundProtocol {
     
-    
     internal func modifyButtons() {
         
         let views = self.view.subviews
@@ -28,7 +27,6 @@ class CustomBaseViewContollerViewController: UIViewController, SetupViewControll
 
     
     internal func modifyImage() {
-        print("called modifyImage")
         let views = self.view.subviews
         for view in views {
             if view is UIImageView {
@@ -50,7 +48,6 @@ class CustomBaseViewContollerViewController: UIViewController, SetupViewControll
         self.modifyImage()
         modifyStatusBarBackground(view: self.view)
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()

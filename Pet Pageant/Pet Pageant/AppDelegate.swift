@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = gThemeColor
         
         let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
-            ParseMutableClientConfiguration.applicationId = "petPageant"
+            ParseMutableClientConfiguration.applicationId = "pp"
             ParseMutableClientConfiguration.clientKey = "myMasterKey"
             ParseMutableClientConfiguration.server = "https://pet-pageant.herokuapp.com/parse"
         })
