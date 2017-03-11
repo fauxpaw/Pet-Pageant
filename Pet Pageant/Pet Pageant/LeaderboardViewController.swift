@@ -22,14 +22,16 @@ class LeaderboardViewController: UIViewController {
             
             for pet in pets {
                 let imageData = pet["imageFile"] as! PFFile
+                weak var weakSelf = self
                 imageData.getDataInBackground(block: { (data: Data?, error) in
+                    guard let strongSelf = weakSelf else {return}
                     if let error = error {
                         print("Error: \(error.localizedDescription)")
                     }
                     if (data != nil) {
                         let image = UIImage(data: data!)
                         //print("first view? -> \(self.views[count])")
-                        let rankview = self.views[count]
+                        let rankview = strongSelf.views[count]
                         rankview.imageView.image = image
                         rankview.votesLabel.text = "Votes: \(pet.votes)"
                         if let number =  self.pets.index(of: pet) {
@@ -48,9 +50,9 @@ class LeaderboardViewController: UIViewController {
                     
                     count += 1
                     if count == 5 {
-                        self.sortViewsByRank()
-                        self.view.isUserInteractionEnabled = true
-                        self.leftArrowPressed(self)
+                        strongSelf.sortViewsByRank()
+                        strongSelf.view.isUserInteractionEnabled = true
+                        strongSelf.leftArrowPressed(strongSelf)
                     }
                 })
             }

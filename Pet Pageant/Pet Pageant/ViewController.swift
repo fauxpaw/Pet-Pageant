@@ -86,7 +86,6 @@ class ViewController: CustomBaseViewContollerViewController, PFLogInViewControll
             self.login()
         }))
         self.present(alertController, animated: true, completion: nil)
-        
     }
     
     public func signUpViewController(_ signUpController: PFSignUpViewController, didFailToSignUpWithError error: Error?) {

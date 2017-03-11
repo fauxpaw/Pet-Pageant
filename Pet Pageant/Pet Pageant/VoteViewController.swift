@@ -25,16 +25,18 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
         didSet {
             topVoteView.petRecord = topViewsRecord.first
             for pet in topViewsRecord {
+                
+                weak var weakSelf = self
                 let imageData = pet["imageFile"] as! PFFile
                 imageData.getDataInBackground(block: { (data: Data?, error) in
-                    
+                    guard let strongSelf = weakSelf else {return}
                     if let error = error {
                         print("Error: \(error.localizedDescription)")
                     }
                     if let image = UIImage(data: data!) {
-                        self.topVoteView.petImage = image
-                        self.topVoteView.spinner.hidesWhenStopped = true
-                        self.topVoteView.spinner.stopAnimating()
+                        strongSelf.topVoteView.petImage = image
+                        strongSelf.topVoteView.spinner.hidesWhenStopped = true
+                        strongSelf.topVoteView.spinner.stopAnimating()
                     }
                 })
             }
@@ -45,17 +47,18 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
         didSet {
             bottomVoteView.petRecord = botViewsRecord.first
             for pet in botViewsRecord {
+                weak var weakSelf = self
                 let imageData = pet["imageFile"] as! PFFile
                 imageData.getDataInBackground(block: { (data: Data?, error) in
-                    
+                    guard let strongSelf = weakSelf else {return}
                     if let error = error {
                         print("Error: \(error.localizedDescription)")
                     }
                     if let image = UIImage(data: data!) {
-                        self.bottomVoteView.petImage = image
+                        strongSelf.bottomVoteView.petImage = image
                         
-                        self.bottomVoteView.spinner.hidesWhenStopped = true
-                        self.bottomVoteView.spinner.stopAnimating()
+                        strongSelf.bottomVoteView.spinner.hidesWhenStopped = true
+                        strongSelf.bottomVoteView.spinner.stopAnimating()
                     }
                 })
             }
@@ -76,8 +79,8 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
         self.setupImageViews()
     }
     
-    //ButtonVoting protocol
     
+    //ButtonVoting protocol
     internal func didVoteViaButton(forView: VoteView) {
         
         var otherivew = VoteView()

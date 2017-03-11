@@ -80,19 +80,20 @@ class ProfileViewController: UICollectionViewController {
                 self.colView.isHidden = false
                 for object in petObjects {
                     let imageData = object["imageFile"] as! PFFile
+                    weak var weakSelf = self
                     imageData.getDataInBackground(block: { (data: Data?, error) in
+                        guard let strongSelf = weakSelf else {return}
                         if let error = error {
                             print("ERROR fetching image: \(error.localizedDescription) ")
                         }
                         else {
                             if let data = data {
                                 guard let image = UIImage(data: data) else {return}
-                                self.allImages.append(image)
-                                self.allPets.append(object)
-                                self.collectionView?.reloadData()
+                                strongSelf.allImages.append(image)
+                                strongSelf.allPets.append(object)
+                                strongSelf.collectionView?.reloadData()
                                 print("Allimages: \(self.allImages.count)")
                                 print("AllPets: \(self.allPets.count)")
-                                
                             }
                         }
                     })

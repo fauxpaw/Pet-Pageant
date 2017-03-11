@@ -129,8 +129,10 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
             self.showUploadSpinner()
             let pet = Pet(owner: PFUser.current()!)
             if let img: UIImage = imagView.image {
+                weak var weakSelf = self
                 pet.saveInBackground(block: { (success, error) in
-                    
+                    guard let strongSelf = weakSelf else {return}
+
                     if error == nil {
                         
                         let imageData = UIImagePNGRepresentation(img)
@@ -139,27 +141,27 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
                         pet.saveInBackground(block: { (success, error) in
                             
                             if success {
-                                self.hideUploadSpinner()
+                                strongSelf.hideUploadSpinner()
                                 print("Image successfully saved")
-                                self.enableActions()
-                                self.dismiss(animated: true, completion: nil)
+                                strongSelf.enableActions()
+                                strongSelf.dismiss(animated: true, completion: nil)
                                 
                             }
                             else if let error = error {
-                                self.hideUploadSpinner()
+                                strongSelf.hideUploadSpinner()
                                 print("Image not saved. ERROR: \(error.localizedDescription)")
-                                self.enableActions()
+                                strongSelf.enableActions()
                                 let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
                                 alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                                self.present(alertController, animated: true, completion: nil)
+                                strongSelf.present(alertController, animated: true, completion: nil)
                             }
                         })
                     }
                     else if let error = error {
-                        self.enableActions()
+                        strongSelf.enableActions()
                         let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
+                        strongSelf.present(alertController, animated: true, completion: nil)
                     }
                 })
             }
