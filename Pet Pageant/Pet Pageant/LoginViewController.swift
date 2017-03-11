@@ -8,9 +8,9 @@
 
 import Foundation
 import ParseUI
+import Parse
 
-class LoginViewController: PFLogInViewController, ModifyButtonProtocol, StatusBarBackgroundProtocol {
-    
+class LoginViewController: PFLogInViewController, ModifyButtonProtocol, StatusBarBackgroundProtocol, PFLogInViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()

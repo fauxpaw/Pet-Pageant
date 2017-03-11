@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class VoteViewController: UIViewController {
+class VoteViewController: UIViewController, ButtonVotingProtocol {
     
     //MARK: OUTLETS
     
@@ -17,8 +17,8 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var bottomVoteView: VoteView!
     
     fileprivate let panThreshold: CGFloat = 4.0
-    fileprivate let viewAnimationOutTime = 0.5
-    fileprivate let viewAnimationInTime = 0.5
+    fileprivate let viewAnimationOutTime = 0.4
+    fileprivate let viewAnimationInTime = 0.4
     
     fileprivate var voteQueue = [Pet]()
     fileprivate var topViewsRecord = [Pet]() {
@@ -66,12 +66,41 @@ class VoteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.topVoteView.delegate = self
+        self.bottomVoteView.delegate = self
         self.setupPanGestures()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupImageViews()
+    }
+    
+    //ButtonVoting protocol
+    
+    internal func didVoteViaButton(forView: VoteView) {
+        
+        var otherivew = VoteView()
+        
+        if(topVoteView == forView){
+            otherivew = bottomVoteView
+        } else if (bottomVoteView == forView) {
+            otherivew = topVoteView
+        }
+        self.updatePetRecords(forView, nonselectedView: otherivew)
+        self.animateViewsOut(forView, otherView: otherivew)        
+    }
+    
+    internal func didPassViaButton(forView: VoteView) {
+        var otherivew = VoteView()
+        
+        if(topVoteView == forView){
+            otherivew = bottomVoteView
+        } else if (bottomVoteView == forView) {
+            otherivew = topVoteView
+        }
+        
+        self.animateViewsOut(forView, otherView: otherivew)
     }
     
     //MARK: CLASS METHODS
@@ -186,6 +215,7 @@ class VoteViewController: UIViewController {
     
     //To handle collision for dual-view pan
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         self.topVoteView.isUserInteractionEnabled = false
         self.bottomVoteView.isUserInteractionEnabled = false
     }
@@ -212,7 +242,7 @@ class VoteViewController: UIViewController {
     
     fileprivate func animateViewsOut(_ selectedView: UIView, otherView: UIView){
         
-        if selectedView.center.x > self.view.center.x {
+        if selectedView.center.x > self.view.center.x || selectedView.center.x == self.view.center.x {
             
             UIView.animate(withDuration: viewAnimationOutTime, animations: {
                 
@@ -257,6 +287,7 @@ class VoteViewController: UIViewController {
     }
     
      public func viewWasPanned(_ sender: UIPanGestureRecognizer) {
+        
         guard let view = sender.view else {return}
         guard let superView = sender.view?.superview else {return}
         let translation = sender.translation(in: view)
@@ -279,19 +310,18 @@ class VoteViewController: UIViewController {
             otherView.addNoVoteIcon()
             otherView.isUserInteractionEnabled = false
         case .changed:
-            if selectedView.petImageView.subviews.count > 0 && otherView.petImageView.subviews.count > 0 {
-                let yesIconView = selectedView.petImageView.subviews[0]
-                let noIconView = otherView.petImageView.subviews[0]
+                guard let yesIconView = selectedView.voteIcon else { return }
+                guard let noIconView = otherView.voteIcon else { return }
                 selectedView.center.x = superView.center.x + translation.x
                 let alphaSet = abs(translation.x) / 100
                 yesIconView.alpha = alphaSet
                 noIconView.alpha = alphaSet
-            }
             
         case .ended:
+            
             guard let superView = view.superview else {return}
-            if selectedView.petImageView.subviews.count > 0 {
-                let iconView = selectedView.petImageView.subviews[0]
+            guard let iconView = selectedView.voteIcon else { return }
+            
                 if iconView.alpha > 0.75 {
                     view.isUserInteractionEnabled = false
                     otherView.isUserInteractionEnabled = false
@@ -307,18 +337,6 @@ class VoteViewController: UIViewController {
                     selectedView.isUserInteractionEnabled = true
                     otherView.isUserInteractionEnabled = true
                 }
-            }
-            
-            else {
-                selectedView.center = CGPoint(x: superView.center.x, y: view.center.y)
-                selectedView.alpha = 1.0
-                otherView.alpha = 1.0
-                
-                selectedView.removeVoteIcon()
-                otherView.removeVoteIcon()
-                selectedView.isUserInteractionEnabled = true
-                otherView.isUserInteractionEnabled = true
-            }
             
         default:
             print("no action triggered")
