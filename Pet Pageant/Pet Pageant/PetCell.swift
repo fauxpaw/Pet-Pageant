@@ -12,6 +12,7 @@ class PetCell: UICollectionViewCell {
     
     //MARK: PROPERTIES
     
+    @IBOutlet weak var labelBackgroundView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var viewLabel: UILabel!

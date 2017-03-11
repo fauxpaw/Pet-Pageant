@@ -25,7 +25,6 @@ class CustomBaseViewContollerViewController: UIViewController, SetupViewControll
         }
     }
 
-    
     internal func modifyImage() {
         let views = self.view.subviews
         for view in views {

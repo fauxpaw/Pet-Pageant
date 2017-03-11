@@ -15,6 +15,7 @@ import UIKit
     var view: UIView!
     var nibName: String = "VoteView"
     var petRecord: Pet?
+    var delegate: VoteViewController?
     
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var rightBackgroundImage: UIImageView!
@@ -23,6 +24,7 @@ import UIKit
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var menuButton: UIButton!
     
+    @IBOutlet weak var voteIcon: UIImageView!
     
     @IBInspectable var petImage: UIImage? {
         get{
@@ -73,6 +75,8 @@ import UIKit
             button?.layer.borderColor = gThemeColor.cgColor
             button?.layer.cornerRadius = gCornerRadiusButton
         }
+        
+        self.voteIcon.isHidden = true
     }
     
     fileprivate func loadViewFromNib() -> UIView {
@@ -86,43 +90,37 @@ import UIKit
     
     func addYesVoteIcon(){
         
-        let image = UIImage(named: "GreenCheck.png")
-        let yesImageView = UIImageView(image: image)
-        self.petImageView.addSubview(yesImageView)
-        yesImageView.center = CGPoint(x: self.petImageView.bounds.midX, y: self.petImageView.bounds.midY)
-        yesImageView.alpha = 0.0
+        self.voteIcon.image = UIImage(named: "chooseDestruct.png")
+        self.voteIcon.alpha = 0.0
+        self.voteIcon.isHidden = false
     }
     
     func addNoVoteIcon(){
         
-        let image = UIImage(named: "RedX.png")
-        let noImageView = UIImageView(image: image)
-        self.petImageView.addSubview(noImageView)
-        noImageView.center = CGPoint(x: self.petImageView.bounds.midX, y: self.petImageView.bounds.midY)
-        noImageView.alpha = 0.0
+        self.voteIcon.image = UIImage(named: "rejectDestruct.png")
+        self.voteIcon.alpha = 0.0
+        self.voteIcon.isHidden = false
     }
     
     func removeVoteIcon(){
-        //check here if things go wrong after pictures add
-        if petImageView.subviews.count > 0 {
-            for subview in petImageView.subviews {
-                subview.removeFromSuperview()
-            }
-        }
+        self.voteIcon.isHidden = true
     }
     
     func menuButtonSelected() {
 
         guard let topVC = UIApplication.shared.keyWindow?.rootViewController else {return}
-        let alertVC = UIAlertController(title: "Menu", message: "To cast a vote for this pet, press <Choose> or cancel this menu and swipe the photo left or right. To pass on this round of voting, press <Pass>. To return to the previous screen, press <Cancel>.", preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction(title: "Choose", style: .default, handler: { (action) in
-            let parentVC = self.superview?.superview?.superview
-            print("parent vc is: \(parentVC)")
-            print("responder? \(parentVC?.isFirstResponder)")
-            
+        let alertVC = UIAlertController(title: "Menu", message: "To cast a vote for this photo, press <Vote>.(additionally, you may cancel this menu and swipe the photo left or right) To pass on this round of voting, press <Pass>. To close this menu, press <Cancel>.", preferredStyle: .actionSheet)
+        alertVC.addAction(UIAlertAction(title: "Vote", style: .default, handler: { (action) in
+            if (self.delegate != nil) {
+                self.delegate?.didVoteViaButton(forView: self)
+            }
         }))
         alertVC.addAction(UIAlertAction(title: "Pass", style: .default, handler: { (action) in
             print("passing voting round")
+            if (self.delegate != nil) {
+                self.delegate?.didPassViaButton(forView: self)
+            }
+            
         }))
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         topVC.present(alertVC, animated: true, completion: nil)
@@ -164,19 +162,6 @@ import UIKit
     func enableReport() {
         reportButton.isUserInteractionEnabled = true
     }
-    
-   /* func deleteRecord() {
-        guard self.petRecord != nil else { return }
-        let record = self.petRecord
-        record?.deleteInBackground(block: { (success, error) in
-            if let error = error {
-                ErrorHandler.presentNotification(title: "Error", message: "Could not be deleted due to \(error.localizedDescription)")
-            }
-            else if success {
-                ErrorHandler.presentNotification(title: "Success", message: "Record deleted")
-            }
-        })
-    } */
     
     //MARK: ACTIONS
     

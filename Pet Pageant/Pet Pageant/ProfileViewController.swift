@@ -80,19 +80,20 @@ class ProfileViewController: UICollectionViewController {
                 self.colView.isHidden = false
                 for object in petObjects {
                     let imageData = object["imageFile"] as! PFFile
+                    weak var weakSelf = self
                     imageData.getDataInBackground(block: { (data: Data?, error) in
+                        guard let strongSelf = weakSelf else {return}
                         if let error = error {
                             print("ERROR fetching image: \(error.localizedDescription) ")
                         }
                         else {
                             if let data = data {
                                 guard let image = UIImage(data: data) else {return}
-                                self.allImages.append(image)
-                                self.allPets.append(object)
-                                self.collectionView?.reloadData()
+                                strongSelf.allImages.append(image)
+                                strongSelf.allPets.append(object)
+                                strongSelf.collectionView?.reloadData()
                                 print("Allimages: \(self.allImages.count)")
                                 print("AllPets: \(self.allPets.count)")
-                                
                             }
                         }
                     })
@@ -100,7 +101,6 @@ class ProfileViewController: UICollectionViewController {
             }
              self.removeOverlay()
         }
-       
     }
     
     //MARK: COLLECTION VIEWCONTROLLER DELEGATE
@@ -124,8 +124,13 @@ class ProfileViewController: UICollectionViewController {
             cell.reportsLabel.text = "Reports: \(allPets[(indexPath as NSIndexPath).row].reports)"
             cell.imageView.layer.cornerRadius = gCornerRadius
             cell.layer.cornerRadius = gCornerRadius
-            cell.layer.borderWidth = 2
+            cell.layer.borderWidth = gBorderWidthDefault
             cell.layer.borderColor = gThemeColor.cgColor
+            cell.labelBackgroundView.layer.cornerRadius = gCornerRadius
+            cell.labelBackgroundView.layer.borderWidth = gBorderWidthDefault
+            cell.labelBackgroundView.layer.borderColor = gThemeColor.cgColor
+            cell.labelBackgroundView.backgroundColor = gBackGroundColor
+            cell.backgroundColor = gThemeColor
             return cell
         } else if (indexPath as NSIndexPath).row == allImages.count && allImages.count >= gPhotoUploadLimit {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseMaxPhoto, for: indexPath) as UICollectionViewCell
