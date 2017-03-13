@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C03BC931D68FCA50035F510 /* VoteViewController.swift */; };
-		4C0A74E51D729289009B4F93 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; };
-		4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; };
 		4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */; };
 		4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */; };
-		4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; };
-		4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C46344B1E6AF6C000E38B56 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46344A1E6AF6C000E38B56 /* ArrowButton.swift */; };
 		4C46344F1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46344E1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift */; };
 		4C4F7DD01E69793F0064BB61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4F7DCF1E69793F0064BB61 /* LoginViewController.swift */; };
 		4C4FF2F61D7148AD00714806 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F51D7148AD00714806 /* PhotoDetailViewController.swift */; };
 		4C4FF2F81D714C4300714806 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FF2F71D714C4300714806 /* Pet.swift */; };
 		4C5AC27C1DBC4DF500A57776 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5AC27B1DBC4DF500A57776 /* RootViewController.swift */; };
+		4C5D61AD1E77589D00092FF5 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		4C5D61AE1E77589D00092FF5 /* ParseUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C5D61AF1E77589D00092FF5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; };
+		4C5D61B01E77589D00092FF5 /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C5D61B11E77589D00092FF5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; };
+		4C5D61B21E77589D00092FF5 /* Parse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C62BC671DB9A56E00EB356D /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C62BC661DB9A56E00EB356D /* ErrorHandler.swift */; };
 		4C72E5E01D8B6FC30009AB05 /* PetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E5DF1D8B6FC30009AB05 /* PetCell.swift */; };
 		4C72E5E21D8B86AC0009AB05 /* PetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C72E5E11D8B86AC0009AB05 /* PetCell.xib */; };
@@ -46,16 +46,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4C75B29F1D642690002755B7 /* CopyFiles */ = {
+		4C5D61B31E77589D00092FF5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */,
-				4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */,
-				4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */,
+				4C5D61AE1E77589D00092FF5 /* ParseUI.framework in Embed Frameworks */,
+				4C5D61B21E77589D00092FF5 /* Parse.framework in Embed Frameworks */,
+				4C5D61B01E77589D00092FF5 /* Bolts.framework in Embed Frameworks */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -103,9 +104,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */,
-				4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */,
-				4C0A74E51D729289009B4F93 /* Bolts.framework in Frameworks */,
+				4C5D61AD1E77589D00092FF5 /* ParseUI.framework in Frameworks */,
+				4C5D61B11E77589D00092FF5 /* Parse.framework in Frameworks */,
+				4C5D61AF1E77589D00092FF5 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				4C75B28A1D63F9BB002755B7 /* Pet Pageant */,
-				4CF524CA1E6ADB3B0038505B /* Extensions */,
 				4C75B2891D63F9BB002755B7 /* Products */,
 				4C75B2A71D643088002755B7 /* Libraries */,
 			);
@@ -205,14 +205,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		4CF524CA1E6ADB3B0038505B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Extensions;
-			path = "Pet Pageant";
-			sourceTree = "<group>";
-		};
 		4CF524CE1E6ADEF70038505B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,7 +228,7 @@
 				4C75B2841D63F9BB002755B7 /* Sources */,
 				4C75B2851D63F9BB002755B7 /* Frameworks */,
 				4C75B2861D63F9BB002755B7 /* Resources */,
-				4C75B29F1D642690002755B7 /* CopyFiles */,
+				4C5D61B31E77589D00092FF5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,6 +444,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Pet Pageant/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -469,6 +462,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Pet Pageant/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
