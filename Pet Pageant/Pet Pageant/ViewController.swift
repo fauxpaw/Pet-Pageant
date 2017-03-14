@@ -80,7 +80,7 @@ class ViewController: CustomBaseViewContollerViewController, PFLogInViewControll
     //MARK: PARSE SIGN-UP
     
     public func signUpViewController(_ signUpController: PFSignUpViewController, didSignUp user: PFUser) {
-        
+        self.dismiss(animated: true, completion: nil)
         let alertController = UIAlertController(title: "Pet Pageant", message: "You have successfully signed up and are now logged in. Have fun!", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
             self.login()
