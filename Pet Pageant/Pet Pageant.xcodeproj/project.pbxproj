@@ -7,15 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		067E9343711387117E1A5C1C /* Pods_Pet_Pageant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E2F27B2C98584D415FC9FD /* Pods_Pet_Pageant.framework */; };
 		4C03BC941D68FCA50035F510 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C03BC931D68FCA50035F510 /* VoteViewController.swift */; };
-		4C0A74E51D729289009B4F93 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; };
-		4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; };
 		4C1E3ACF1D6CDA7F000B9861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */; };
 		4C1E3AD11D6CDB68000B9861 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */; };
-		4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; };
-		4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C36E7351D72936800B83B92 /* ParseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E31D729289009B4F93 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C0A74E41D729289009B4F93 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C46344B1E6AF6C000E38B56 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46344A1E6AF6C000E38B56 /* ArrowButton.swift */; };
 		4C46344F1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46344E1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift */; };
 		4C4F7DD01E69793F0064BB61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4F7DCF1E69793F0064BB61 /* LoginViewController.swift */; };
@@ -46,27 +41,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4C75B29F1D642690002755B7 /* CopyFiles */ = {
+		4C5D61B31E77589D00092FF5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4C36E7371D72937500B83B92 /* ParseUI.framework in CopyFiles */,
-				4C36E7381D72937500B83B92 /* Bolts.framework in CopyFiles */,
-				4C36E7391D72937500B83B92 /* Parse.framework in CopyFiles */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4C03BC931D68FCA50035F510 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
-		4C0A74E31D729289009B4F93 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		4C0A74E41D729289009B4F93 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4C1E3ACE1D6CDA7F000B9861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4C1E3AD01D6CDB68000B9861 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
-		4C36E7351D72936800B83B92 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		4C46344A1E6AF6C000E38B56 /* ArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
 		4C46344E1E6B1D9C00E38B56 /* StatusBarBackgroundProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarBackgroundProtocol.swift; sourceTree = "<group>"; };
 		4C4F7DCF1E69793F0064BB61 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +86,9 @@
 		4CF524C41E6AA7BE0038505B /* SetupViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewControllerProtocol.swift; sourceTree = "<group>"; };
 		4CF524C61E6AA8110038505B /* CustomBaseViewContollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBaseViewContollerViewController.swift; sourceTree = "<group>"; };
 		4CF524C81E6AB68B0038505B /* ModifyButonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyButonProtocol.swift; sourceTree = "<group>"; };
+		6E922AD5BAE68266E6EB70A1 /* Pods-Pet Pageant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pet Pageant.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pet Pageant/Pods-Pet Pageant.release.xcconfig"; sourceTree = "<group>"; };
+		94E2F27B2C98584D415FC9FD /* Pods_Pet_Pageant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pet_Pageant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1154D89ADA105ED3B37F3AA /* Pods-Pet Pageant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pet Pageant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pet Pageant/Pods-Pet Pageant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C36E7361D72936800B83B92 /* ParseUI.framework in Frameworks */,
-				4C0A74E61D729289009B4F93 /* Parse.framework in Frameworks */,
-				4C0A74E51D729289009B4F93 /* Bolts.framework in Frameworks */,
+				067E9343711387117E1A5C1C /* Pods_Pet_Pageant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,9 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				4C75B28A1D63F9BB002755B7 /* Pet Pageant */,
-				4CF524CA1E6ADB3B0038505B /* Extensions */,
 				4C75B2891D63F9BB002755B7 /* Products */,
 				4C75B2A71D643088002755B7 /* Libraries */,
+				98481F1F42BB460F4CBD681B /* Pods */,
+				D82ED036AA28E621D45D21B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,9 +137,6 @@
 		4C75B2A71D643088002755B7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				4C36E7351D72936800B83B92 /* ParseUI.framework */,
-				4C0A74E31D729289009B4F93 /* Bolts.framework */,
-				4C0A74E41D729289009B4F93 /* Parse.framework */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -205,14 +194,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		4CF524CA1E6ADB3B0038505B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Extensions;
-			path = "Pet Pageant";
-			sourceTree = "<group>";
-		};
 		4CF524CE1E6ADEF70038505B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +207,23 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		98481F1F42BB460F4CBD681B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1154D89ADA105ED3B37F3AA /* Pods-Pet Pageant.debug.xcconfig */,
+				6E922AD5BAE68266E6EB70A1 /* Pods-Pet Pageant.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D82ED036AA28E621D45D21B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94E2F27B2C98584D415FC9FD /* Pods_Pet_Pageant.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,10 +231,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C75B29A1D63F9BB002755B7 /* Build configuration list for PBXNativeTarget "Pet Pageant" */;
 			buildPhases = (
+				E6FFD4F22F6B7F2CF12AA5B7 /* [CP] Check Pods Manifest.lock */,
 				4C75B2841D63F9BB002755B7 /* Sources */,
 				4C75B2851D63F9BB002755B7 /* Frameworks */,
 				4C75B2861D63F9BB002755B7 /* Resources */,
-				4C75B29F1D642690002755B7 /* CopyFiles */,
+				4C5D61B31E77589D00092FF5 /* Embed Frameworks */,
+				6387F2B3B59E1BDA0E19D6DF /* [CP] Embed Pods Frameworks */,
+				066D4FC5D48A1BE23CAFC4E3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,6 +298,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		066D4FC5D48A1BE23CAFC4E3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pet Pageant/Pods-Pet Pageant-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6387F2B3B59E1BDA0E19D6DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pet Pageant/Pods-Pet Pageant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6FFD4F22F6B7F2CF12AA5B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4C75B2841D63F9BB002755B7 /* Sources */ = {
@@ -444,35 +493,45 @@
 		};
 		4C75B29B1D63F9BB002755B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1154D89ADA105ED3B37F3AA /* Pods-Pet Pageant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NXQBD8W8TS;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Pet Pageant/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		4C75B29C1D63F9BB002755B7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E922AD5BAE68266E6EB70A1 /* Pods-Pet Pageant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NXQBD8W8TS;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Pet Pageant/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "sweeney.Pet-Pageant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
