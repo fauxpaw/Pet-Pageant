@@ -1,10 +1,9 @@
-//
+
 //  LeaderboardViewController.swift
 //  Pet Pageant
 //
 //  Created by Michael Sweeney on 8/23/16.
 //  Copyright © 2016 Michael Sweeney. All rights reserved.
-//
 
 import UIKit
 import Parse

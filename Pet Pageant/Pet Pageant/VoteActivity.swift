@@ -1,5 +1,7 @@
 import UIKit
 
+
+//Future update implementation for voteview menu actions
 class VoteActivity: UIActivity {
     
     override class var activityCategory: UIActivityCategory {
