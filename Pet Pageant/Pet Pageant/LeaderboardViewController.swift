@@ -13,6 +13,7 @@ class LeaderboardViewController: UIViewController {
     @IBOutlet weak var rightArrowButton: ArrowButton!
     @IBOutlet weak var leftArrowButton: ArrowButton!
     
+    var viewSizeDefault: CGSize?
     var views = [RankView]()
     var pets = [Pet]() {
         didSet{
@@ -32,6 +33,7 @@ class LeaderboardViewController: UIViewController {
                         //print("first view? -> \(self.views[count])")
                         let rankview = strongSelf.views[count]
                         rankview.imageView.image = image
+                        rankview.image = image
                         rankview.votesLabel.text = "Votes: \(pet.votes)"
                         if let number =  self.pets.index(of: pet) {
                             rankview.rankLabel.text = "Rank: \(number + 1)"
@@ -43,8 +45,6 @@ class LeaderboardViewController: UIViewController {
                         } else {
                             rankview.votePercentageLabel.text = "Photo has not yet been viewed"
                         }
-                        
-                        
                     }
                     
                     count += 1
@@ -62,6 +62,17 @@ class LeaderboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setup()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    //MARK: CLASS METHODS
+    
+    fileprivate func setup() {
         self.flipRightButton()
         self.setupSwipes()
         self.view.isUserInteractionEnabled = false
@@ -69,13 +80,6 @@ class LeaderboardViewController: UIViewController {
         self.fetchTopPets()
         self.buttonsToForeground()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    //MARK: CLASS METHODS
     
     fileprivate func buttonsToForeground() {
         let buttons = [leftArrowButton, rightArrowButton]
@@ -97,11 +101,13 @@ class LeaderboardViewController: UIViewController {
             let position = CGPoint(x: x, y: y)
             let view = RankView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width/2, height: gScreenSize.width/2 + 75))
             view.center = position
-            view.currentPosition = position
+            let tap = UITapGestureRecognizer(target: self, action: #selector(LeaderboardViewController.tapGesture(_:)))
+            view.isUserInteractionEnabled = true
+            view.addGestureRecognizer(tap)
             self.views.append(view)
             self.view.addSubview(view)
-            //view.evaluateViewForResize(angle: angle)
         }
+        self.viewSizeDefault = self.views[0].frame.size
     }
     
     fileprivate func sortViewsByRank() {
@@ -117,7 +123,6 @@ class LeaderboardViewController: UIViewController {
                 let cutString1 = rank1.substring(from: ind)
                 if let numString1 = Int(cutString1) {
                     first = numString1
-                    print(first)
 
                 }
             }
@@ -125,13 +130,11 @@ class LeaderboardViewController: UIViewController {
             if index > 0 {
                 nextView = views[index-1]
                 if let rank2 = views[index-1].rankLabel.text {
-                    //print("Next views rank: \(rank2)")
                     let ind = rank2.index(rank2.startIndex, offsetBy:6)
                     let cutString2 = rank2.substring(from: ind)
                     if let numString2 = Int(cutString2){
                         
                         if first < numString2 {
-                            print("swappage")
                             self.swapViewPositions(first: element, second: nextView)
                             let temp = self.views.remove(at: index)
                             self.views.insert(temp, at: index-1)
@@ -148,8 +151,6 @@ class LeaderboardViewController: UIViewController {
         let tempPos : CGPoint = first.center
         first.center = second.center
         second.center = tempPos
-        first.updateCenterPosition()
-        second.updateCenterPosition()
     }
     
     fileprivate func fetchTopPets(){
@@ -169,8 +170,63 @@ class LeaderboardViewController: UIViewController {
         }
     }
     
+    func animate(clockwise: Bool) {
+        
+        for view in views {
+            
+            let currentAngle = self.angleFromPoint(pos: view.center)
+            let nextAngle = self.getNextAngle(currentAngle: currentAngle, clockwise: clockwise)
+            let destination = pointFromAngle(angle: nextAngle)
+            
+            UIView.animateKeyframes(withDuration: gAnimationTime, delay: 0.0, options: .calculationModeCubicPaced, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0, animations: {
+                    
+                    switch destination.y {
+                    case 0..<gCarouselCenterPoint.y:
+                        self.view.sendSubview(toBack: view)
+                        if view.frame.size == self.viewSizeDefault {
+                            view.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                        }
+                        
+                    case (gCarouselCenterPoint.y)..<gCarouselCenterPoint.y + gScreenSize.width / 2 - 1:
+                        view.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    case gCarouselCenterPoint.y + gScreenSize.width / 2:
+                        self.view.bringSubview(toFront: view)
+                        view.view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                    default:
+                        print("Triggered switch default like a bad")
+                    }
+                    
+                    view.center = destination
+                })
+            }) { (finished) in
+                //Anything important to do after animations complete
+                self.view.isUserInteractionEnabled = true
+            }
+        }
+    }
     
+    func getNextAngle (currentAngle: CGFloat, clockwise: Bool) -> CGFloat {
+        
+        
+        if clockwise == true {
+            return currentAngle + CGFloat(gdistanceBetweenViewsInRadians)
+        }
+        else {
+            return currentAngle - CGFloat(gdistanceBetweenViewsInRadians)
+        }
+    }
     
+    public func angleFromPoint (pos: CGPoint) -> CGFloat {
+        let angle = atan2(pos.y - gCarouselCenterPoint.y, pos.x - gCarouselCenterPoint.x)
+        return angle
+    }
+    
+    fileprivate func pointFromAngle (angle: CGFloat) -> CGPoint {
+        //(x,y) = cx + rcos0, cy + sin0
+        return CGPoint(x: gCarouselCenterPoint.x + (gScreenSize.width/2) * cos(angle), y:gCarouselCenterPoint.y + (gScreenSize.width/2) * sin(angle))
+    }
+
     //MARK: GESTURES
     
     fileprivate func setupSwipes(){
@@ -185,22 +241,30 @@ class LeaderboardViewController: UIViewController {
     func swipeGesture(_ gesture: UISwipeGestureRecognizer){
         
         if gesture.direction == UISwipeGestureRecognizerDirection.left {
-            for view in views {
-                view.animate(clockwise: true)
-            }
+            self.animate(clockwise: true)
         }
         else if gesture.direction == UISwipeGestureRecognizerDirection.right {
-            for view in views {
-                view.animate(clockwise: false)
-            }
+            
+            self.animate(clockwise: false)
         }
         self.buttonsToForeground()
+    }
+    
+    func tapGesture(_ gesture: UITapGestureRecognizer){
+        
+        let view = gesture.view as! RankView
+        
+        if view.imageView.image != nil{
+            view.imageView.image = nil
+        } else {
+            view.imageView.image = view.image
+        }
     }
     
     //MARK - ACTIONS
     
     @IBAction func leftArrowPressed(_ sender: Any) {
-        
+        self.view.isUserInteractionEnabled = false
         let swipe = UISwipeGestureRecognizer()
         swipe.direction = .left
         swipeGesture(swipe)
@@ -208,7 +272,7 @@ class LeaderboardViewController: UIViewController {
     }
     
     @IBAction func rightArrowPressed(_ sender: Any) {
-
+        self.view.isUserInteractionEnabled = false
         let swipe = UISwipeGestureRecognizer()
         swipe.direction = .right
         swipeGesture(swipe)

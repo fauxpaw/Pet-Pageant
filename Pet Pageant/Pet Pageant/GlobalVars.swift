@@ -19,6 +19,7 @@ let gTextColor = UIColor.white
 let gCornerRadius: CGFloat = 15
 let gCornerRadiusButton: CGFloat = 10
 let gBorderWidthDefault: CGFloat = 2
+let gdistanceBetweenViewsInRadians = 2 * M_PI / Double(gNumberOfRankViews)
 
 
 

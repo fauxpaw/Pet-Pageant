@@ -30,7 +30,6 @@ class RootViewController: UITabBarController, StatusBarBackgroundProtocol {
             // Fallback on earlier versions
         }
         self.tabBar.tintColor = gTextColor
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

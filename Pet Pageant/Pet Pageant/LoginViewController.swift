@@ -15,7 +15,6 @@ class LoginViewController: PFLogInViewController, ModifyButtonProtocol, StatusBa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {

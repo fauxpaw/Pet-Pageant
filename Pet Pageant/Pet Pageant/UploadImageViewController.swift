@@ -13,11 +13,10 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
 
     //MARK: OUTLETS
     
-    
     @IBOutlet weak var navBar: UINavigationBar!
-    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var imagView: UIImageView!
+    
     fileprivate let defaultImage = UIImage(named: "selectPhoto.png")
     
     //MARK: VIEWCONTROLLER METHODS
@@ -80,7 +79,7 @@ class UploadImageViewController: CustomBaseViewContollerViewController, UIImageP
     
     //MARK: IMAGE PICKERCONTROLLER DELEGATE
     
-    //As of iOS 10.x this will prompt a faulty error message of "Creating an image format with an unknown type is an error" - This is ignorable
+    //As of iOS 10.x this will prompt a faulty error message of "Creating an image format with an unknown type is an error" - may safely disregard
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         imagView.image = image
