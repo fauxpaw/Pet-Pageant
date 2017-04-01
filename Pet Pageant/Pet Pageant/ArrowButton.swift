@@ -33,6 +33,5 @@ class ArrowButton: UIButton {
         shape.strokeColor = gThemeColor.cgColor
         shape.fillColor = gBackGroundColor.cgColor
         self.layer.insertSublayer(shape, at: 0)
-        
     }
 }

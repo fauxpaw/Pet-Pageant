@@ -15,14 +15,10 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var shownLabel: UILabel!
     @IBOutlet weak var reportsLabel: UILabel!
-    
     @IBOutlet weak var navBar: UINavigationBar!
-    
-
-    
+   
     var pet: Pet?
     var image: UIImage?
-    
     
     //MARK: VIEWCONTROLLER METHODS
 
@@ -39,13 +35,13 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
         self.updateLabels()
         self.modifyLabels()
         self.modifyNavbar()
+        self.setupTap()
         self.enableActions()
     }
     
     internal override func modifyImage() {
         super.modifyImage()
         self.imageView.image = image
-
     }
     
     private func updateLabels () {
@@ -67,9 +63,7 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     }
     
     private func modifyNavbar(){
-       //self.tab.barTintColor = UIColor.redColor()
         self.navigationController?.navigationBar.barTintColor = gThemeColor
-
     }
     
     //The two methods below are temporary bandaids to ensure that the user cannot spam buttons or change photos while uploading is taking place. This will cause the app to crash and the upload will not complete correctly.
@@ -82,6 +76,16 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
         self.navBar.isUserInteractionEnabled = true
     }
     
+    //MARK: GESTURES
+    fileprivate func setupTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PhotoDetailViewController.imageTapped(_:)))
+        tap.numberOfTapsRequired = 1
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    func imageTapped(_ gesture: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //MARK: ACTIONS
     

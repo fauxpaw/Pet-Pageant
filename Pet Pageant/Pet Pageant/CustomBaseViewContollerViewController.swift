@@ -50,7 +50,6 @@ class CustomBaseViewContollerViewController: UIViewController, SetupViewControll
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
 }

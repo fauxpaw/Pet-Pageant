@@ -92,8 +92,6 @@ class ProfileViewController: UICollectionViewController {
                                 strongSelf.allImages.append(image)
                                 strongSelf.allPets.append(object)
                                 strongSelf.collectionView?.reloadData()
-                                print("Allimages: \(self.allImages.count)")
-                                print("AllPets: \(self.allPets.count)")
                             }
                         }
                     })
@@ -151,9 +149,6 @@ class ProfileViewController: UICollectionViewController {
            topVC.performSegue(withIdentifier: "uploadPhoto", sender: self)
         }
         else if (indexPath as NSIndexPath).row < allImages.count {
-            print("You clicked on photo number \((indexPath as NSIndexPath).row)")
-            print("This pics votes: \(allPets[(indexPath as NSIndexPath).row].votes)")
-            print("This pics viewed: \(allPets[(indexPath as NSIndexPath).row].viewed)")
              let topVC = UIApplication.shared.keyWindow?.rootViewController as! RootViewController
             topVC.pet = allPets[(indexPath as NSIndexPath).row]
             topVC.votes = allPets[(indexPath as NSIndexPath).row].votes
