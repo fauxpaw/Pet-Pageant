@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomBaseViewContollerViewController: UIViewController, SetupViewControllerProtocol, ModifyViewProtocol, ModifyButtonProtocol, ModifyImageProtocol, StatusBarBackgroundProtocol {
+class CustomBaseViewContollerViewController: UIViewController, SetupViewControllerProtocol, ModifyViewProtocol, ModifyButtonProtocol, ModifyImageProtocol {
     
     internal func modifyButtons() {
         
@@ -45,7 +45,6 @@ class CustomBaseViewContollerViewController: UIViewController, SetupViewControll
         self.modifyBackground()
         self.modifyButtons()
         self.modifyImage()
-        modifyStatusBarBackground(view: self.view)
     }
 
     override func viewDidLoad() {

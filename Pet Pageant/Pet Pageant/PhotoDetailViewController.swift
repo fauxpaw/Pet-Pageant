@@ -18,7 +18,7 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     @IBOutlet weak var navBar: UINavigationBar!
    
     var pet: Pet?
-    var image: UIImage?
+    var petImg: UIImage?
     
     //MARK: VIEWCONTROLLER METHODS
 
@@ -31,7 +31,7 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
     
     internal override func setup() {
         super.setup()
-        self.modifyImage()
+        self.showImage()
         self.updateLabels()
         self.modifyLabels()
         self.modifyNavbar()
@@ -39,20 +39,17 @@ class PhotoDetailViewController: CustomBaseViewContollerViewController {
         self.enableActions()
     }
     
-    internal override func modifyImage() {
-        super.modifyImage()
-        self.imageView.image = image
+    func showImage() {
+        self.imageView.image = self.petImg
     }
     
     private func updateLabels () {
-        if let pet = pet {
-            votesLabel.text = "Number of votes: \(pet.votes)"
-            shownLabel.text = "Number of times viewed: \(pet.viewed)"
-            reportsLabel.text = "Number of reports: \(pet.reports)"
-            self.ownerLabel.text = ""
-        } else {
-            print("pet not found")
-        }
+        guard let pet = self.pet else {
+            return}
+        self.votesLabel.text = "Number of votes: \(pet.votes)"
+        self.shownLabel.text = "Number of times viewed: \(pet.viewed)"
+        self.reportsLabel.text = "Number of reports: \(pet.reports)"
+        self.ownerLabel.text = ""
     }
     
     private func modifyLabels () {

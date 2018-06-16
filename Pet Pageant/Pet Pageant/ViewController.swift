@@ -12,17 +12,17 @@ import ParseUI
 
 class ViewController: CustomBaseViewContollerViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate  {
     
-    
     var loginVC = LoginViewController()
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var logoutButton: UIButton!
-    
     
     //MARK: VIEWCONTROLLER METHODS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.logoutButton.layer.cornerRadius = gCornerRadiusButton
         self.setup()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,12 +30,12 @@ class ViewController: CustomBaseViewContollerViewController, PFLogInViewControll
         self.login()
     }
     
-    internal override func modifyImage() {
-        return
+    override func modifyImage() {
+        // remove base behavior for image
     }
     
-    internal override func setup() {
-        super.setup()
+    override func modifyButtons() {
+        //
     }
     
     //MARK: CLASS METHODS
@@ -51,7 +51,16 @@ class ViewController: CustomBaseViewContollerViewController, PFLogInViewControll
             self.present(loginVC, animated: true, completion: nil)
             
         } else {
-            print("User is logged in")
+            guard let user = PFUser.current() else {return}
+            if let name = user.username {
+                print("\(name) is logged in")
+            }
+            if let pw = user.password {
+                print("user password = \(pw)")
+            }
+            if let email = user.email {
+                print("\(email)")
+            }
         }
     }
     

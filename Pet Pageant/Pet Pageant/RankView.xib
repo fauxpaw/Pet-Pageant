@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RankView" customModule="Pet_Pageant" customModuleProvider="target">
             <connections>
                 <outlet property="imageView" destination="qNl-Qu-elm" id="XBI-x9-Inp"/>
+                <outlet property="imageViewLabel" destination="Me1-Uc-6WL" id="GHH-HK-qTa"/>
                 <outlet property="labelBackgroundView" destination="MaD-Pt-e9e" id="0Pf-TD-t37"/>
                 <outlet property="rankLabel" destination="Gvm-5o-3zP" id="Tyw-FD-s5x"/>
                 <outlet property="votePercentageLabel" destination="8bf-lL-B07" id="7a4-4r-nxl"/>
@@ -26,6 +27,7 @@
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qNl-Qu-elm">
                     <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                    <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="qNl-Qu-elm" secondAttribute="height" multiplier="1:1" id="06V-Zv-jxz"/>
                     </constraints>
@@ -34,7 +36,7 @@
                     <rect key="frame" x="0.0" y="345" width="350" height="105"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Rank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvm-5o-3zP">
-                            <rect key="frame" x="151" y="4" width="48.5" height="24"/>
+                            <rect key="frame" x="151.5" y="4" width="47.5" height="24"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -52,7 +54,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.97895169339999999" green="0.24711994349999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.97230464179999998" blue="0.5636798636" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="8bf-lL-B07" firstAttribute="centerX" secondItem="MaD-Pt-e9e" secondAttribute="centerX" id="4dR-SC-D7f"/>
                         <constraint firstItem="Gvm-5o-3zP" firstAttribute="centerX" secondItem="MaD-Pt-e9e" secondAttribute="centerX" id="8MW-gE-XeM"/>
@@ -62,10 +64,18 @@
                         <constraint firstItem="Gvm-5o-3zP" firstAttribute="top" secondItem="MaD-Pt-e9e" secondAttribute="top" constant="4" id="s6M-1K-iow"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to show image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Me1-Uc-6WL">
+                    <rect key="frame" x="103.5" y="165" width="143" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="qNl-Qu-elm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8QX-Yf-9ua"/>
                 <constraint firstItem="qNl-Qu-elm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GUW-tQ-NwB"/>
+                <constraint firstItem="Me1-Uc-6WL" firstAttribute="centerX" secondItem="qNl-Qu-elm" secondAttribute="centerX" id="MQP-Mb-fVf"/>
+                <constraint firstItem="Me1-Uc-6WL" firstAttribute="centerY" secondItem="qNl-Qu-elm" secondAttribute="centerY" id="Xjt-CC-mWV"/>
                 <constraint firstItem="qNl-Qu-elm" firstAttribute="bottom" secondItem="MaD-Pt-e9e" secondAttribute="top" constant="5" id="a72-GZ-qQZ"/>
                 <constraint firstAttribute="bottom" secondItem="MaD-Pt-e9e" secondAttribute="bottom" id="l3A-mu-cNv"/>
                 <constraint firstItem="MaD-Pt-e9e" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lmS-co-VhV"/>

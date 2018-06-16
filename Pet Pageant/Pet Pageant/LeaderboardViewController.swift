@@ -10,76 +10,33 @@ import Parse
 
 class LeaderboardViewController: UIViewController {
     
+    @IBOutlet weak var textLabelView: UILabel!
+    @IBOutlet weak var bottomBar: UITabBarItem!
     @IBOutlet weak var rightArrowButton: ArrowButton!
     @IBOutlet weak var leftArrowButton: ArrowButton!
     
+    let recordManager = RecordManager()
     var viewSizeDefault: CGSize?
     var views = [RankView]()
-    var pets = [Pet]() {
-        didSet{
-            
-            var count = 0
-            
-            for pet in pets {
-                let imageData = pet["imageFile"] as! PFFile
-                weak var weakSelf = self
-                imageData.getDataInBackground(block: { (data: Data?, error) in
-                    guard let strongSelf = weakSelf else {return}
-                    if let error = error {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                    if (data != nil) {
-                        let image = UIImage(data: data!)
-                        //print("first view? -> \(self.views[count])")
-                        let rankview = strongSelf.views[count]
-                        rankview.imageView.image = image
-                        rankview.image = image
-                        rankview.votesLabel.text = "Votes: \(pet.votes)"
-                        if let number =  self.pets.index(of: pet) {
-                            rankview.rankLabel.text = "Rank: \(number + 1)"
-                        }
-                        
-                        rankview.imageView.layer.cornerRadius = gCornerRadius
-                        if pet.viewed != 0 {
-                            rankview.votePercentageLabel.text = "Votes of total views: \((100 * pet.votes/pet.viewed))%"
-                        } else {
-                            rankview.votePercentageLabel.text = "Photo has not yet been viewed"
-                        }
-                    }
-                    
-                    count += 1
-                    if count == 5 {
-                        strongSelf.sortViewsByRank()
-                        strongSelf.view.isUserInteractionEnabled = true
-                        strongSelf.leftArrowPressed(strongSelf)
-                    }
-                })
-            }
-        }
-    }
+
     
     //MARK: VIEWCONTROLLER METHODS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
-        
+        self.flipRightButton()
+        self.setupSwipes()
+        self.instantiateViews()
+        self.buttonsToForeground()
+        self.animate(clockwise: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getTopRecords()
     }
     
     //MARK: CLASS METHODS
-    
-    fileprivate func setup() {
-        self.flipRightButton()
-        self.setupSwipes()
-        self.view.isUserInteractionEnabled = false
-        self.instantiateViews()
-        self.fetchTopPets()
-        self.buttonsToForeground()
-    }
     
     fileprivate func buttonsToForeground() {
         let buttons = [leftArrowButton, rightArrowButton]
@@ -92,12 +49,40 @@ class LeaderboardViewController: UIViewController {
         rightArrowButton.transform = CGAffineTransform(scaleX: -1, y: 1)
     }
     
+    fileprivate func getTopRecords() {
+        self.recordManager.fetchTopRecordsForLeaderBoard(maxCount: gNumberOfRankViews) { (success) in
+            if success == true {
+                print("records fetch success")
+                self.assignPetRecordToRankViews()
+                for rankView in self.views {
+                    rankView.fetchImageForRecord(completion: { (success) in
+                        // did set img
+                        rankView.hideImageLabel()
+                        rankView.imageView.image = rankView.image
+                    })
+                }
+            } else {
+                print("retrying top records fetch")
+                self.getTopRecords()
+            }
+        }
+    }
+    
+    func assignPetRecordToRankViews() {
+        
+        for (index,rankView) in self.views.enumerated() {
+            rankView.petRecord = self.recordManager.records.removeFirst()
+            rankView.assignRank(rank: index + 1)
+            rankView.updateLabels()
+        }
+    }
+    
     fileprivate func instantiateViews() {
         self.views.removeAll()
-        for index in 0..<gCarouselViewCount {
-            let angle = CGFloat(90 + index * (360/gCarouselViewCount))
-            let x = gCarouselCenterPoint.x + CGFloat(gScreenSize.width/2) * cos(angle * CGFloat(M_PI/180))
-            let y = gCarouselCenterPoint.y + CGFloat(gScreenSize.width/2) * sin(angle * CGFloat(M_PI/180))
+        for index in 0..<gNumberOfRankViews {
+            let angle = CGFloat(90 + index * (360/gNumberOfRankViews))
+            let x = gCarouselCenterPoint.x + CGFloat(gScreenSize.width/2) * cos(angle * CGFloat(Double.pi/180))
+            let y = gCarouselCenterPoint.y + CGFloat(gScreenSize.width/2) * sin(angle * CGFloat(Double.pi/180))
             let position = CGPoint(x: x, y: y)
             let view = RankView(frame: CGRect(x: 0, y: 0, width: gScreenSize.width/2, height: gScreenSize.width/2 + 75))
             view.center = position
@@ -153,23 +138,6 @@ class LeaderboardViewController: UIViewController {
         second.center = tempPos
     }
     
-    fileprivate func fetchTopPets(){
-        let query = PFQuery(className: "Pet")
-        query.order(byDescending: "votes")
-        query.limit = 5
-        query.findObjectsInBackground { (objects, error) in
-            if let error = error {
-                let alertController = UIAlertController(title: "Error", message: "Could not retrieve data due to \(error.localizedDescription). Please try again later.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-            }
-            else {
-                let petObjects = objects as! [Pet]
-                self.pets = petObjects
-            }
-        }
-    }
-    
     func animate(clockwise: Bool) {
         
         for view in views {
@@ -178,7 +146,7 @@ class LeaderboardViewController: UIViewController {
             let nextAngle = self.getNextAngle(currentAngle: currentAngle, clockwise: clockwise)
             let destination = pointFromAngle(angle: nextAngle)
             
-            UIView.animateKeyframes(withDuration: gAnimationTime, delay: 0.0, options: .calculationModeCubicPaced, animations: {
+            UIView.animateKeyframes(withDuration: gLeaderBoardAnimationTime, delay: 0.0, options: .calculationModeCubicPaced, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0, animations: {
                     
                     switch destination.y {
@@ -256,8 +224,10 @@ class LeaderboardViewController: UIViewController {
         
         if view.imageView.image != nil{
             view.imageView.image = nil
+            view.showImageLabel()
         } else {
             view.imageView.image = view.image
+            view.hideImageLabel()
         }
     }
     
