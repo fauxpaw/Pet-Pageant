@@ -64,7 +64,6 @@ class ViewController: CustomBaseViewContollerViewController, PFLogInViewControll
         }
     }
     
-    
     //MARK: PARSE LOGIN DELEGATE
 
     public func log(_ logInController: PFLogInViewController, didLogIn user: PFUser) {
