@@ -8,16 +8,17 @@
 
 import UIKit
 import Foundation
+import Parse
 
 class RankView: UIView {
     
     //MARK: PROPERTIES
     
-    
+    var petRecord: Pet?
     var view: UIView!
     var image: UIImage?
-    //var currentPosition: CGPoint?
     
+    @IBOutlet weak var imageViewLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var votesLabel: UILabel!
@@ -27,8 +28,10 @@ class RankView: UIView {
     func loadXib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "RankView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
+        if let view = nib.instantiate(withOwner: self, options: nil)[0] as? UIView {
+            return view
+        }
+        return UIView()
     }
     
     //MARK: INITIALIZERS
@@ -51,7 +54,6 @@ class RankView: UIView {
     func setup() {
         view = self.loadXib()
         view.frame = self.bounds
-        //view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         addSubview(view)
     }
     
@@ -63,11 +65,79 @@ class RankView: UIView {
             view?.layer.borderColor = gThemeColor.cgColor
         }
         
-        self.view.backgroundColor = gThemeColor
-        self.labelBackgroundView.backgroundColor = gBackGroundColor
-        let labels = [self.rankLabel, self.votesLabel, self.votePercentageLabel]
+        let labels = [self.rankLabel, self.votesLabel, self.votePercentageLabel, self.imageViewLabel]
         for label in labels {
             label?.textColor = gThemeColor
         }
+        self.imageView.contentMode = .scaleAspectFill
+    }
+    
+    func updateLabels() {
+        self.updateViewsLabel()
+        self.updateVotesLabel()
+    }
+    
+    func assignRank(rank: Int) {
+        self.rankLabel.text = "Rank: \(rank)"
+    }
+    
+    func updateVotesLabel() {
+        guard let record = petRecord else {return}
+        self.votesLabel.text = "Votes: \(record.votes)"
+    }
+    
+    func updateViewsLabel() {
+        guard let record = petRecord else {return}
+        if record.viewed != 0 {
+            self.votePercentageLabel.text = "Showdown win rate: \((100 * record.votes/record.viewed))%"
+        } else {
+            self.votePercentageLabel.text = "Photo has not yet been viewed"
+        }
+    }
+    
+    func showImageLabel() {
+        self.imageViewLabel.isHidden = false
+    }
+    
+    func hideImageLabel() {
+        self.imageViewLabel.isHidden = true
+    }
+    
+    func fetchImageForRecord(completion: @escaping (Bool)->()){
+        guard let petRecord = self.petRecord else {
+            print("No pet record on this voteview")
+            completion(false)
+            return
+        }
+        
+        
+        guard let imageData = petRecord["imageFile"] as? PFFile else {
+            print("PFFile badness for key 'imageFile'")
+            API.deleteRecord(record: petRecord)
+            completion(false)
+            return
+        }
+        
+        imageData.getDataInBackground(block: { (data: Data?, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            guard let stuff = data else {
+                print("data param came back nil")
+                completion(false)
+                return
+            }
+            guard let img = UIImage(data: stuff) else {
+                print("failed to init UIImage from data ")
+                completion(false)
+                return
+            }
+            
+            self.image = img
+            completion(true)
+        })
     }
 }

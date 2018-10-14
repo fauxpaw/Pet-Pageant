@@ -15,70 +15,50 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
     
     @IBOutlet weak var topVoteView: VoteView!
     @IBOutlet weak var bottomVoteView: VoteView!
-    
-    fileprivate let panThreshold: CGFloat = 4.0
-    fileprivate let viewAnimationOutTime = 0.4
-    fileprivate let viewAnimationInTime = 0.4
-    
-    fileprivate var voteQueue = [Pet]()
-    fileprivate var topViewsRecord = [Pet]() {
-        didSet {
-            topVoteView.petRecord = topViewsRecord.first
-            for pet in topViewsRecord {
-                
-                weak var weakSelf = self
-                let imageData = pet["imageFile"] as! PFFile
-                imageData.getDataInBackground(block: { (data: Data?, error) in
-                    guard let strongSelf = weakSelf else {return}
-                    if let error = error {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                    if let image = UIImage(data: data!) {
-                        strongSelf.topVoteView.petImage = image
-                        strongSelf.topVoteView.spinner.hidesWhenStopped = true
-                        strongSelf.topVoteView.spinner.stopAnimating()
-                    }
-                })
-            }
-        }
-    }
-    
-    fileprivate var botViewsRecord = [Pet]() {
-        didSet {
-            bottomVoteView.petRecord = botViewsRecord.first
-            for pet in botViewsRecord {
-                weak var weakSelf = self
-                let imageData = pet["imageFile"] as! PFFile
-                imageData.getDataInBackground(block: { (data: Data?, error) in
-                    guard let strongSelf = weakSelf else {return}
-                    if let error = error {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                    if let image = UIImage(data: data!) {
-                        strongSelf.bottomVoteView.petImage = image
-                        
-                        strongSelf.bottomVoteView.spinner.hidesWhenStopped = true
-                        strongSelf.bottomVoteView.spinner.stopAnimating()
-                    }
-                })
-            }
-        }
-    }
+        
+    let recordManager = RecordManager()
     
     //MARK: VIEWCONTROLLER METHODS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.topVoteView.delegate = self
-        self.bottomVoteView.delegate = self
+        self.setDelegates()
         self.setupPanGestures()
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setupImageViews()
+        self.offsetVoteViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.offsetVoteViews()
+        self.enterShowDownState()
+    }
+    
+    fileprivate func setDelegates() {
+        self.topVoteView.delegate = self
+        self.bottomVoteView.delegate = self
+    }
+    
+    fileprivate func offsetVoteViews() {
+        DispatchQueue.main.async {
+            self.topVoteView.center.x = self.view.frame.width * 2
+            self.bottomVoteView.center.x = self.view.frame.width * -2
+        }
+    }
+    
+    func resupplyRecordQueue() {
+        if self.recordManager.records.count < 12 {
+            self.recordManager.fetchRecordBatch { (success) in
+                self.attachRecordsToVoteViews()
+                if self.topVoteView.center.x != self.bottomVoteView.center.x {
+                    self.animateViewsIn()
+                }
+                self.displayImagesForVoteViews()
+            }
+        } else {
+            self.attachRecordsToVoteViews()
+            self.displayImagesForVoteViews()
+        }
+    }
     
     //ButtonVoting protocol
     internal func didVoteViaButton(forView: VoteView) {
@@ -90,8 +70,8 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
         } else if (bottomVoteView == forView) {
             otherivew = topVoteView
         }
-        self.updatePetRecords(forView, nonselectedView: otherivew)
-        self.animateViewsOut(forView, otherView: otherivew)        
+        self.updatePetRecordsOnVoteCast(forView, nonselectedView: otherivew)
+        self.animateViewsOut(forView, otherView: otherivew)
     }
     
     internal func didPassViaButton(forView: VoteView) {
@@ -106,113 +86,47 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
         self.animateViewsOut(forView, otherView: otherivew)
     }
     
-    //MARK: CLASS METHODS
-    
-    fileprivate func setupImageViews() {
-        self.topVoteView.petImage = nil
-        self.bottomVoteView.petImage = nil
-        self.topVoteView.enableReport()
-        self.bottomVoteView.enableReport()
-        self.topVoteView.spinner.startAnimating()
-        self.bottomVoteView.spinner.startAnimating()
-        self.GETPetsForQueue()
-        self.animateViewsIn(topVoteView, bot: bottomVoteView)
+    func enterShowDownState() {
+        self.animateViewsIn()
+        self.resupplyRecordQueue()
     }
     
-    fileprivate func chooseRecords(){
-        if self.voteQueue.isEmpty{
-            print("VOTEQUE EMPTY -> Aborting chooseRecords")
+    //MARK: CLASS METHODS
+    
+    func displayImagesForVoteViews() {
+        self.displayImageIn(voteView: self.topVoteView)
+        self.displayImageIn(voteView: self.bottomVoteView)
+    }
+    
+    func displayImageIn(voteView: VoteView) {
+        voteView.fetchImageForRecord { (success) in
+            if success == true {
+                print("did fetch image for pet")
+                voteView.enterVotingState()
+            } else {
+                print("no img yet! - Time to retry!")
+                self.displayImageIn(voteView: voteView)
+            }
+        }
+    }
+    
+    fileprivate func attachRecordsToVoteViews() {
+        guard let result = self.recordManager.getTwoRecords() else {
+            print("Could not get two records")
             return
         }
         
-        let objectIndex1 = Int(arc4random_uniform(UInt32(self.voteQueue.count)))
-        var objectIndex2 = Int(arc4random_uniform(UInt32(self.voteQueue.count)))
-        while objectIndex1 == objectIndex2 {
-            objectIndex2 = Int(arc4random_uniform(UInt32(self.voteQueue.count)))
-        }
-        if objectIndex1 > objectIndex2 {
-            self.topViewsRecord.append(self.voteQueue.remove(at: objectIndex1))
-            self.botViewsRecord.append(self.voteQueue.remove(at: objectIndex2))
-        }
-        else {
-            self.topViewsRecord.append(self.voteQueue.remove(at: objectIndex2))
-            self.botViewsRecord.append(self.voteQueue.remove(at: objectIndex1))
-        }
+        self.topVoteView.petRecord = result.0
+        self.bottomVoteView.petRecord = result.1
     }
     
-    /* MARK: BACKEND CALLS
-           -- get the 2 oldest(by update time) records --
-    */
-    
-    fileprivate func GETPetsForQueue () {
-        self.topViewsRecord.removeAll()
-        self.botViewsRecord.removeAll()
-        self.voteQueue.removeAll()
-        let query = PFQuery(className: "Pet")
-        query.order(byAscending: "updatedAt")
-        query.limit = 100
-        query.findObjectsInBackground { (objects, error) in
-            if error == nil {
-                let petObjects = objects as! [Pet]
-                for object in petObjects {
-                    self.voteQueue.append(object)
-                }
-                self.chooseRecords()
-            }
-            else if let error = error {
-                let alertController = UIAlertController(title: "ERROR", message: "Could not retrieve data due to \(error.localizedDescription). Please try again", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    fileprivate func updatePetRecords(_ selectedView: UIView, nonselectedView: UIView) {
+   fileprivate func updatePetRecordsOnVoteCast(_ selectedView: UIView, nonselectedView: UIView) {
         if selectedView == self.topVoteView {
-            guard let record = self.topViewsRecord.first else { return}
-            record.incrementKey("votes")
-            record.incrementKey("viewed")
-            record.saveInBackground(block: { (success, error) in
-                if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
-                }
-                else {
-                    print("top record updated")
-                }
-            })
-            guard let record2 = self.botViewsRecord.first else { return }
-            record2.incrementKey("viewed")
-            record2.saveInBackground(block: { (success, error) in
-                if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
-                }
-                else {
-                    print("bottom record updated")
-                }
-            })
-        }
-        else {
-            guard let record = self.botViewsRecord.first else {return}
-            record.incrementKey("votes")
-            record.incrementKey("viewed")
-            record.saveInBackground(block: { (success, error) in
-                if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
-                }
-                else {
-                    print("bottom record updated")
-                }
-            })
-            guard let record2 = self.topViewsRecord.first else { return }
-            record2.incrementKey("viewed")
-            record2.saveInBackground(block: { (success, error) in
-                if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
-                }
-                else {
-                    print("top record updated")
-                }
-            })
+            self.topVoteView.incrementRecordsVotes()
+            self.bottomVoteView.incrementRecordsViews()
+        } else {
+            self.topVoteView.incrementRecordsViews()
+            self.bottomVoteView.incrementRecordsVotes()
         }
     }
     
@@ -228,55 +142,40 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
     }
     
     //MARK: ANIMATIONS
-    fileprivate func animateViewsIn(_ top: UIView, bot: UIView) {
-        topVoteView.removeVoteIcon()
-        bottomVoteView.removeVoteIcon()
-        let startCenter = self.view.center.x
-        top.center.x = self.view.frame.width * 2
-        bot.center.x = self.view.frame.width * -2
-        
-        UIView.animate(withDuration: viewAnimationInTime, delay: 0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
-            
-            top.center.x = startCenter
-            bot.center.x = startCenter
-            
-            }, completion: nil)
+    fileprivate func animateViewsIn() {
+        self.topVoteView.animateViewIn()
+        self.bottomVoteView.animateViewIn()
     }
     
     fileprivate func animateViewsOut(_ selectedView: UIView, otherView: UIView){
         
+        // casted vote by swiping to the right
         if selectedView.center.x > self.view.center.x || selectedView.center.x == self.view.center.x {
             
-            UIView.animate(withDuration: viewAnimationOutTime, animations: {
+            UIView.animate(withDuration: gVoteAnimationOutTime, animations: {
                 
                 selectedView.center.x = self.view.frame.width * 2
                 otherView.center.x = self.view.frame.width * -2
                 
             }, completion: { (true) in
                 
-                selectedView.isUserInteractionEnabled = true
-                otherView.isUserInteractionEnabled = true
-                selectedView.alpha = 1.0
-                otherView.alpha = 1.0
-                self.setupImageViews()
-            }) 
+                self.enterShowDownState()
+            })
             
         }
+            
+        // casted vote by swiping to the left
         else if selectedView.center.x < self.view.center.x {
             
-            UIView.animate(withDuration: viewAnimationOutTime, animations: {
+            UIView.animate(withDuration: gVoteAnimationOutTime, animations: {
                 
                 selectedView.center.x = self.view.frame.width * -2
                 otherView.center.x = self.view.frame.width * 2
                 
             }, completion: { (true) in
                 
-                selectedView.isUserInteractionEnabled = true
-                otherView.isUserInteractionEnabled = true
-                selectedView.alpha = 1.0
-                otherView.alpha = 1.0
-                self.setupImageViews()
-            }) 
+                self.enterShowDownState()
+            })
         }
     }
     
@@ -290,9 +189,9 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
     }
     
      public func viewWasPanned(_ sender: UIPanGestureRecognizer) {
-        
+        print("detected pan")
         guard let view = sender.view else {return}
-        guard let superView = sender.view?.superview else {return}
+        let originalCenter = self.view.center.x
         let translation = sender.translation(in: view)
         var selectedView = VoteView()
         var otherView = VoteView()
@@ -309,34 +208,27 @@ class VoteViewController: UIViewController, ButtonVotingProtocol {
         
         switch sender.state {
         case .began:
-            selectedView.addYesVoteIcon()
-            otherView.addNoVoteIcon()
-            otherView.isUserInteractionEnabled = false
+            otherView.disableInteraction()
         case .changed:
-                guard let yesIconView = selectedView.voteIcon else { return }
-                guard let noIconView = otherView.voteIcon else { return }
-                selectedView.center.x = superView.center.x + translation.x
-                let alphaSet = abs(translation.x) / 100
-                yesIconView.alpha = alphaSet
-                noIconView.alpha = alphaSet
+                selectedView.center.x = originalCenter + translation.x
+                let alphaSet = (abs(translation.x) / 180) // percentage view movement where 100% is equal to 180 pts.
+                otherView.alterAlphaForUnselectedState(alpha: max(0.3, 1 - alphaSet))
             
+                //hit our threshold
+//                if (1 - alphaSet) <= 0.4 {
+//
+//            }
         case .ended:
             
-            guard let superView = view.superview else {return}
-            guard let iconView = selectedView.voteIcon else { return }
-            
-                if iconView.alpha > 0.75 {
+                if otherView.alpha < 0.4 {
                     view.isUserInteractionEnabled = false
                     otherView.isUserInteractionEnabled = false
-                    self.updatePetRecords(selectedView, nonselectedView: otherView)
+                    self.updatePetRecordsOnVoteCast(selectedView, nonselectedView: otherView)
                     self.animateViewsOut(view, otherView: otherView)
                 } else {
-                    selectedView.center = CGPoint(x: superView.center.x, y: view.center.y)
-                    selectedView.alpha = 1.0
-                    otherView.alpha = 1.0
-                    
-                    selectedView.removeVoteIcon()
-                    otherView.removeVoteIcon()
+                    selectedView.center.x = originalCenter
+                    selectedView.alterAlphaForUnselectedState(alpha: 1.0)
+                    otherView.alterAlphaForUnselectedState(alpha: 1.0)
                     selectedView.isUserInteractionEnabled = true
                     otherView.isUserInteractionEnabled = true
                 }

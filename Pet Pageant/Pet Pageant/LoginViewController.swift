@@ -10,7 +10,7 @@ import Foundation
 import ParseUI
 import Parse
 
-class LoginViewController: PFLogInViewController, ModifyButtonProtocol, StatusBarBackgroundProtocol, PFLogInViewControllerDelegate {
+class LoginViewController: PFLogInViewController, ModifyButtonProtocol, PFLogInViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +26,6 @@ class LoginViewController: PFLogInViewController, ModifyButtonProtocol, StatusBa
         self.modifyButtons()
         self.removeLogos()
         self.modifySignupController()
-        modifyStatusBarBackground(view: self.logInView!)
-        modifyStatusBarBackground(view: (self.signUpController?.signUpView)!)
     }
     
     private func initBackgroundView (){

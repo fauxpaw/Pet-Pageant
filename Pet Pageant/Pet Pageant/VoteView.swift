@@ -4,18 +4,14 @@
 //
 //  Created by Michael Sweeney on 8/22/16.
 //  Copyright © 2016 Michael Sweeney. All rights reserved.
-//
+
 
 import UIKit
+import Parse
 
 @IBDesignable class VoteView: UIView {
     
-    //MARK: PROPERTIES
-    
-    var view: UIView!
-    var nibName: String = "VoteView"
-    var petRecord: Pet?
-    var delegate: VoteViewController?
+    //MARK: - PROPERTIES
     
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var rightBackgroundImage: UIImageView!
@@ -24,18 +20,23 @@ import UIKit
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var menuButton: UIButton!
     
-    @IBOutlet weak var voteIcon: UIImageView!
-    
     @IBInspectable var petImage: UIImage? {
         get{
             return petImageView.image
         }
         set(image) {
-            petImageView.image = image
+//            DispatchQueue.main.async {
+                self.petImageView.image = image
+//            }
         }
     }
     
-    //MARK: INITIALIZERS
+    var view: UIView!
+    var nibName: String = "VoteView"
+    var petRecord: Pet?
+    var delegate: VoteViewController?
+    
+    //MARK: - INITIALIZERS
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,7 +51,7 @@ import UIKit
         self.commenceAesthetics()
     }
     
-    //MARK: CLASS METHODS
+    //MARK: - CLASS METHODS
     
     fileprivate func setup() {
         view = self.loadViewFromNib()
@@ -76,7 +77,6 @@ import UIKit
             button?.layer.cornerRadius = gCornerRadiusButton
         }
         
-        self.voteIcon.isHidden = true
     }
     
     fileprivate func loadViewFromNib() -> UIView {
@@ -88,22 +88,73 @@ import UIKit
         
     }
     
-    func addYesVoteIcon(){
+    func fetchImageForRecord(completion: @escaping (Bool)->()){
+        guard let petRecord = self.petRecord else {
+            print("No pet record on this voteview")
+            completion(false)
+            return
+        }
         
-        self.voteIcon.image = UIImage(named: "chooseDestruct.png")
-        self.voteIcon.alpha = 0.0
-        self.voteIcon.isHidden = false
+        guard let imageData = petRecord["imageFile"] as? PFFile else {
+            print("PFFile badness for key 'imageFile'")
+            API.deleteRecord(record: petRecord)
+            completion(false)
+            return
+        }
+        
+        imageData.getDataInBackground(block: { (data: Data?, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            guard let stuff = data else {
+                print("data param came back nil")
+                completion(false)
+                return
+            }
+            guard let img = UIImage(data: stuff) else {
+                print("failed to init UIImage from data ")
+                completion(false)
+                return
+            }
+            
+            self.petImage = img
+            completion(true)
+        })
+    }
+
+    func incrementRecordsViews() {
+        guard let record = self.petRecord else {return}
+        record.incrementKey("viewed")
+        record.saveInBackground(block: { (success, error) in
+            if let error = error {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            // handle success
+        })
     }
     
-    func addNoVoteIcon(){
-        
-        self.voteIcon.image = UIImage(named: "rejectDestruct.png")
-        self.voteIcon.alpha = 0.0
-        self.voteIcon.isHidden = false
+    func incrementRecordsVotes() {
+        guard let record = self.petRecord else {return}
+        record.incrementKey("votes")
+        record.incrementKey("viewed")
+        record.saveInBackground(block: { (success, error) in
+            if let error = error {
+                print("ERROR: \(error.localizedDescription)")
+            }
+            // handle success
+        })
     }
     
-    func removeVoteIcon(){
-        self.voteIcon.isHidden = true
+    func alterAlphaForUnselectedState(alpha: CGFloat) {
+        
+        self.alpha = alpha
+    }
+    
+    func resetViewAlphas() {
+        self.alterAlphaForUnselectedState(alpha: 1.0)
     }
     
     func menuButtonSelected() {
@@ -132,19 +183,21 @@ import UIKit
         let reportAction = UIAlertAction(title: "Report", style: .destructive) {
             (action) in
             self.reportPictureSelected()
+            self.delegate?.didPassViaButton(forView: self)
         }
         actionController.addAction(reportAction)
         guard let topVC = UIApplication.shared.keyWindow?.rootViewController else {return}
         topVC.present(actionController, animated: true, completion: nil)
+    
     }
     
     func reportPictureSelected() {
-        guard (self.petRecord != nil) else { return }
+        guard let record = self.petRecord else { return }
         //API call
-        let record = self.petRecord
-        record?.incrementKey("reports")
-        self.disableReport()
-        record?.saveInBackground(block: { (success, error) in
+        
+        record.incrementKey("reports")
+        self.disableInteraction()
+        record.saveInBackground(block: { (success, error) in
             if let error = error {
                 print(error.localizedDescription)
                 ErrorHandler.presentNotification(title: "Error", message: "Report not successfully recieved due to: \(error.localizedDescription)")
@@ -153,17 +206,82 @@ import UIKit
                 ErrorHandler.presentNotification(title:"Success!", message: "Report successfully recieved. Thank you for helping keep Pet Pageant family friendly.")
             }
         })
+        
+        guard let user = PFUser.current() else {return}
+        let relation = record.relation(forKey: "usersBlocked")
+        relation.add(user)
+        record.saveInBackground(block: { (success, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                print("Pet record did not update with ignored user")
+            }
+            
+            if success {
+                print("User will be listed on this record as blocked")
+            }
+        })
     }
     
-    func disableReport() {
-        reportButton.isUserInteractionEnabled = false
+    func disableInteraction() {
+//        DispatchQueue.main.async {
+            self.reportButton.isUserInteractionEnabled = false
+//        }
     }
     
-    func enableReport() {
-        reportButton.isUserInteractionEnabled = true
+    func enableInteraction() {
+//        DispatchQueue.main.async {
+            self.reportButton.isUserInteractionEnabled = true
+//        }
     }
     
-    //MARK: ACTIONS
+    func enterVotingState() {
+        self.turnOffSpinner()
+        self.enableInteraction()
+    }
+    
+    func enterPreVoteState() {
+        self.disableInteraction()
+        self.alterAlphaForUnselectedState(alpha: 1.0)
+        self.petImage = nil
+        self.turnOnSpinner()
+    }
+    
+    private func turnOnSpinner() {
+//        DispatchQueue.main.async {
+            self.spinner.startAnimating()
+            self.spinner.isHidden = false
+//        }
+    }
+    
+    private func turnOffSpinner() {
+//        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.spinner.isHidden = true
+//        }
+    }
+    
+    //MARK: - ANIMATIONS
+    
+    func animateViewIn() {
+        
+        self.enterPreVoteState()
+        guard let destinationCenter = self.superview?.center.x else {
+            print("vote view super view cry")
+            return}
+        if self.center.x == destinationCenter {
+            print("no need to animate, we are at center!")
+            return
+        }
+        
+        UIView.animate(withDuration: gVoteAnimationInTime, delay: 0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
+            
+            self.center.x = destinationCenter
+            
+            
+        }, completion: nil)
+    }
+    
+    //MARK: - ACTIONS
     
     @IBAction func leftButtonSelected(_ sender: UIButton) {
         self.menuButtonSelected()
